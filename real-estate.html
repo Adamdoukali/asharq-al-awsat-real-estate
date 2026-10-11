@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="fr" class="lenis lenis-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Asharq Al Awsat Group — Résidences d'Exception à Tanger</title>
+  <meta name="description" content="Les réalisations résidentielles de prestige du Groupe Asharq Al Awsat à Tanger : Résidence Palmares, Résidence Assalam et Les Villas Assalam à Malabata.">
+  <link rel="icon" type="image/png" href="assets/emblem_gold.png">
+
+  <!-- Typography: Cormorant Garamond & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Loam House Architectural Styles -->
+  <link rel="stylesheet" href="styles/loam.css">
+  <link rel="stylesheet" href="styles/palmares-3d-explorer.css?v=apple3d_2">
+
+  <!-- Lenis & GSAP CDN Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       Master Site Header (Loam House Style)
+       ========================================================================== -->
+  <header class="loam-header">
+    <!-- Left: The 3 Main Projects & 3D Plans -->
+    <nav class="loam-nav-projects" aria-label="Nos Trois Projets Phares">
+      <a href="palmares.html" class="loam-nav-link">
+        <span class="loam-nav-badge"><img src="assets/projects/chip_emblem_palmares.png" alt="Palmares"></span>
+        <span>01. Palmares</span>
+      </a>
+      <a href="residence-assalam.html" class="loam-nav-link">
+        <span class="loam-nav-badge"><img src="assets/projects/chip_emblem_assalam.png" alt="Assalam"></span>
+        <span>02. Assalam</span>
+      </a>
+      <a href="villas-assalam.html" class="loam-nav-link">
+        <span class="loam-nav-badge"><img src="assets/projects/chip_emblem_villas.png" alt="Villas Malabata"></span>
+        <span>03. Villas Malabata</span>
+      </a>
+      <a href="#plans3d" class="loam-nav-link">3D & Plans</a>
+    </nav>
+
+    <!-- Center: Clean Asharq Al Awsat Group Logo (Without Immobilier) -->
+    <a href="index.html" class="loam-logo-lockup" aria-label="Asharq Al Awsat Group">
+      <img src="assets/logo_dark.png" alt="Asharq Al Awsat Group">
+      <span>GROUP</span>
+    </a>
+
+    <!-- Right: Navigation CTAs -->
+    <div class="loam-header-ctas">
+      <a href="index.html" class="loam-btn-outline">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Holding</span>
+      </a>
+      <a href="#contact" class="loam-btn-primary">
+        <span>Brochure & Visite</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ==========================================================================
+         HERO SECTION: Loam House Style with Birds Flying Video & Floating Card
+         ========================================================================== -->
+    <section class="loam-hero">
+      <!-- Background Video: Skyline Birds in Flight at Dusk -->
+      <div class="loam-hero-media">
+        <video autoplay muted loop playsinline poster="assets/hero-video/hero-poster.jpg">
+          <source src="assets/hero-video/hero-skyline.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <!-- Subtle Loam House Texture & Dark Directional Shade (No Milky White) -->
+      <div class="loam-scanlines"></div>
+      <div class="loam-hero-shade"></div>
+
+      <!-- Left Column: Editorial Headline -->
+      <div class="loam-hero-copy">
+        <span class="loam-eyebrow">Collection Résidentielle de Prestige • Tanger</span>
+        <h1 class="loam-hero-title">
+          Une Vie d'Exception.
+          <em>L'Art de Vivre à Tanger.</em>
+        </h1>
+        <p class="loam-hero-bottom">
+          <strong>Asharq Al Awsat Group</strong> conçoit et édifie des adresses d'exception face à la Méditerranée et au cœur des pôles dynamiques de la ville. Architecture contemporaine, finitions nobles et déclaration légale à 100%.
+        </p>
+
+        <div style="display: flex; gap: 16px; margin-top: 12px;">
+          <a href="#palmares" class="loam-btn-primary" style="padding: 14px 28px;">
+            <span>Découvrir les Projets</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+          </a>
+          <a href="#plans3d" class="loam-btn-outline" style="padding: 14px 24px;">
+            <span>Modèles 3D & Plans</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Floating Dark Glass Inquiry Card (Loam House Exact Pattern) -->
+      <aside class="loam-hero-card">
+        <div class="card-eyebrow">Consultation Privilégiée</div>
+        <h2 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 300; color: #fff; margin-bottom: 8px;">
+          Recevoir les Brochures & Prix
+        </h2>
+        <p class="card-intro">
+          Accédez aux plans architecturaux confidentiels et aux disponibilités en avant-première.
+        </p>
+
+        <form class="card-form" id="hero-inquiry-form">
+          <div class="card-field">
+            <label for="hero-name">Votre Nom Complet</label>
+            <input type="text" id="hero-name" required placeholder="Ex. M. El Idrissi">
+          </div>
+
+          <div class="card-field">
+            <label for="hero-tel">Téléphone ou WhatsApp</label>
+            <input type="tel" id="hero-tel" required placeholder="+212 600 000 000">
+          </div>
+
+          <div class="card-field">
+            <label for="hero-project">Projet de Prédilection</label>
+            <select id="hero-project">
+              <option value="palmares">01. Résidence Palmares (Tanger Centre — dès 688k DH)</option>
+              <option value="assalam">02. Résidence Assalam (Vue Mer — dès 13 800 DH/m²)</option>
+              <option value="villas">03. Les Villas Assalam (Malabata — 2.5M DH)</option>
+            </select>
+          </div>
+
+          <button type="submit" class="card-btn-submit">
+            Recevoir la Documentation
+          </button>
+          <span class="card-trust">✦ Service commercial direct promoteur • Zéro intermédiaire</span>
+        </form>
+      </aside>
+    </section>
+
+    <!-- ==========================================================================
+         CHAPTER 01: Résidence Palmares
+         ========================================================================== -->
+    <section id="palmares" class="loam-chapter">
+      <div class="loam-chapter-bg">
+        <img src="assets/projects/palmares_hero.jpg" alt="Résidence Palmares Tanger">
+      </div>
+      <div class="loam-chapter-shade"></div>
+
+      <div class="loam-chapter-copy">
+        <div class="section-number">
+          01 <span class="section-tagline">Complexe Urbain Haut Standing</span>
+        </div>
+        <div class="loam-project-brand-badge">
+          <img src="assets/projects/logo_palmares.png" alt="Logo Officiel Résidence Palmares" class="loam-project-brand-logo">
+        </div>
+        <p class="loam-eyebrow">Grand Stade • Avenue Principale • Centre-Ville</p>
+        <h2 class="loam-chapter-title">
+          Résidence <em>Palmares</em>
+        </h2>
+        <p class="loam-chapter-lede">
+          Dans un environnement d’exception se dresse majestueusement Palmares. Un ensemble résidentiel clos et sécurisé 24h/24 alliant appartements spacieux, complexe scolaire complet, terrains omnisports et piscines privatives au cœur de la vitalité tangéroise.
+        </p>
+
+        <div class="loam-figs">
+          <div class="loam-fig">
+            <strong>688 000 DH</strong>
+            <span>À Partir De</span>
+          </div>
+          <div class="loam-fig">
+            <strong>40–155 m²</strong>
+            <span>Surfaces Disponibles</span>
+          </div>
+          <div class="loam-fig">
+            <strong>100%</strong>
+            <span>Déclaration Légale</span>
+          </div>
+        </div>
+
+        <div class="loam-actions-row">
+          <a href="palmares.html" class="loam-btn-primary">
+            <span>Découvrir la Page Complète</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="assets/projects/Pres-RESIDENCE-PALMARES-2026.pdf" target="_blank" download class="loam-btn-outline" style="gap: 6px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            <span>Brochure PDF (43 Mo)</span>
+          </a>
+          <button type="button" class="loam-btn-outline" data-inspect="palmares">
+            <span>Fiche Rapide</span>
+          </button>
+          <a href="https://wa.me/212665276901?text=Bonjour,%20je%20souhaite%20recevoir%20la%20brochure%20de%20la%20Résidence%20Palmares" target="_blank" class="loam-btn-outline">
+            <span>WhatsApp Ventes</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CHAPTER 02: Résidence Assalam
+         ========================================================================== -->
+    <section id="assalam" class="loam-chapter">
+      <div class="loam-chapter-bg">
+        <img src="assets/projects/assalam_hero.jpg" alt="Résidence Assalam Tanger Vue Mer">
+      </div>
+      <div class="loam-chapter-shade"></div>
+
+      <div class="loam-chapter-copy">
+        <div class="section-number">
+          02 <span class="section-tagline">Sanctuaire Côtier & Vue Mer</span>
+        </div>
+        <div class="loam-project-brand-badge">
+          <img src="assets/projects/logo_assalam.png" alt="Logo Officiel Résidence Assalam" class="loam-project-brand-logo">
+        </div>
+        <p class="loam-eyebrow">Littoral Nord • Vue Panoramique Méditerranée</p>
+        <h2 class="loam-chapter-title">
+          Résidence <em>Assalam</em>
+        </h2>
+        <p class="loam-chapter-lede">
+          Face à la brise marine, la Résidence Assalam offre une perspective nouvelle sur l'art de vivre en famille. Des appartements baignés de lumière naturelle, dotés d'une climatisation centrale réversible, de piscines paysagères et d'une mosquée intégrée au domaine.
+        </p>
+
+        <div class="loam-figs">
+          <div class="loam-fig">
+            <strong>13 800 DH</strong>
+            <span>Le m² Habitable</span>
+          </div>
+          <div class="loam-fig">
+            <strong>94–115 m²</strong>
+            <span>Appartements Familiaux</span>
+          </div>
+          <div class="loam-fig">
+            <strong>Panoramique</strong>
+            <span>Vue Mer & Horizon</span>
+          </div>
+        </div>
+
+        <div class="loam-actions-row">
+          <a href="residence-assalam.html" class="loam-btn-primary">
+            <span>Découvrir la Page Complète</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <button type="button" class="loam-btn-outline" data-inspect="assalam">
+            <span>Fiche Rapide</span>
+          </button>
+          <a href="https://wa.me/212661103547?text=Bonjour,%20je%20souhaite%20des%20informations%20sur%20la%20Résidence%20Assalam" target="_blank" class="loam-btn-outline">
+            <span>WhatsApp Ventes</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CHAPTER 03: Les Villas Assalam (Malabata)
+         ========================================================================== -->
+    <section id="villas" class="loam-chapter">
+      <div class="loam-chapter-bg">
+        <img src="assets/projects/villas_hero.jpg" alt="Les Villas Assalam Malabata Tanger">
+      </div>
+      <div class="loam-chapter-shade"></div>
+
+      <div class="loam-chapter-copy">
+        <div class="section-number">
+          03 <span class="section-tagline">Domaine Privé Confidentiel</span>
+        </div>
+        <div class="loam-project-brand-badge">
+          <img src="assets/projects/logo_villas.png" alt="Logo Officiel Les Villas Assalam" class="loam-project-brand-logo">
+        </div>
+        <p class="loam-eyebrow">Colline de Malabata • Baie de Tanger</p>
+        <h2 class="loam-chapter-title">
+          Les Villas <em>Assalam</em>
+        </h2>
+        <p class="loam-chapter-lede">
+          Une collection confidentielle de villas contemporaines jumelées surplombant la baie de Malabata. 300 m² de terrain et 360 m² de surface construite sur 4 niveaux avec solarium privatif, jardin paysager et piscine individuelle.
+        </p>
+
+        <div class="loam-figs">
+          <div class="loam-fig">
+            <strong>2 500 000 DH</strong>
+            <span>Prix Propriété</span>
+          </div>
+          <div class="loam-fig">
+            <strong>360 m²</strong>
+            <span>Habitable / 4 Niveaux</span>
+          </div>
+          <div class="loam-fig">
+            <strong>300 m²</strong>
+            <span>Parcelle Privative</span>
+          </div>
+        </div>
+
+        <div class="loam-actions-row">
+          <a href="villas-assalam.html" class="loam-btn-primary">
+            <span>Découvrir la Page Complète</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <button type="button" class="loam-btn-outline" data-inspect="villas">
+            <span>Fiche Rapide</span>
+          </button>
+          <a href="https://wa.me/212600907262?text=Bonjour,%20je%20souhaite%20visiter%20les%20Villas%20Assalam%20Malabata" target="_blank" class="loam-btn-outline">
+            <span>WhatsApp Ventes</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CHAPTER 04: Finitions & Architecture (Loam House Interactive Swatches)
+         ========================================================================== -->
+    <section class="loam-chapter">
+      <div class="loam-chapter-bg">
+        <img id="loam-finish-img" src="assets/loam/INT01_Penthouse-Living.jpg" alt="Finitions Intérieures et Volumes">
+      </div>
+      <div class="loam-chapter-shade"></div>
+
+      <div class="loam-chapter-copy">
+        <div class="section-number">
+          04 <span class="section-tagline">Exigence des Matériaux & Design</span>
+        </div>
+        <p class="loam-eyebrow">L'Harmonie dans Chaque Détail</p>
+        <h2 class="loam-chapter-title">
+          La Perfection dans <em>Chaque Ligne</em>
+        </h2>
+        <p class="loam-chapter-lede">
+          Nous marions le savoir-faire artisanal marocain aux standards architecturaux internationaux les plus stricts : marbres polis de premier choix, menuiseries nobles, vitrages isolants thermo-acoustiques et agencements baignés de clarté.
+        </p>
+
+        <div class="loam-tags">
+          <button type="button" class="loam-tag-btn active" data-img="assets/loam/INT01_Penthouse-Living.jpg">
+            Séjour & Réceptions
+          </button>
+          <button type="button" class="loam-tag-btn" data-img="assets/loam/INT03_Courtyard-Living-Dining.jpg">
+            Salons & Patios
+          </button>
+          <button type="button" class="loam-tag-btn" data-img="assets/loam/INT04_Kitchen-Light.jpg">
+            Cuisines Équipées
+          </button>
+          <button type="button" class="loam-tag-btn" data-img="assets/loam/INT05_Bathroom-Light.jpg">
+            Bains & Marbre
+          </button>
+          <button type="button" class="loam-tag-btn" data-img="assets/loam/EXT_Terrace.jpg">
+            Terrasses Extérieures
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CHAPTER 05: 3D Plans & Typologies Explorer (Interactive Master Model)
+         ========================================================================== -->
+    <section id="plans3d" class="loam-plans-section">
+      <div class="loam-plans-header">
+        <div class="section-number">
+          05 <span class="section-tagline">Architecture & Typologies 3D</span>
+        </div>
+        <h2 class="loam-chapter-title" style="margin-top: 10px;">
+          Maquette 3D Interactive & <em>Dollhouse Palmares</em>
+        </h2>
+        <p style="color: rgba(255, 255, 255, 0.7); font-size: 1.05rem; margin-top: 12px; line-height: 1.6;">
+          Naviguez en 3D temps réel au cœur de la <strong>Tranche 8 (Étage Courant)</strong> de la Résidence Palmares conçue par MB Interior Architects. Basculez entre la maquette 3D dollhouse de l'appartement et la vue du plateau des 17 lots, simulez l'ensoleillement de Tanger heure par heure, et personnalisez les finitions intérieures.
+        </p>
+      </div>
+
+      <div id="palmares-3d-explorer"></div>
+    </section>
+
+    <!-- ==========================================================================
+         CHAPTER 06: Private Consultation & Contact
+         ========================================================================== -->
+    <section id="contact" class="loam-contact-section">
+      <div class="loam-contact-bg">
+        <img src="assets/holding_hero.jpg" alt="Siège Asharq Al Awsat Group Tanger">
+      </div>
+
+      <div class="loam-contact-container">
+        <div class="section-number">
+          06 <span class="section-tagline">Rendez-Vous & Conseil Privé</span>
+        </div>
+        <h2 class="loam-chapter-title">
+          Votre Nouvelle Demeure <em>Vous Attend</em>
+        </h2>
+        <p style="color: rgba(255, 255, 255, 0.75); font-size: 1.1rem; line-height: 1.6;">
+          Nos conseillers vous reçoivent sur rendez-vous au siège ou directement sur nos chantiers pour une visite des appartements témoins et la remise de la brochure officielle.
+        </p>
+
+        <form class="loam-contact-form" id="contact-master-form">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="card-field">
+              <label for="c-name">Nom Complet</label>
+              <input type="text" id="c-name" required placeholder="Votre nom">
+            </div>
+            <div class="card-field">
+              <label for="c-tel">Numéro de Téléphone</label>
+              <input type="tel" id="c-tel" required placeholder="+212 600 000 000">
+            </div>
+          </div>
+
+          <div class="card-field">
+            <label for="c-project">Projet Sélectionné</label>
+            <select id="c-project">
+              <option value="palmares">Résidence Palmares (Tanger Centre — dès 688k DH)</option>
+              <option value="assalam">Résidence Assalam (Vue Mer — dès 13 800 DH/m²)</option>
+              <option value="villas">Les Villas Assalam (Malabata — 2.5M DH)</option>
+            </select>
+          </div>
+
+          <div class="card-field">
+            <label for="c-note">Remarques ou Créneau Souhaité</label>
+            <input type="text" id="c-note" placeholder="Ex. Visite ce samedi matin...">
+          </div>
+
+          <button type="submit" class="card-btn-submit" style="padding: 16px;">
+            Confirmer la Demande de Rendez-Vous
+          </button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       Project Technical Inspection Drawer (Modal Sheet)
+       ========================================================================== -->
+  <div id="project-modal" class="loam-modal-drawer" aria-hidden="true">
+    <div class="loam-modal-sheet">
+      <div class="loam-modal-header">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div class="modal-logo-badge">
+            <img id="modal-logo-img" src="assets/projects/logo_palmares.png" alt="Logo Projet" class="modal-logo-img">
+          </div>
+          <div>
+            <span id="modal-loc" style="font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--loam-gold); font-weight: 600;"></span>
+            <h3 id="modal-title" style="font-family: var(--font-serif); font-size: 2.2rem; color: #fff; margin-top: 4px; font-weight: 300;"></h3>
+          </div>
+        </div>
+        <button type="button" class="loam-modal-close" aria-label="Fermer le tiroir">✕</button>
+      </div>
+
+      <div class="loam-modal-body">
+        <img id="modal-preview-img" src="" alt="Aperçu du projet" class="loam-modal-preview">
+
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <div>
+            <span style="font-size: 0.7rem; text-transform: uppercase; color: rgba(255,255,255,0.5);">Conditions Tarifaires</span>
+            <div id="modal-price" style="font-size: 1.5rem; font-family: var(--font-serif); color: var(--loam-gold-light); font-weight: 400;"></div>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <a id="modal-whatsapp-link" href="#" target="_blank" class="loam-btn-outline" style="font-size: 0.75rem; padding: 8px 16px;">
+              WhatsApp
+            </a>
+            <a id="modal-call-link" href="#" class="loam-btn-primary" style="font-size: 0.75rem; padding: 8px 16px;">
+              Appeler
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 style="font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 8px;">Description</h4>
+          <p id="modal-desc" style="color: rgba(255,255,255,0.8); line-height: 1.6; font-size: 0.95rem;"></p>
+        </div>
+
+        <div>
+          <h4 style="font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 12px;">Spécifications Techniques</h4>
+          <table class="loam-modal-specs">
+            <tbody id="modal-specs-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       Master Footer
+       ========================================================================== -->
+  <footer class="loam-footer">
+    <div class="loam-footer-grid">
+      <div class="loam-footer-col">
+        <img src="assets/logo_dark.png" alt="Asharq Al Awsat Group" style="height: 48px; margin-bottom: 16px;">
+        <p style="font-size: 0.9rem; line-height: 1.6; max-width: 340px;">
+          Asharq Al Awsat Group • Plus de 35 années d'excellence et d'intégrité dans le développement résidentiel à Tanger, Maroc.
+        </p>
+      </div>
+
+      <div class="loam-footer-col">
+        <h4>Nos Trois Projets</h4>
+        <ul>
+          <li><a href="palmares.html">01. Résidence Palmares</a></li>
+          <li><a href="residence-assalam.html">02. Résidence Assalam</a></li>
+          <li><a href="villas-assalam.html">03. Les Villas Assalam</a></li>
+          <li><a href="#plans3d">Plans 3D & Typologies</a></li>
+        </ul>
+      </div>
+
+      <div class="loam-footer-col">
+        <h4>Navigation Groupe</h4>
+        <ul>
+          <li><a href="index.html">Portail Holding</a></li>
+          <li><a href="car-rental.html">Location de Voitures</a></li>
+          <li><a href="index.html#story">Notre Histoire</a></li>
+          <li><a href="index.html#contact">Siège Social</a></li>
+        </ul>
+      </div>
+
+      <div class="loam-footer-col">
+        <h4>Lignes Directes Ventes</h4>
+        <ul>
+          <li>Palmares : +212 665 276 901</li>
+          <li>Assalam : +212 661 103 547</li>
+          <li>Direction : +212 665 877 177</li>
+          <li>Standard : +212 600 907 262</li>
+          <li>Siège Social : 6 Rue Ibn Katir, Avenue Mohamed V, 90000 Tanger</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="loam-footer-bottom">
+      <div>© 2026 Asharq Al Awsat Group • Pôle Immobilier de Prestige.</div>
+      <div>100% Déclaré • Titres Fonciers Disponibles</div>
+    </div>
+  </footer>
+
+  <!-- Controller Script -->
+  <script src="js/loam-scroll.js"></script>
+  <!-- Three.js WebGL 3D Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Palmares 3D Architectural Master Explorer Script -->
+  <script src="js/palmares-3d-explorer.js?v=apple3d_2"></script>
+</body>
+</html>
