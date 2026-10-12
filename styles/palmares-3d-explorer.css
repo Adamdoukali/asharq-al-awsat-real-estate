@@ -1734,6 +1734,18 @@
   border-radius: 9999px;
 }
 
+.p3d-3d-room-pin {
+  border-color: rgba(197, 160, 89, 0.65);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.75), 0 0 16px rgba(197, 160, 89, 0.35);
+}
+
+.p3d-3d-room-pin:hover,
+.p3d-3d-room-pin.active {
+  background: var(--p3d-gold);
+  border-color: #FFFFFF;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.85), 0 0 24px rgba(197, 160, 89, 0.7);
+}
+
 /* Plateau 17 Lots Pins on Master Floorplate */
 .p3d-plateau-lot-pin {
   position: absolute;

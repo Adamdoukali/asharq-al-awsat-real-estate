@@ -504,7 +504,7 @@
       label: 'Studio Signature Investisseur',
       surface: '42,50 m²',
       surfaceVal: 42.5,
-      category: 'f2',
+      category: 'studio',
       typology: 'Studio Signature Haut Rendement',
       orientation: 'Façade Ouest • Lumière Douce',
       solarAngle: 260,
@@ -512,7 +512,7 @@
       floor: 'Étage Courant (R+2 à R+7)',
       x: 35.5,
       y: 57.0,
-      rooms: 'Espace Nuit • Séjour Lumineux • Cuisine Américaine • SDB',
+      rooms: 'Espace Nuit • Séjour Lumineux • Cuisine Américaine • SDB • Balcon',
       estimatedPrice: '520 000 DH',
       priceVal: 520000,
       plan3DImg: 'assets/projects/brochure_plans/p24_img1_xref291_644x800.png',
@@ -524,13 +524,22 @@
         { key: 'suite', name: 'Espace Nuit & Dressing', surf: '16,2 m²', x: 33, y: 46 },
         { key: 'salon', name: 'Salon Séjour Lumineux', surf: '15,8 m²', x: 67, y: 48 },
         { key: 'cuisine', name: 'Cuisine Américaine Équipée', surf: '6,5 m²', x: 65, y: 22 },
-        { key: 'sdb', name: 'Salle d’Eau Italienne', surf: '4,0 m²', x: 25, y: 84 }
+        { key: 'sdb', name: 'Salle d’Eau Italienne', surf: '4,0 m²', x: 25, y: 84 },
+        { key: 'balcon', name: 'Balcon Plein Ouest', surf: '5,0 m²', x: 50, y: 92 }
+      ],
+      roomPins3D: [
+        { key: 'suite', name: 'Espace Nuit & Dressing', surf: '16,2 m²', x: 28, y: 56 },
+        { key: 'salon', name: 'Salon Séjour Lumineux', surf: '15,8 m²', x: 64, y: 56 },
+        { key: 'cuisine', name: 'Cuisine Américaine Équipée', surf: '6,5 m²', x: 48, y: 15 },
+        { key: 'sdb', name: 'Salle d’Eau Italienne', surf: '4,0 m²', x: 25, y: 16 },
+        { key: 'balcon', name: 'Balcon & Terrasse', surf: '5,0 m²', x: 48, y: 88 }
       ],
       roomsDetail: [
         { name: 'Espace Nuit & Dressing Privatif', surf: '16,2 m²', pct: 38, key: 'suite' },
         { name: 'Salon & Espace Réception Ouvert', surf: '15,8 m²', pct: 37, key: 'salon' },
         { name: 'Cuisine Américaine Équipée', surf: '6,5 m²', pct: 15, key: 'cuisine' },
-        { name: 'Salle d’Eau Italienne', surf: '4,0 m²', pct: 10, key: 'sdb' }
+        { name: 'Salle d’Eau Italienne', surf: '4,0 m²', pct: 10, key: 'sdb' },
+        { name: 'Balcon & Terrasse Plein Ouest', surf: '5,0 m²', pct: 12, key: 'balcon' }
       ],
       breakdown: [
         'Espace studio optimisé sans perte de place avec finitions de standing',
@@ -850,6 +859,7 @@
       if (!this.container) return;
 
       this.currentMode = 'dollhouse'; // 'dollhouse' (3D Intérieur), 'plateau' (3D Plateau 17 Lots), 'cad' (Blueprint CAD)
+      this.sub3DMode = 'brochure'; // 'brochure' (Plan 3D Brochure Officielle) or 'webgl' (Maquette 3D WebGL 360°)
       this.currentAmbiance = 'jour'; // 'matin', 'jour', 'crepuscule', 'nuit'
       this.currentFilter = 'all'; // 'all', 'wing-a', 'wing-b', 'f2', 'f3', 'f4'
       this.selectedUnitId = 'pal-t8-a02'; // Default selected unit (Grand F4 91.4 m²)
@@ -1055,12 +1065,15 @@
                     <span class="p3d-plan-badge-dot" style="background: #9E1B32; box-shadow: 0 0 10px #9E1B32;"></span>
                     <div>
                       <div class="p3d-plan-header-title" id="p3d-b3d-title">RENDU 3D ISOMÉTRIQUE BROCHURE</div>
-                      <div class="p3d-plan-header-sub">Rendu Axonométrique Officiel Palmares 2026</div>
+                      <div class="p3d-plan-header-sub" id="p3d-b3d-sub">Plan Axonométrique Officiel • MB Interior Architects</div>
                     </div>
                   </div>
                   <div class="p3d-plan-header-controls">
-                    <button type="button" class="p3d-plan-toggle-btn active" id="p3d-b3d-close-btn" title="Revenir au modèle 3D WebGL interactif">
-                      <span>← Retour 3D WebGL</span>
+                    <button type="button" class="p3d-plan-toggle-btn active" id="p3d-b3d-btn-brochure" title="Plan 3D Isométrique officiel de la brochure">
+                      <span>🎨 Rendu Brochure 3D</span>
+                    </button>
+                    <button type="button" class="p3d-plan-toggle-btn" id="p3d-b3d-btn-webgl" title="Passer à la maquette 3D WebGL 360°">
+                      <span>🌐 Maquette WebGL 360°</span>
                     </button>
                   </div>
                 </div>
@@ -1068,10 +1081,12 @@
                 <div class="p3d-plan-stage-wrap" id="p3d-b3d-stage-wrap">
                   <div class="p3d-plan-stage" id="p3d-b3d-stage">
                     <img src="" alt="Rendu 3D Brochure" class="p3d-plan-img" id="p3d-b3d-img">
+                    <div id="p3d-b3d-pins-layer"></div>
                   </div>
                 </div>
 
                 <div class="p3d-plan-bottom-hud">
+                  <div class="p3d-plan-rooms-strip" id="p3d-b3d-rooms-strip"></div>
                   <div class="p3d-plan-zoom-dock">
                     <button type="button" class="p3d-plan-zoom-btn" id="p3d-b3d-zoom-in" title="Zoomer">+</button>
                     <button type="button" class="p3d-plan-zoom-btn" id="p3d-b3d-zoom-out" title="Dézoomer">−</button>
@@ -1123,15 +1138,15 @@
 
               <!-- Quick Camera View Presets Dock -->
               <div class="p3d-camera-presets-dock">
+                <button type="button" class="p3d-dock-pill" id="p3d-cam-brochure-toggle" title="Voir le rendu 3D haute définition de la brochure">
+                  <span>🎨 Plan Brochure 3D</span>
+                </button>
                 <button type="button" class="p3d-dock-pill tour-btn" id="p3d-btn-guided-tour" title="Lancer la visite cinématographique 3D guidée">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                   <span>Visite Guidée 3D</span>
                 </button>
                 <button type="button" class="p3d-dock-pill" id="p3d-btn-solar-cycle" title="Animer le cycle solaire 24H Tanger">
                   <span>☀️ Cycle 24H</span>
-                </button>
-                <button type="button" class="p3d-dock-pill" id="p3d-cam-brochure-3d" title="Voir le rendu 3D haute définition de la brochure">
-                  <span>🎨 Rendu Brochure HD</span>
                 </button>
                 <button type="button" class="p3d-dock-pill active" id="p3d-cam-iso" title="Perspective Isométrique 3D">
                   <span>Isométrique</span>
@@ -1382,14 +1397,26 @@
     }
 
     buildDollhouseModel(unit) {
-      const isF4 = unit.category === 'f4';
-      const isF3 = unit.category === 'f3';
+      const isStudio = unit.category === 'studio' || unit.id === 'pal-t8-studio' || unit.num === 'Studio';
+      if (isStudio) {
+        this.buildStudioDollhouse(unit);
+      } else {
+        this.buildStandardDollhouse(unit);
+      }
+    }
 
-      // Width and depth of apartment dollhouse
-      const totalW = isF4 ? 13.5 : (isF3 ? 11.2 : 9.5);
-      const totalD = isF4 ? 10.5 : (isF3 ? 9.0 : 8.2);
+    // --- DEDICATED STUDIO SIGNATURE DOLLHOUSE (FAITHFUL TO BROCHURE PAGE 24) ---
+    buildStudioDollhouse(unit) {
+      const totalW = 6.6;
+      const totalD = 9.6;
+      const halfW = totalW / 2; // 3.3
+      const halfD = totalD / 2; // 4.8
+      const wallH = 1.6;
+      const extWallH = 1.85;
+      const wallThick = 0.22;
+      const intThick = 0.14;
 
-      // --- 1. Base Pedestal Slab ---
+      // 1. Base Pedestal Slab
       const baseGeo = new THREE.BoxGeometry(totalW + 1.2, 0.4, totalD + 1.2);
       const baseMat = new THREE.MeshStandardMaterial({
         color: 0x141820,
@@ -1401,7 +1428,6 @@
       baseMesh.receiveShadow = true;
       this.modelGroup.add(baseMesh);
 
-      // Elegant gold rim around base slab
       const rimGeo = new THREE.BoxGeometry(totalW + 1.24, 0.05, totalD + 1.24);
       const rimMat = new THREE.MeshStandardMaterial({
         color: 0xC5A059,
@@ -1412,12 +1438,10 @@
       rimMesh.position.y = 0.01;
       this.modelGroup.add(rimMesh);
 
-      // --- 2. Materials Definition ---
-      const floorFinishMat = this.currentFinish === 'calacatta'
-        ? new THREE.MeshStandardMaterial({ map: this.textures.calacatta, roughness: 0.15, metalness: 0.05 })
-        : (this.currentFinish === 'parquet'
-          ? new THREE.MeshStandardMaterial({ map: this.textures.oak, roughness: 0.35, metalness: 0.05 })
-          : new THREE.MeshStandardMaterial({ color: 0xE8E5DE, roughness: 0.4 }));
+      // 2. Materials
+      const floorFinishMat = this.currentFinish === 'parquet'
+        ? new THREE.MeshStandardMaterial({ map: this.textures.oak, roughness: 0.35, metalness: 0.05 })
+        : new THREE.MeshStandardMaterial({ map: this.textures.calacatta, roughness: 0.15, metalness: 0.05 });
 
       const bedFloorMat = new THREE.MeshStandardMaterial({
         map: this.textures.oak,
@@ -1459,7 +1483,495 @@
         metalness: 0.9
       });
 
-      // --- 3. Room Zones & Floors (Interactive Meshes) ---
+      const brassMat = new THREE.MeshStandardMaterial({
+        color: 0xD4AF37,
+        metalness: 0.85,
+        roughness: 0.25
+      });
+
+      const woodWalnutMat = new THREE.MeshStandardMaterial({
+        color: 0x4E3727,
+        roughness: 0.4,
+        map: this.textures.walnut
+      });
+
+      const marblePbrMat = new THREE.MeshPhysicalMaterial({
+        map: this.textures.calacatta,
+        roughness: 0.12,
+        clearcoat: 0.5,
+        clearcoatRoughness: 0.1
+      });
+
+      const sofaPlinthMat = new THREE.MeshStandardMaterial({ color: 0x1E1A16, roughness: 0.7 });
+      const sofaBoucleMat = new THREE.MeshStandardMaterial({
+        color: 0x323B47,
+        roughness: 0.82,
+        map: this.textures.fabricDark
+      });
+
+      const rugMat = new THREE.MeshStandardMaterial({
+        color: 0xEAE6DF,
+        roughness: 0.95,
+        map: this.textures.fabricLight
+      });
+
+      const cushionBurgundyMat = new THREE.MeshStandardMaterial({
+        color: 0x9E1B32,
+        roughness: 0.55,
+        map: this.textures.fabricGold
+      });
+
+      const cushionGoldMat = new THREE.MeshStandardMaterial({
+        color: 0xC5A059,
+        roughness: 0.45
+      });
+
+      const tvMat = new THREE.MeshStandardMaterial({
+        color: 0x080808,
+        roughness: 0.05,
+        metalness: 0.95
+      });
+
+      const plantPotMat = new THREE.MeshStandardMaterial({
+        color: 0xF5F3EE,
+        roughness: 0.3
+      });
+
+      const plantLeafMat = new THREE.MeshStandardMaterial({
+        color: 0x245832,
+        roughness: 0.4
+      });
+
+      const lampGlobeMat = new THREE.MeshStandardMaterial({
+        color: 0xFFF0D0,
+        emissive: 0xFFD899,
+        emissiveIntensity: 0.85,
+        roughness: 0.2
+      });
+
+      // 3. Interactive Room Floor Zones
+      const createRoomZone = (name, surf, x, z, w, d, mat, key) => {
+        const roomGeo = new THREE.BoxGeometry(w, 0.06, d);
+        const roomMesh = new THREE.Mesh(roomGeo, mat.clone());
+        roomMesh.position.set(x, 0.03, z);
+        roomMesh.receiveShadow = true;
+        roomMesh.userData = {
+          type: 'room',
+          name: name,
+          surf: surf,
+          key: key,
+          baseColor: roomMesh.material.color.getHex()
+        };
+        this.modelGroup.add(roomMesh);
+        this.interactiveRooms.push(roomMesh);
+        return roomMesh;
+      };
+
+      // Balcony (South): z in [3.0, 4.8]
+      createRoomZone('Balcon & Terrasse Panoramique', '5,0 m²', 0, 3.9, totalW, 1.8, balconyFloorMat, 'balcon');
+      // Bedroom Alcove (South-West): x in [-3.3, -0.1], z in [-1.4, 3.0]
+      createRoomZone('Espace Nuit & Dressing Privatif', '16,2 m²', -1.7, 0.8, 3.2, 4.4, bedFloorMat, 'suite');
+      // Salon / Living Room (South-East): x in [-0.1, 3.3], z in [-1.4, 3.0]
+      createRoomZone('Salon & Espace Réception Ouvert', '15,8 m²', 1.6, 0.8, 3.4, 4.4, floorFinishMat, 'salon');
+      // Bathroom (North-West): x in [-3.3, -0.9], z in [-4.8, -1.4]
+      createRoomZone('Salle d’Eau Italienne', '4,0 m²', -2.1, -3.1, 2.4, 3.4, bathFloorMat, 'sdb');
+      // Kitchen & Entry (North-East): x in [-0.9, 3.3], z in [-4.8, -1.4]
+      createRoomZone('Cuisine Américaine Équipée & Entrée', '6,5 m²', 1.2, -3.1, 4.2, 3.4, floorFinishMat, 'cuisine');
+
+      // 4. Wall Extrusion Helper
+      const addWall = (x, z, w, d, h = wallH, mat = wallMat) => {
+        const geo = new THREE.BoxGeometry(w, h, d);
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.position.set(x, h / 2 + 0.05, z);
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+        this.modelGroup.add(mesh);
+        return mesh;
+      };
+
+      // Perimeter Walls
+      addWall(0, -halfD, totalW, wallThick, extWallH); // North Wall
+      addWall(-halfW, -0.9, wallThick, 7.8, extWallH); // West Wall
+      addWall(halfW, -0.9, wallThick, 7.8, extWallH); // East Wall
+      addWall(-halfW, 3.9, wallThick, 1.8, extWallH * 0.8); // West Balcony Wall
+      addWall(halfW, 3.9, wallThick, 1.8, extWallH * 0.8); // East Balcony Wall
+
+      // Balcony Glass Balustrade (South Front)
+      const balustradeGeo = new THREE.BoxGeometry(totalW - 0.1, 0.85, 0.04);
+      const balustradeMesh = new THREE.Mesh(balustradeGeo, glassMat);
+      balustradeMesh.position.set(0, 0.45, halfD);
+      this.modelGroup.add(balustradeMesh);
+
+      const railGeo = new THREE.BoxGeometry(totalW - 0.05, 0.04, 0.06);
+      const railMesh = new THREE.Mesh(railGeo, chromeMat);
+      railMesh.position.set(0, 0.88, halfD);
+      this.modelGroup.add(railMesh);
+
+      // Large Sliding French Bay Window separating interior from balcony
+      const bayWindowGeo = new THREE.BoxGeometry(totalW - 0.1, 1.8, 0.04);
+      const bayWindowMesh = new THREE.Mesh(bayWindowGeo, glassMat);
+      bayWindowMesh.position.set(0, 0.95, 3.0);
+      this.modelGroup.add(bayWindowMesh);
+
+      // Curtains / Drapes framing bay window
+      [-halfW + 0.4, -0.15, 0.15, halfW - 0.4].forEach(cx => {
+        const curtain = new THREE.Mesh(new THREE.BoxGeometry(0.35, 1.7, 0.12), rugMat);
+        curtain.position.set(cx, 0.9, 2.92);
+        this.modelGroup.add(curtain);
+      });
+
+      // 5. Interior Partitions (100% Justified to Brochure Layout)
+      // Bathroom Enclosure Walls
+      addWall(-2.1, -1.4, 2.4, intThick, wallH); // Separates bathroom from bedroom
+      addWall(-0.9, -3.5, intThick, 2.6, wallH); // Separates bathroom from kitchen (leaves 0.8m doorway to hall)
+
+      // Central Dividing Wall separating Bedroom and Living Room
+      const centralWallX = -0.1;
+      const centralWallZ = 1.2;
+      const centralWallLength = 3.4;
+      addWall(centralWallX, centralWallZ, intThick + 0.02, centralWallLength, wallH);
+
+      // 6. The TV Media Wall & Credenza (MOUNTED FLUSH ON CENTRAL PARTITION WALL)
+      const tvWallFaceX = centralWallX + 0.08;
+
+      const credenzaW = 2.4; // along Z
+      const credenzaD = 0.36; // along X
+      const credenzaH = 0.36; // along Y
+      const credenza = new THREE.Mesh(new THREE.BoxGeometry(credenzaD, credenzaH, credenzaW), woodWalnutMat);
+      credenza.position.set(tvWallFaceX + credenzaD / 2, 0.28, centralWallZ);
+      credenza.castShadow = true;
+      this.modelGroup.add(credenza);
+
+      for (let s = -1.0; s <= 1.0; s += 0.2) {
+        const slat = new THREE.Mesh(new THREE.BoxGeometry(0.02, credenzaH - 0.04, 0.04), brassMat);
+        slat.position.set(tvWallFaceX + credenzaD + 0.01, 0.28, centralWallZ + s);
+        this.modelGroup.add(slat);
+      }
+
+      // 65" Ultra-Thin OLED TV Screen mounted FLUSH on central dividing wall
+      const oledW = 1.8;
+      const oledH = 1.05;
+      const oled = new THREE.Mesh(new THREE.BoxGeometry(0.03, oledH, oledW), tvMat);
+      oled.position.set(tvWallFaceX + 0.02, 1.15, centralWallZ);
+      this.modelGroup.add(oled);
+
+      // Sleek Soundbar mounted flush beneath TV
+      const soundbar = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.08, 1.2), tvMat);
+      soundbar.position.set(tvWallFaceX + 0.04, 0.54, centralWallZ);
+      this.modelGroup.add(soundbar);
+
+      // 7. Living Room Seating (Sofa, Coffee Table, Rug, Decor)
+      const sofaPlinth = new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.12, 2.7), sofaPlinthMat);
+      sofaPlinth.position.set(halfW - 0.6, 0.08, centralWallZ);
+      this.modelGroup.add(sofaPlinth);
+
+      for (let sc = -0.85; sc <= 0.85; sc += 0.85) {
+        const seat = new THREE.Mesh(new THREE.BoxGeometry(0.95, 0.3, 0.82), sofaBoucleMat);
+        seat.position.set(halfW - 0.6, 0.26, centralWallZ + sc);
+        seat.castShadow = true;
+        this.modelGroup.add(seat);
+      }
+
+      const sofaBack = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.44, 2.7), sofaBoucleMat);
+      sofaBack.position.set(halfW - 0.2, 0.56, centralWallZ);
+      sofaBack.castShadow = true;
+      this.modelGroup.add(sofaBack);
+
+      const sp1 = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.3, 0.44), cushionBurgundyMat);
+      sp1.position.set(halfW - 0.36, 0.5, centralWallZ - 0.7);
+      sp1.rotation.y = 0.2;
+      this.modelGroup.add(sp1);
+
+      const sp2 = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.28, 0.4), cushionGoldMat);
+      sp2.position.set(halfW - 0.36, 0.48, centralWallZ + 0.7);
+      sp2.rotation.y = -0.15;
+      this.modelGroup.add(sp2);
+
+      const salonRug = new THREE.Mesh(new THREE.BoxGeometry(2.3, 0.02, 3.2), rugMat);
+      salonRug.position.set(1.5, 0.04, centralWallZ);
+      salonRug.receiveShadow = true;
+      this.modelGroup.add(salonRug);
+
+      const coffeeTable = new THREE.Mesh(new THREE.BoxGeometry(0.65, 0.26, 1.25), marblePbrMat);
+      coffeeTable.position.set(1.3, 0.17, centralWallZ);
+      coffeeTable.castShadow = true;
+      this.modelGroup.add(coffeeTable);
+
+      const coffeeBase = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.05, 1.15), brassMat);
+      coffeeBase.position.set(1.3, 0.05, centralWallZ);
+      this.modelGroup.add(coffeeBase);
+
+      const coffeeBook = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.03, 0.3), cushionBurgundyMat);
+      coffeeBook.position.set(1.3, 0.32, centralWallZ);
+      coffeeBook.rotation.y = 0.25;
+      this.modelGroup.add(coffeeBook);
+
+      const sideTable = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.24, 0.45, 20), brassMat);
+      sideTable.position.set(halfW - 0.6, 0.23, -0.7);
+      this.modelGroup.add(sideTable);
+
+      const sidePot = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.1, 0.2, 16), plantPotMat);
+      sidePot.position.set(halfW - 0.6, 0.55, -0.7);
+      this.modelGroup.add(sidePot);
+
+      const sidePlant = new THREE.Mesh(new THREE.SphereGeometry(0.14, 8, 8), plantLeafMat);
+      sidePlant.position.set(halfW - 0.6, 0.7, -0.7);
+      this.modelGroup.add(sidePlant);
+
+      const artFrame = new THREE.Mesh(new THREE.BoxGeometry(0.04, 1.1, 1.4), woodWalnutMat);
+      artFrame.position.set(halfW - 0.04, 1.2, centralWallZ);
+      this.modelGroup.add(artFrame);
+
+      const artCanvas = new THREE.Mesh(new THREE.BoxGeometry(0.05, 1.0, 1.3), marblePbrMat);
+      artCanvas.position.set(halfW - 0.05, 1.2, centralWallZ);
+      this.modelGroup.add(artCanvas);
+
+      // 8. Bedroom Alcove (Headboard, Bed, Nightstands, Wardrobe)
+      const bedCenterZ = centralWallZ;
+      const headboard = new THREE.Mesh(new THREE.BoxGeometry(0.18, 1.3, 2.3), sofaBoucleMat);
+      headboard.position.set(-halfW + 0.18, 0.7, bedCenterZ);
+      headboard.castShadow = true;
+      this.modelGroup.add(headboard);
+
+      const bedBase = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.24, 1.9), woodWalnutMat);
+      bedBase.position.set(-halfW + 1.2, 0.14, bedCenterZ);
+      this.modelGroup.add(bedBase);
+
+      const mattress = new THREE.Mesh(new THREE.BoxGeometry(1.95, 0.3, 1.85), rugMat);
+      mattress.position.set(-halfW + 1.2, 0.38, bedCenterZ);
+      mattress.castShadow = true;
+      this.modelGroup.add(mattress);
+
+      const duvet = new THREE.Mesh(new THREE.BoxGeometry(1.25, 0.2, 1.87), cushionGoldMat);
+      duvet.position.set(-halfW + 1.55, 0.49, bedCenterZ);
+      this.modelGroup.add(duvet);
+
+      [-0.45, 0.45].forEach(po => {
+        const pBack = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.22, 0.5), rugMat);
+        pBack.position.set(-halfW + 0.5, 0.58, bedCenterZ + po);
+        pBack.rotation.z = 0.25;
+        this.modelGroup.add(pBack);
+
+        const pFront = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.18, 0.44), cushionBurgundyMat);
+        pFront.position.set(-halfW + 0.72, 0.52, bedCenterZ + po);
+        pFront.rotation.z = 0.18;
+        this.modelGroup.add(pFront);
+      });
+
+      [-1.4, 1.4].forEach(no => {
+        const nStand = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.26, 0.48), woodWalnutMat);
+        nStand.position.set(-halfW + 0.3, 0.3, bedCenterZ + no);
+        this.modelGroup.add(nStand);
+
+        const orbLamp = new THREE.Mesh(new THREE.SphereGeometry(0.12, 16, 16), lampGlobeMat);
+        orbLamp.position.set(-halfW + 0.3, 0.54, bedCenterZ + no);
+        this.modelGroup.add(orbLamp);
+
+        const lampLight = new THREE.PointLight(0xFFB75E, 0.35, 3.5);
+        lampLight.position.set(-halfW + 0.3, 0.6, bedCenterZ + no);
+        this.modelGroup.add(lampLight);
+      });
+
+      // Full-Height Built-in Wardrobe / Dressing along Bathroom partition wall (z = -1.4)
+      const wardrobe = new THREE.Mesh(new THREE.BoxGeometry(2.1, 1.5, 0.52), woodWalnutMat);
+      wardrobe.position.set(-2.2, 0.78, -1.05);
+      this.modelGroup.add(wardrobe);
+
+      for (let d = -0.8; d <= 0.8; d += 0.5) {
+        const wDoor = new THREE.Mesh(new THREE.BoxGeometry(0.46, 1.44, 0.02), wallAccentMat);
+        wDoor.position.set(-2.2 + d, 0.78, -0.78);
+        this.modelGroup.add(wDoor);
+
+        const handle = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.35, 0.02), brassMat);
+        handle.position.set(-2.2 + d + 0.18, 0.78, -0.76);
+        this.modelGroup.add(handle);
+      }
+
+      // 9. Kitchenette & Entrance (North-East)
+      const kitchenCounter = new THREE.Mesh(new THREE.BoxGeometry(2.5, 0.84, 0.65), woodWalnutMat);
+      kitchenCounter.position.set(0.5, 0.44, -halfD + 0.45);
+      this.modelGroup.add(kitchenCounter);
+
+      const kitchenTop = new THREE.Mesh(new THREE.BoxGeometry(2.54, 0.06, 0.67), marblePbrMat);
+      kitchenTop.position.set(0.5, 0.88, -halfD + 0.45);
+      this.modelGroup.add(kitchenTop);
+
+      const cooktop = new THREE.Mesh(new THREE.BoxGeometry(0.65, 0.02, 0.45), tvMat);
+      cooktop.position.set(1.1, 0.92, -halfD + 0.45);
+      this.modelGroup.add(cooktop);
+
+      const sink = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.02, 0.38), tvMat);
+      sink.position.set(-0.1, 0.92, -halfD + 0.45);
+      this.modelGroup.add(sink);
+
+      const faucet = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 0.22, 12), brassMat);
+      faucet.position.set(-0.1, 1.04, -halfD + 0.26);
+      this.modelGroup.add(faucet);
+
+      const upperCabinets = new THREE.Mesh(new THREE.BoxGeometry(2.5, 0.5, 0.35), woodWalnutMat);
+      upperCabinets.position.set(0.5, 1.45, -halfD + 0.28);
+      this.modelGroup.add(upperCabinets);
+
+      const entryDoor = new THREE.Mesh(new THREE.BoxGeometry(0.06, 1.6, 0.9), woodWalnutMat);
+      entryDoor.position.set(halfW - 0.04, 0.82, -3.8);
+      this.modelGroup.add(entryDoor);
+
+      for (let s = -4.5; s <= -2.0; s += 0.2) {
+        const slat = new THREE.Mesh(new THREE.BoxGeometry(0.03, 1.6, 0.06), woodWalnutMat);
+        slat.position.set(halfW - 0.05, 0.82, s);
+        this.modelGroup.add(slat);
+      }
+
+      // 10. Bathroom (North-West)
+      const showerTray = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.04, 1.3), bathFloorMat);
+      showerTray.position.set(-2.6, 0.05, -4.0);
+      this.modelGroup.add(showerTray);
+
+      const showerGlass = new THREE.Mesh(new THREE.BoxGeometry(0.03, 1.5, 1.3), glassMat);
+      showerGlass.position.set(-2.05, 0.8, -4.0);
+      this.modelGroup.add(showerGlass);
+
+      const showerFrame = new THREE.Mesh(new THREE.BoxGeometry(0.04, 1.52, 0.04), tvMat);
+      showerFrame.position.set(-2.05, 0.8, -3.35);
+      this.modelGroup.add(showerFrame);
+
+      const showerHead = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.02, 16), tvMat);
+      showerHead.position.set(-2.6, 1.45, -4.4);
+      this.modelGroup.add(showerHead);
+
+      const vanity = new THREE.Mesh(new THREE.BoxGeometry(0.45, 0.32, 0.85), woodWalnutMat);
+      vanity.position.set(-1.15, 0.48, -2.7);
+      this.modelGroup.add(vanity);
+
+      const vanityBasin = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.08, 0.6), marblePbrMat);
+      vanityBasin.position.set(-1.15, 0.68, -2.7);
+      this.modelGroup.add(vanityBasin);
+
+      const vanityMirror = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.75, 0.65), lampGlobeMat);
+      vanityMirror.position.set(-0.92, 1.25, -2.7);
+      this.modelGroup.add(vanityMirror);
+
+      const toilet = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.34, 0.52), plantPotMat);
+      toilet.position.set(-1.15, 0.28, -1.8);
+      this.modelGroup.add(toilet);
+
+      // 11. Balcony Outdoor Living
+      [-1.2, 1.2].forEach(bx => {
+        const chair = new THREE.Mesh(new THREE.BoxGeometry(0.65, 0.42, 0.65), woodWalnutMat);
+        chair.position.set(bx, 0.24, 4.0);
+        chair.castShadow = true;
+        this.modelGroup.add(chair);
+
+        const cushion = new THREE.Mesh(new THREE.BoxGeometry(0.58, 0.08, 0.58), rugMat);
+        cushion.position.set(bx, 0.46, 4.0);
+        this.modelGroup.add(cushion);
+      });
+
+      const table = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.32, 0.42, 20), brassMat);
+      table.position.set(0, 0.22, 4.0);
+      this.modelGroup.add(table);
+
+      [-2.5, 2.5].forEach(px => {
+        const pot = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.16, 0.46, 16), plantPotMat);
+        pot.position.set(px, 0.24, 4.0);
+        this.modelGroup.add(pot);
+
+        for (let l = 0; l < 5; l++) {
+          const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.15, 8, 8), plantLeafMat);
+          leaf.scale.set(1.2, 0.2, 0.8);
+          leaf.position.set(px + (Math.sin(l * 1.3) * 0.14), 0.5 + l * 0.07, 4.0 + (Math.cos(l * 1.3) * 0.14));
+          leaf.rotation.set(0.4, l * 1.2, 0.3);
+          this.modelGroup.add(leaf);
+        }
+      });
+    }
+
+    // --- STANDARD APARTMENT DOLLHOUSE (F2, F3, F4 WITH ACCURATE WALLS & NO COLLISIONS) ---
+    buildStandardDollhouse(unit) {
+      const isF4 = unit.category === 'f4';
+      const isF3 = unit.category === 'f3';
+
+      const totalW = isF4 ? 13.5 : (isF3 ? 11.2 : 9.5);
+      const totalD = isF4 ? 10.5 : (isF3 ? 9.0 : 8.2);
+
+      // Base Pedestal Slab
+      const baseGeo = new THREE.BoxGeometry(totalW + 1.2, 0.4, totalD + 1.2);
+      const baseMat = new THREE.MeshStandardMaterial({
+        color: 0x141820,
+        roughness: 0.7,
+        metalness: 0.2
+      });
+      const baseMesh = new THREE.Mesh(baseGeo, baseMat);
+      baseMesh.position.y = -0.2;
+      baseMesh.receiveShadow = true;
+      this.modelGroup.add(baseMesh);
+
+      const rimGeo = new THREE.BoxGeometry(totalW + 1.24, 0.05, totalD + 1.24);
+      const rimMat = new THREE.MeshStandardMaterial({
+        color: 0xC5A059,
+        roughness: 0.3,
+        metalness: 0.8
+      });
+      const rimMesh = new THREE.Mesh(rimGeo, rimMat);
+      rimMesh.position.y = 0.01;
+      this.modelGroup.add(rimMesh);
+
+      // Materials
+      const floorFinishMat = this.currentFinish === 'calacatta'
+        ? new THREE.MeshStandardMaterial({ map: this.textures.calacatta, roughness: 0.15, metalness: 0.05 })
+        : (this.currentFinish === 'parquet'
+          ? new THREE.MeshStandardMaterial({ map: this.textures.oak, roughness: 0.35, metalness: 0.05 })
+          : new THREE.MeshStandardMaterial({ color: 0xE8E5DE, roughness: 0.4 }));
+
+      const bedFloorMat = new THREE.MeshStandardMaterial({
+        map: this.textures.oak,
+        roughness: 0.38
+      });
+
+      const bathFloorMat = new THREE.MeshStandardMaterial({
+        map: this.textures.calacatta,
+        roughness: 0.18
+      });
+
+      const balconyFloorMat = new THREE.MeshStandardMaterial({
+        map: this.textures.travertine,
+        roughness: 0.6
+      });
+
+      const wallMat = new THREE.MeshStandardMaterial({
+        color: 0xEEECE8,
+        roughness: 0.85
+      });
+
+      const glassMat = new THREE.MeshPhysicalMaterial({
+        color: 0xE0F7FA,
+        transparent: true,
+        opacity: 0.35,
+        roughness: 0.1,
+        transmission: 0.85,
+        thickness: 0.5
+      });
+
+      const chromeMat = new THREE.MeshStandardMaterial({
+        color: 0xD8D8D8,
+        roughness: 0.2,
+        metalness: 0.9
+      });
+
+      const brassMat = new THREE.MeshStandardMaterial({ color: 0xD4AF37, metalness: 0.85, roughness: 0.25 });
+      const woodWalnutMat = new THREE.MeshStandardMaterial({ color: 0x4E3727, roughness: 0.4, map: this.textures.walnut });
+      const marblePbrMat = new THREE.MeshPhysicalMaterial({ map: this.textures.calacatta, roughness: 0.12, clearcoat: 0.5, clearcoatRoughness: 0.1 });
+      const sofaPlinthMat = new THREE.MeshStandardMaterial({ color: 0x1E1A16, roughness: 0.7 });
+      const sofaBoucleMat = new THREE.MeshStandardMaterial({ color: 0x323B47, roughness: 0.82, map: this.textures.fabricDark });
+      const rugMat = new THREE.MeshStandardMaterial({ color: 0xEAE6DF, roughness: 0.95, map: this.textures.fabricLight });
+      const cushionBurgundyMat = new THREE.MeshStandardMaterial({ color: 0x9E1B32, roughness: 0.55, map: this.textures.fabricGold });
+      const cushionGoldMat = new THREE.MeshStandardMaterial({ color: 0xC5A059, roughness: 0.45 });
+      const tvMat = new THREE.MeshStandardMaterial({ color: 0x080808, roughness: 0.05, metalness: 0.95 });
+      const plantPotMat = new THREE.MeshStandardMaterial({ color: 0xF5F3EE, roughness: 0.3 });
+      const plantLeafMat = new THREE.MeshStandardMaterial({ color: 0x245832, roughness: 0.4 });
+      const lampGlobeMat = new THREE.MeshStandardMaterial({ color: 0xFFF0D0, emissive: 0xFFD899, emissiveIntensity: 0.85, roughness: 0.2 });
+
+      // Room Zones
       const createRoomZone = (name, surf, x, z, w, d, mat, key) => {
         const roomGeo = new THREE.BoxGeometry(w, 0.06, d);
         const roomMesh = new THREE.Mesh(roomGeo, mat.clone());
@@ -1478,41 +1990,28 @@
       };
 
       if (isF4) {
-        // Living & Reception (Grand Salon 38,2 m²)
         createRoomZone('Grand Double Salon de Réception', '38,2 m²', 1.8, -2.2, 7.8, 5.2, floorFinishMat, 'salon');
-        // Master Suite (18,5 m²)
         createRoomZone('Suite Parentale Royale', '18,5 m²', -4.2, 2.5, 4.2, 4.6, bedFloorMat, 'suite');
-        // Bedroom 2 (13,8 m²)
         createRoomZone('Chambre Enfants 2 & Dressing', '13,8 m²', 0.2, 2.5, 3.8, 4.6, bedFloorMat, 'chambre2');
-        // Bedroom 3 / Office (12,0 m²)
         createRoomZone('Chambre 3 / Bureau Privé', '12,0 m²', 4.2, 2.5, 3.8, 4.6, bedFloorMat, 'chambre3');
-        // Chef Kitchen (11,4 m²)
         createRoomZone('Cuisine de Chef & Buanderie', '11,4 m²', -4.2, -2.2, 3.8, 4.8, bathFloorMat, 'cuisine');
-        // Balcony (9,5 m²)
         createRoomZone('Balcon Filant d’Angle Panoramique', '9,5 m²', 1.8, -5.2, 7.8, 1.4, balconyFloorMat, 'balcon');
       } else if (isF3) {
-        // Salon Familial (27,8 m²)
         createRoomZone('Salon Familial & Espace Repas', '27,8 m²', 1.5, -1.8, 6.8, 4.6, floorFinishMat, 'salon');
-        // Suite Parentale (15,0 m²)
         createRoomZone('Chambre Parentale Spacieuse', '15,0 m²', -3.4, 2.0, 4.0, 4.2, bedFloorMat, 'suite');
-        // Chambre 2 (12,0 m²)
         createRoomZone('Chambre Enfants / Bureau', '12,0 m²', 1.2, 2.0, 4.0, 4.2, bedFloorMat, 'chambre2');
-        // Cuisine (7,5 m²)
         createRoomZone('Cuisine Équipée & Buanderie', '7,5 m²', -3.4, -1.8, 3.6, 4.2, bathFloorMat, 'cuisine');
-        // Balcon (6,0 m²)
         createRoomZone('Balcon Terrasse', '6,0 m²', 1.5, -4.5, 6.8, 1.3, balconyFloorMat, 'balcon');
       } else {
-        // F2 Studio Confort
         createRoomZone('Vaste Séjour & Espace Repas', '26,5 m²', 1.2, -1.5, 5.8, 4.4, floorFinishMat, 'salon');
         createRoomZone('Chambre Royale avec Penderie', '16,0 m²', -2.8, 1.8, 4.0, 4.0, bedFloorMat, 'suite');
         createRoomZone('Cuisine Américaine Design', '9,5 m²', 2.2, 1.8, 3.6, 4.0, bathFloorMat, 'cuisine');
         createRoomZone('Balcon Ouvert', '5,0 m²', 1.2, -4.1, 5.8, 1.2, balconyFloorMat, 'balcon');
       }
 
-      // --- 4. Extruded 3D Walls (Authentic Dollhouse Cutaway) ---
-      const wallH = 1.6; // 1.6m cutaway dollhouse height
-      const extWallH = 1.9; // Outer wall slightly taller
-
+      // Walls
+      const wallH = 1.6;
+      const extWallH = 1.9;
       const addWall = (x, z, w, d, h = wallH, mat = wallMat) => {
         const geo = new THREE.BoxGeometry(w, h, d);
         const mesh = new THREE.Mesh(geo, mat);
@@ -1523,108 +2022,48 @@
         return mesh;
       };
 
-      // Outer Perimeter Walls (with cutouts for windows and balcony doors)
       const halfW = totalW / 2;
       const halfD = totalD / 2;
       const wallThick = 0.22;
+      const intThick = 0.12;
 
-      // Back Wall (North)
+      // Outer Perimeter Walls
       addWall(0, halfD, totalW, wallThick, extWallH);
-      // Left Wall (West)
       addWall(-halfW, 0, wallThick, totalD, extWallH);
-      // Right Wall (East)
       addWall(halfW, 0, wallThick, totalD, extWallH);
-      // Front Wall Segments (South / Balcony Opening)
       addWall(-halfW + 1.8, -halfD + 1.4, 3.6, wallThick, extWallH);
       addWall(halfW - 0.8, -halfD + 1.4, 1.6, wallThick, extWallH);
 
-      // Interior Partitions
-      const intThick = 0.12;
-      addWall(-halfW + 4.2, 0, wallThick, totalD - 2.8, wallH); // Separates Living/Kitchen from Bedrooms
-      addWall(0, halfD - 2.3, totalW - 4.4, intThick, wallH); // Bedroom horizontal corridor wall
+      // Partitions (placed without intersecting furniture)
+      addWall(-halfW + 4.2, 0.4, wallThick, totalD - 3.2, wallH); // Separates Bedrooms from Living
+      addWall(0, halfD - 2.3, totalW - 4.4, intThick, wallH); // Bedroom corridor
       if (isF4) {
-        addWall(2.2, halfD - 2.3, intThick, 4.6, wallH); // Between Bed 2 and Bed 3
+        addWall(2.2, halfD - 2.3, intThick, 4.6, wallH);
       }
 
-      // Balcony Glass Balustrade
+      // Balcony Balustrade
       const balustradeGeo = new THREE.BoxGeometry(isF4 ? 7.6 : 5.8, 0.85, 0.04);
       const balustradeMesh = new THREE.Mesh(balustradeGeo, glassMat);
       balustradeMesh.position.set(isF4 ? 1.8 : 1.2, 0.45, -halfD);
       this.modelGroup.add(balustradeMesh);
 
-      // Balustrade Handrail
       const railGeo = new THREE.BoxGeometry(isF4 ? 7.65 : 5.85, 0.04, 0.06);
       const railMesh = new THREE.Mesh(railGeo, chromeMat);
       railMesh.position.set(isF4 ? 1.8 : 1.2, 0.88, -halfD);
       this.modelGroup.add(railMesh);
 
-      // Large Sliding Balcony French Window Glass
       const glassWindowGeo = new THREE.BoxGeometry(isF4 ? 6.2 : 4.8, 1.8, 0.04);
       const glassWindowMesh = new THREE.Mesh(glassWindowGeo, glassMat);
       glassWindowMesh.position.set(isF4 ? 2.0 : 1.4, 0.95, -halfD + 1.4);
       this.modelGroup.add(glassWindowMesh);
 
-      // --- 5. Contemporary Architectural Furniture Blockouts ---
-      this.addArchitecturalFurniture(isF4, isF3);
-    }
-
-    addArchitecturalFurniture(isF4, isF3) {
-      // High-grade PBR architectural materials
-      const sofaPlinthMat = new THREE.MeshStandardMaterial({ color: 0x1E1A16, roughness: 0.7 });
-      const sofaBoucleMat = new THREE.MeshStandardMaterial({
-        color: 0x323B47,
-        roughness: 0.82,
-        map: this.textures.fabricDark
-      });
-      const rugMat = new THREE.MeshStandardMaterial({
-        color: 0xEAE6DF,
-        roughness: 0.95,
-        map: this.textures.fabricLight
-      });
-      const cushionGoldMat = new THREE.MeshStandardMaterial({ color: 0xC5A059, roughness: 0.45 });
-      const cushionBurgundyMat = new THREE.MeshStandardMaterial({
-        color: 0x9E1B32,
-        roughness: 0.55,
-        map: this.textures.fabricGold
-      });
-      const woodWalnutMat = new THREE.MeshStandardMaterial({
-        color: 0x4E3727,
-        roughness: 0.4,
-        map: this.textures.walnut
-      });
-      const marblePbrMat = new THREE.MeshPhysicalMaterial({
-        map: this.textures.calacatta,
-        roughness: 0.12,
-        clearcoat: 0.5,
-        clearcoatRoughness: 0.1
-      });
-      const brassMat = new THREE.MeshStandardMaterial({ color: 0xD4AF37, metalness: 0.85, roughness: 0.25 });
-      const smokedGlassMat = new THREE.MeshPhysicalMaterial({
-        color: 0x1A2228,
-        transparent: true,
-        opacity: 0.65,
-        roughness: 0.08,
-        transmission: 0.7
-      });
-      const tvMat = new THREE.MeshStandardMaterial({ color: 0x080808, roughness: 0.05, metalness: 0.95 });
-      const plantPotMat = new THREE.MeshStandardMaterial({ color: 0xF5F3EE, roughness: 0.3 });
-      const plantLeafMat = new THREE.MeshStandardMaterial({ color: 0x245832, roughness: 0.4 });
-      const lampGlobeMat = new THREE.MeshStandardMaterial({
-        color: 0xFFF0D0,
-        emissive: 0xFFD899,
-        emissiveIntensity: 0.85,
-        roughness: 0.2
-      });
-
-      // --- 1. LIVING ROOM LOUNGE & ENTERTAINMENT SUITE ---
-      // A. Luxury Berber Area Rug beneath seating group
+      // Furniture
+      // Living Lounge
       const rug = new THREE.Mesh(new THREE.BoxGeometry(4.8, 0.02, 3.8), rugMat);
       rug.position.set(2.4, 0.04, -2.6);
       rug.receiveShadow = true;
       this.modelGroup.add(rug);
 
-      // B. Modular L-Shaped Sectional Lounge
-      // Recessed dark shadow plinth
       const sofaPlinth1 = new THREE.Mesh(new THREE.BoxGeometry(3.5, 0.12, 1.1), sofaPlinthMat);
       sofaPlinth1.position.set(2.4, 0.1, -1.8);
       this.modelGroup.add(sofaPlinth1);
@@ -1633,20 +2072,18 @@
       sofaPlinth2.position.set(3.95, 0.1, -2.8);
       this.modelGroup.add(sofaPlinth2);
 
-      // Deep plush seat cushions with bevel look
       for (let sc = 0; sc < 3; sc++) {
         const seat = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.32, 1.05), sofaBoucleMat);
         seat.position.set(1.3 + sc * 1.1, 0.28, -1.8);
         seat.castShadow = true;
         this.modelGroup.add(seat);
       }
-      // Chaise lounge extension cushion
+
       const chaise = new THREE.Mesh(new THREE.BoxGeometry(1.05, 0.32, 1.3), sofaBoucleMat);
       chaise.position.set(3.95, 0.28, -2.95);
       chaise.castShadow = true;
       this.modelGroup.add(chaise);
 
-      // Upholstered backrests
       const backLong = new THREE.Mesh(new THREE.BoxGeometry(3.6, 0.42, 0.28), sofaBoucleMat);
       backLong.position.set(2.4, 0.58, -1.36);
       backLong.castShadow = true;
@@ -1657,250 +2094,77 @@
       backShort.castShadow = true;
       this.modelGroup.add(backShort);
 
-      // Contrast designer throw pillows (ClaroDiG Burgundy & Warm Gold)
-      const p1 = new THREE.Mesh(new THREE.BoxGeometry(0.48, 0.32, 0.18), cushionBurgundyMat);
-      p1.position.set(1.4, 0.54, -1.55);
-      p1.rotation.set(0.1, 0.25, 0);
-      this.modelGroup.add(p1);
-
-      const p2 = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.28, 0.16), cushionGoldMat);
-      p2.position.set(2.4, 0.52, -1.55);
-      p2.rotation.set(0.08, -0.15, 0);
-      this.modelGroup.add(p2);
-
-      const p3 = new THREE.Mesh(new THREE.BoxGeometry(0.44, 0.3, 0.16), cushionBurgundyMat);
-      p3.position.set(4.32, 0.54, -2.2);
-      p3.rotation.set(0, -0.3, 0.1);
-      this.modelGroup.add(p3);
-
-      // C. Bespoke Nesting Designer Coffee Tables
-      // Main circular Calacatta marble table
       const marbleTable = new THREE.Mesh(new THREE.CylinderGeometry(0.72, 0.72, 0.28, 32), marblePbrMat);
       marbleTable.position.set(2.1, 0.18, -2.7);
       marbleTable.castShadow = true;
       this.modelGroup.add(marbleTable);
 
-      // Brass pedestal base
-      const brassBase = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.45, 0.06, 24), brassMat);
-      brassBase.position.set(2.1, 0.05, -2.7);
-      this.modelGroup.add(brassBase);
-
-      // Secondary smoked glass & brass nesting table
-      const glassTable = new THREE.Mesh(new THREE.CylinderGeometry(0.48, 0.48, 0.36, 24), smokedGlassMat);
-      glassTable.position.set(3.0, 0.22, -3.1);
-      glassTable.castShadow = true;
-      this.modelGroup.add(glassTable);
-
-      // Decor books on coffee table
-      const artBook = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.04, 0.24), cushionBurgundyMat);
-      artBook.position.set(2.1, 0.34, -2.7);
-      artBook.rotation.y = 0.3;
-      this.modelGroup.add(artBook);
-
-      // D. Wall-Mounted Media Credenza & OLED Display
+      // Media Wall credenza flush mounted against interior living wall
+      const tvWallZ = -halfD + 1.45;
       const credenza = new THREE.Mesh(new THREE.BoxGeometry(3.2, 0.36, 0.42), woodWalnutMat);
-      credenza.position.set(2.4, 0.24, -4.4);
+      credenza.position.set(2.4, 0.24, tvWallZ + 0.22);
       credenza.castShadow = true;
       this.modelGroup.add(credenza);
 
-      // Fluted wood vertical slats on credenza front
-      for (let s = -1.4; s <= 1.4; s += 0.2) {
-        const slat = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.34, 0.02), brassMat);
-        slat.position.set(2.4 + s, 0.24, -4.18);
-        this.modelGroup.add(slat);
-      }
-
-      // Ultra-thin OLED TV screen with brushed dark bezel
       const oled = new THREE.Mesh(new THREE.BoxGeometry(2.4, 1.25, 0.03), tvMat);
-      oled.position.set(2.4, 1.15, -4.38);
+      oled.position.set(2.4, 1.15, tvWallZ + 0.05);
       this.modelGroup.add(oled);
 
-      // Minimalist soundbar
       const soundbar = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.08, 0.08), tvMat);
-      soundbar.position.set(2.4, 0.48, -4.38);
+      soundbar.position.set(2.4, 0.48, tvWallZ + 0.06);
       this.modelGroup.add(soundbar);
 
-      // Gallery Art Frame on Living Wall
-      const artFrame = new THREE.Mesh(new THREE.BoxGeometry(1.2, 1.4, 0.03), woodWalnutMat);
-      artFrame.position.set(-1.0, 1.2, -4.38);
-      this.modelGroup.add(artFrame);
-
-      const artCanvas = new THREE.Mesh(new THREE.BoxGeometry(1.1, 1.3, 0.04), marblePbrMat);
-      artCanvas.position.set(-1.0, 1.2, -4.37);
-      this.modelGroup.add(artCanvas);
-
-      // --- 2. DINING GROUP ---
+      // Dining Group (Placed in dining room zone with plenty of clearance from dividing wall)
       const diningTable = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.72, 0.95), woodWalnutMat);
-      diningTable.position.set(-0.8, 0.38, -2.6);
+      diningTable.position.set(2.2, 0.38, 0.6);
       diningTable.castShadow = true;
       this.modelGroup.add(diningTable);
 
-      // 4 Sculptural Dining Chairs
       for (let i = -0.65; i <= 0.65; i += 1.3) {
         [-0.65, 0.65].forEach(side => {
           const chairSeat = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.06, 0.42), sofaBoucleMat);
-          chairSeat.position.set(-0.8 + i, 0.44, -2.6 + side);
+          chairSeat.position.set(2.2 + i, 0.44, 0.6 + side);
           this.modelGroup.add(chairSeat);
 
           const chairBack = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.34, 0.05), sofaBoucleMat);
-          chairBack.position.set(-0.8 + i, 0.62, -2.6 + side + (side > 0 ? 0.2 : -0.2));
+          chairBack.position.set(2.2 + i, 0.62, 0.6 + side + (side > 0 ? 0.2 : -0.2));
           this.modelGroup.add(chairBack);
-
-          const chairLegs = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.44, 8), brassMat);
-          chairLegs.position.set(-0.8 + i, 0.22, -2.6 + side);
-          this.modelGroup.add(chairLegs);
         });
       }
 
-      // --- 3. KITCHEN WATERFALL ISLAND ---
-      // Countertop
-      const islandTop = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.08, 1.0), marblePbrMat);
-      islandTop.position.set(-4.2, 0.88, -2.8);
-      islandTop.castShadow = true;
-      this.modelGroup.add(islandTop);
-
-      // Waterfall left side slab
-      const waterfallL = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.88, 1.0), marblePbrMat);
-      waterfallL.position.set(-5.36, 0.44, -2.8);
-      waterfallL.castShadow = true;
-      this.modelGroup.add(waterfallL);
-
-      // Waterfall right side slab
-      const waterfallR = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.88, 1.0), marblePbrMat);
-      waterfallR.position.set(-3.04, 0.44, -2.8);
-      waterfallR.castShadow = true;
-      this.modelGroup.add(waterfallR);
-
-      // Island cabinetry body
-      const islandBody = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.82, 0.94), woodWalnutMat);
-      islandBody.position.set(-4.2, 0.43, -2.8);
-      this.modelGroup.add(islandBody);
-
-      // Undermount composite sink & arched mixer tap
-      const sink = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.02, 0.4), tvMat);
-      sink.position.set(-4.6, 0.92, -2.8);
-      this.modelGroup.add(sink);
-
-      const faucet = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 0.22, 12), brassMat);
-      faucet.position.set(-4.9, 1.03, -2.8);
-      this.modelGroup.add(faucet);
-
-      // Luxury Leather Barstools with brass footrests
-      [-0.45, 0.45].forEach(stOffset => {
-        const stoolSeat = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 0.08, 16), sofaBoucleMat);
-        stoolSeat.position.set(-4.2 + stOffset, 0.62, -1.95);
-        this.modelGroup.add(stoolSeat);
-
-        const stoolLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.6, 8), brassMat);
-        stoolLeg.position.set(-4.2 + stOffset, 0.31, -1.95);
-        this.modelGroup.add(stoolLeg);
-      });
-
-      // --- 4. MASTER SUITE ROYALE ---
-      // Vertical channel-tufted upholstered tall headboard
+      // Master Bed
       const headboard = new THREE.Mesh(new THREE.BoxGeometry(2.6, 1.35, 0.18), sofaBoucleMat);
-      headboard.position.set(-4.2, 0.72, 4.4);
+      headboard.position.set(-halfW + 2.0, 0.72, halfD - 0.2);
       headboard.castShadow = true;
       this.modelGroup.add(headboard);
 
-      // Warm fluted walnut panel backdrop behind bed
-      const bedPanel = new THREE.Mesh(new THREE.BoxGeometry(3.6, 1.5, 0.04), woodWalnutMat);
-      bedPanel.position.set(-4.2, 0.8, 4.48);
-      this.modelGroup.add(bedPanel);
-
-      // Two-tier plush luxury mattress
       const bedBase = new THREE.Mesh(new THREE.BoxGeometry(2.1, 0.25, 2.2), woodWalnutMat);
-      bedBase.position.set(-4.2, 0.14, 3.2);
+      bedBase.position.set(-halfW + 2.0, 0.14, halfD - 1.4);
       this.modelGroup.add(bedBase);
 
       const mattress = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.32, 2.1), rugMat);
-      mattress.position.set(-4.2, 0.38, 3.2);
+      mattress.position.set(-halfW + 2.0, 0.38, halfD - 1.4);
       mattress.castShadow = true;
       this.modelGroup.add(mattress);
 
-      // Folded luxury duvet in ClaroDiG gold/taupe velvet
       const duvet = new THREE.Mesh(new THREE.BoxGeometry(2.02, 0.2, 1.35), cushionGoldMat);
-      duvet.position.set(-4.2, 0.49, 2.75);
+      duvet.position.set(-halfW + 2.0, 0.49, halfD - 1.85);
       this.modelGroup.add(duvet);
 
-      // 4 Layered Pillows
-      [-0.55, 0.55].forEach(po => {
-        const pBack = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.24, 0.3), rugMat);
-        pBack.position.set(-4.2 + po, 0.6, 3.9);
-        pBack.rotation.x = -0.35;
-        this.modelGroup.add(pBack);
-
-        const pFront = new THREE.Mesh(new THREE.BoxGeometry(0.48, 0.2, 0.24), cushionBurgundyMat);
-        pFront.position.set(-4.2 + po, 0.54, 3.65);
-        pFront.rotation.x = -0.25;
-        this.modelGroup.add(pFront);
-      });
-
-      // Floating Walnut Nightstands with glowing frosted orb lamps
-      [-1.55, 1.55].forEach(no => {
-        const nStand = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.28, 0.42), woodWalnutMat);
-        nStand.position.set(-4.2 + no, 0.32, 4.2);
-        this.modelGroup.add(nStand);
-
-        // Glowing glass orb lamp with warm PointLight
-        const orbLamp = new THREE.Mesh(new THREE.SphereGeometry(0.14, 16, 16), lampGlobeMat);
-        orbLamp.position.set(-4.2 + no, 0.6, 4.2);
-        this.modelGroup.add(orbLamp);
-
-        const lampLight = new THREE.PointLight(0xFFB75E, 0.35, 3.5);
-        lampLight.position.set(-4.2 + no, 0.65, 4.2);
-        this.modelGroup.add(lampLight);
-      });
-
-      // --- 5. BALCONY MEDITERRANEAN OUTDOOR LIVING ---
-      // 2 Teak Outdoor Armchairs
-      [-1.2, 1.2].forEach(bOff => {
-        const bChair = new THREE.Mesh(new THREE.BoxGeometry(0.65, 0.42, 0.65), woodWalnutMat);
-        bChair.position.set(1.8 + bOff, 0.24, -5.2);
-        bChair.castShadow = true;
-        this.modelGroup.add(bChair);
-
-        const bCushion = new THREE.Mesh(new THREE.BoxGeometry(0.58, 0.08, 0.58), rugMat);
-        bCushion.position.set(1.8 + bOff, 0.46, -5.2);
-        this.modelGroup.add(bCushion);
-      });
-
-      // Round cocktail table
-      const bTable = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.35, 0.45, 20), brassMat);
-      bTable.position.set(1.8, 0.24, -5.2);
-      this.modelGroup.add(bTable);
-
-      // Potted Mediterranean Plants (Monstera / Ficus) on Balcony
-      [-2.6, 2.6].forEach(pOff => {
+      // Balcony Plants (inside balcony bounds)
+      [-1.8, 1.8].forEach(pOff => {
         const pot = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.18, 0.5, 16), plantPotMat);
-        pot.position.set(1.8 + pOff, 0.26, -5.3);
+        pot.position.set(1.8 + pOff, 0.26, -halfD + 0.65);
         this.modelGroup.add(pot);
 
         for (let l = 0; l < 5; l++) {
           const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.16, 8, 8), plantLeafMat);
           leaf.scale.set(1.2, 0.2, 0.8);
-          leaf.position.set(1.8 + pOff + (Math.sin(l * 1.3) * 0.15), 0.55 + l * 0.07, -5.3 + (Math.cos(l * 1.3) * 0.15));
+          leaf.position.set(1.8 + pOff + (Math.sin(l * 1.3) * 0.15), 0.55 + l * 0.07, -halfD + 0.65 + (Math.cos(l * 1.3) * 0.15));
           leaf.rotation.set(0.4, l * 1.2, 0.3);
           this.modelGroup.add(leaf);
         }
       });
-
-      // --- 6. SECOND BEDROOM (If F3 or F4) ---
-      if (isF4 || isF3) {
-        const bed2Base = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.35, 2.1), woodWalnutMat);
-        bed2Base.position.set(0.2, 0.2, 3.2);
-        this.modelGroup.add(bed2Base);
-
-        const bed2Mattress = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.25, 2.0), rugMat);
-        bed2Mattress.position.set(0.2, 0.42, 3.2);
-        bed2Mattress.castShadow = true;
-        this.modelGroup.add(bed2Mattress);
-
-        const desk = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.68, 0.65), woodWalnutMat);
-        desk.position.set(1.5, 0.36, 4.3);
-        desk.castShadow = true;
-        this.modelGroup.add(desk);
-      }
     }
 
     // --- PLATEAU VIEW (EXTRUDED 3D FLOOR WITH 17 UNITS) ---
@@ -2088,20 +2352,103 @@
         if (this.isTourActive) this.stopGuidedTour();
         this.renderPlateau();
       } else {
-        // Dimension 1: 3D Dollhouse Isométrique WebGL
+        // Dimension 1: 3D Isométrique (Brochure Officielle ou Maquette WebGL 360°)
         if (plan2d) plan2d.style.display = 'none';
         if (plateau) plateau.style.display = 'none';
-        if (brochure3d) brochure3d.style.display = 'none';
-        if (canvas) canvas.style.display = 'block';
 
-        if (compass) compass.style.display = 'flex';
-        if (floorHud) floorHud.style.display = 'flex';
-        if (solarHud) solarHud.style.display = 'flex';
-        if (camDock) camDock.style.display = 'flex';
+        if (this.sub3DMode === 'brochure') {
+          if (canvas) canvas.style.display = 'none';
+          if (brochure3d) brochure3d.style.display = 'flex';
+          if (compass) compass.style.display = 'none';
+          if (floorHud) floorHud.style.display = 'none';
+          if (solarHud) solarHud.style.display = 'none';
+          if (camDock) camDock.style.display = 'none';
+          if (tourHud) tourHud.style.display = 'none';
 
-        this.targetSpherical = { radius: 21, theta: Math.PI / 4, phi: Math.PI / 3.6 };
-        this.cameraTarget.set(0, 0.4, -0.6);
-        this.buildCurrent3DModel();
+          if (this.isTourActive) this.stopGuidedTour();
+          this.renderBrochure3DPlan();
+        } else {
+          if (brochure3d) brochure3d.style.display = 'none';
+          if (canvas) canvas.style.display = 'block';
+          if (compass) compass.style.display = 'flex';
+          if (floorHud) floorHud.style.display = 'flex';
+          if (solarHud) solarHud.style.display = 'flex';
+          if (camDock) camDock.style.display = 'flex';
+
+          this.targetSpherical = { radius: 21, theta: Math.PI / 4, phi: Math.PI / 3.6 };
+          this.cameraTarget.set(0, 0.4, -0.6);
+          this.buildCurrent3DModel();
+        }
+      }
+    }
+
+    renderBrochure3DPlan() {
+      const unit = PALMARES_UNITS.find(u => u.id === this.selectedUnitId) || PALMARES_UNITS[0];
+      const titleEl = document.getElementById('p3d-b3d-title');
+      const subEl = document.getElementById('p3d-b3d-sub');
+      const imgEl = document.getElementById('p3d-b3d-img');
+      const pinsLayer = document.getElementById('p3d-b3d-pins-layer');
+      const roomsStrip = document.getElementById('p3d-b3d-rooms-strip');
+      const btnBrochure = document.getElementById('p3d-b3d-btn-brochure');
+      const btnWebgl = document.getElementById('p3d-b3d-btn-webgl');
+
+      if (!imgEl) return;
+
+      if (titleEl) {
+        titleEl.textContent = `PLAN 3D ISOMÉTRIQUE — ${unit.num} (${unit.surface})`;
+      }
+      if (subEl) {
+        subEl.textContent = `${unit.typology} • ${unit.brochureBadge || 'Brochure Officielle Palmares 2026'}`;
+      }
+
+      if (btnBrochure) btnBrochure.classList.add('active');
+      if (btnWebgl) btnWebgl.classList.remove('active');
+
+      imgEl.src = unit.plan3DImg;
+
+      // Reset Pan & Zoom on unit change
+      this.panZoomB3D = { scale: 1, x: 0, y: 0 };
+      this.applyPanZoom('p3d-b3d-stage', this.panZoomB3D);
+
+      // Render Interactive Room Pins
+      if (pinsLayer) {
+        pinsLayer.innerHTML = '';
+        const pins = unit.roomPins3D || unit.roomPins2D;
+        if (pins && pins.length > 0) {
+          pins.forEach(pin => {
+            const pinEl = document.createElement('div');
+            pinEl.className = 'p3d-2d-room-pin p3d-3d-room-pin';
+            pinEl.style.left = `${pin.x}%`;
+            pinEl.style.top = `${pin.y}%`;
+            pinEl.dataset.roomkey = pin.key;
+            pinEl.innerHTML = `
+              <span class="p3d-2d-room-pin-dot"></span>
+              <span class="p3d-2d-room-pin-name">${pin.name}</span>
+              <span class="p3d-2d-room-pin-surf">${pin.surf}</span>
+            `;
+            pinEl.addEventListener('click', (e) => {
+              e.stopPropagation();
+              this.highlightRoom(pin.key);
+            });
+            pinsLayer.appendChild(pinEl);
+          });
+        }
+      }
+
+      // Render Bottom Room Chips
+      if (roomsStrip) {
+        roomsStrip.innerHTML = unit.roomsDetail.map(r => `
+          <button type="button" class="p3d-plan-room-chip" data-roomkey="${r.key}">
+            <span>${r.name}</span>
+            <small style="opacity: 0.7; margin-left: 4px;">${r.surf}</small>
+          </button>
+        `).join('');
+
+        roomsStrip.querySelectorAll('.p3d-plan-room-chip').forEach(chip => {
+          chip.addEventListener('click', () => {
+            this.highlightRoom(chip.dataset.roomkey);
+          });
+        });
       }
     }
 
@@ -2185,10 +2532,24 @@
         });
       }
 
-      // 2. Highlight room chip in bottom strip
       const roomsStrip = document.getElementById('p3d-2d-rooms-strip');
       if (roomsStrip) {
         roomsStrip.querySelectorAll('.p3d-plan-room-chip').forEach(chip => {
+          chip.classList.toggle('active', chip.dataset.roomkey === roomKey);
+        });
+      }
+
+      // 2. Highlight room pin on 3D brochure plan
+      const pinsLayerB3D = document.getElementById('p3d-b3d-pins-layer');
+      if (pinsLayerB3D) {
+        pinsLayerB3D.querySelectorAll('.p3d-2d-room-pin').forEach(pin => {
+          pin.classList.toggle('active', pin.dataset.roomkey === roomKey);
+        });
+      }
+
+      const roomsStripB3D = document.getElementById('p3d-b3d-rooms-strip');
+      if (roomsStripB3D) {
+        roomsStripB3D.querySelectorAll('.p3d-plan-room-chip').forEach(chip => {
           chip.classList.toggle('active', chip.dataset.roomkey === roomKey);
         });
       }
@@ -2233,25 +2594,12 @@
     }
 
     toggleBrochure3DOverlay(show) {
-      const overlay = document.getElementById('p3d-brochure-3d-overlay');
-      const canvas = document.getElementById('p3d-three-canvas');
-      const img = document.getElementById('p3d-b3d-img');
-      const title = document.getElementById('p3d-b3d-title');
-
-      if (!overlay) return;
-
       if (show) {
-        const unit = PALMARES_UNITS.find(u => u.id === this.selectedUnitId) || PALMARES_UNITS[0];
-        if (img) img.src = unit.plan3DImg;
-        if (title) title.textContent = `RENDU 3D ISOMÉTRIQUE — ${unit.num} (${unit.surface})`;
-        overlay.style.display = 'flex';
-        if (canvas) canvas.style.display = 'none';
-        this.panZoomB3D = { scale: 1, x: 0, y: 0 };
-        this.applyPanZoom('p3d-b3d-stage', this.panZoomB3D);
+        this.sub3DMode = 'brochure';
       } else {
-        overlay.style.display = 'none';
-        if (canvas) canvas.style.display = 'block';
+        this.sub3DMode = 'webgl';
       }
+      this.setMode('dollhouse');
     }
 
     setupPanZoomInteraction(wrapId, stageId, state) {
@@ -2544,11 +2892,11 @@
 
       // Refresh corresponding dimension view
       if (this.currentMode === 'dollhouse') {
-        this.buildCurrent3DModel();
-        const b3dImg = document.getElementById('p3d-b3d-img');
-        const b3dTitle = document.getElementById('p3d-b3d-title');
-        if (b3dImg) b3dImg.src = unit.plan3DImg;
-        if (b3dTitle) b3dTitle.textContent = `RENDU 3D ISOMÉTRIQUE — ${unit.num} (${unit.surface})`;
+        if (this.sub3DMode === 'brochure') {
+          this.renderBrochure3DPlan();
+        } else {
+          this.buildCurrent3DModel();
+        }
       } else if (this.currentMode === 'cad') {
         this.render2DPlan();
       } else if (this.currentMode === 'plateau') {
@@ -2896,7 +3244,7 @@
         if (filter === 'all') return true;
         if (filter === 'wing-a') return u.wing === 'A';
         if (filter === 'wing-b') return u.wing === 'B';
-        if (filter === 'f2') return u.category === 'f2';
+        if (filter === 'f2') return u.category === 'f2' || u.category === 'studio';
         if (filter === 'f3') return u.category === 'f3';
         if (filter === 'f4') return u.category === 'f4';
         return true;
@@ -2916,7 +3264,7 @@
         <div class="p3d-mobile-card ${u.id === this.selectedUnitId ? 'active' : ''}" data-id="${u.id}">
           <div class="p3d-mcard-top">
             <span class="p3d-mcard-num">${u.num}</span>
-            <span class="p3d-mcard-cat">${u.category.toUpperCase()}</span>
+            <span class="p3d-mcard-cat">${u.category === 'studio' ? 'STUDIO' : u.category.toUpperCase()}</span>
           </div>
           <div class="p3d-mcard-surf">${u.surface}</div>
           <div class="p3d-mcard-price">${u.estimatedPrice}</div>
@@ -2974,21 +3322,31 @@
           this.cameraTarget.set(0, 0.4, -0.6);
         });
       }
-      const btnBrochure3D = document.getElementById('p3d-cam-brochure-3d');
-      const btnCloseBrochure3D = document.getElementById('p3d-b3d-close-btn');
+      const btnB3DBrochure = document.getElementById('p3d-b3d-btn-brochure');
+      const btnB3DWebgl = document.getElementById('p3d-b3d-btn-webgl');
+      const btnCamBrochureToggle = document.getElementById('p3d-cam-brochure-toggle');
 
-      if (btnBrochure3D) {
-        btnBrochure3D.addEventListener('click', () => {
+      if (btnB3DBrochure) {
+        btnB3DBrochure.addEventListener('click', () => {
           this.lastInteractionTime = Date.now();
-          if (this.isTourActive) this.stopGuidedTour();
-          this.toggleBrochure3DOverlay(true);
+          this.sub3DMode = 'brochure';
+          this.setMode('dollhouse');
         });
       }
 
-      if (btnCloseBrochure3D) {
-        btnCloseBrochure3D.addEventListener('click', () => {
+      if (btnB3DWebgl) {
+        btnB3DWebgl.addEventListener('click', () => {
           this.lastInteractionTime = Date.now();
-          this.toggleBrochure3DOverlay(false);
+          this.sub3DMode = 'webgl';
+          this.setMode('dollhouse');
+        });
+      }
+
+      if (btnCamBrochureToggle) {
+        btnCamBrochureToggle.addEventListener('click', () => {
+          this.lastInteractionTime = Date.now();
+          this.sub3DMode = 'brochure';
+          this.setMode('dollhouse');
         });
       }
 
