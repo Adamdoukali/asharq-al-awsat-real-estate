@@ -511,6 +511,78 @@
   border-color: var(--p3d-border-gold);
 }
 
+.p3d-dock-pill.tour-btn {
+  background: linear-gradient(135deg, rgba(158, 27, 50, 0.45) 0%, rgba(196, 35, 64, 0.28) 100%);
+  border-color: rgba(196, 35, 64, 0.65);
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.p3d-dock-pill.tour-btn:hover {
+  background: linear-gradient(135deg, rgba(158, 27, 50, 0.7) 0%, rgba(196, 35, 64, 0.5) 100%);
+  box-shadow: 0 0 16px rgba(196, 35, 64, 0.45);
+}
+
+.p3d-dock-pill.tour-active {
+  background: #9E1B32 !important;
+  color: #FFFFFF !important;
+  border-color: #C42340 !important;
+  box-shadow: 0 0 20px rgba(196, 35, 64, 0.75) !important;
+  animation: p3d-pulse-glow 1.8s infinite ease-in-out;
+}
+
+@keyframes p3d-pulse-glow {
+  0%, 100% { box-shadow: 0 0 12px rgba(196, 35, 64, 0.5); }
+  50% { box-shadow: 0 0 26px rgba(196, 35, 64, 0.95); }
+}
+
+.p3d-tour-status-hud {
+  position: absolute;
+  top: 114px;
+  left: 20px;
+  z-index: 12;
+  background: rgba(15, 19, 26, 0.90);
+  backdrop-filter: blur(28px) saturate(150%);
+  border: 1px solid var(--p3d-border-gold);
+  border-radius: 14px;
+  padding: 8px 16px;
+  display: none;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.p3d-tour-status-hud.visible {
+  display: flex;
+}
+
+.p3d-tour-rec-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #E53935;
+  box-shadow: 0 0 12px #E53935;
+  animation: p3d-pulse-dot 1.2s infinite ease-in-out;
+}
+
+.p3d-tour-text-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.p3d-tour-step-title {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.p3d-tour-step-sub {
+  font-size: 0.66rem;
+  color: var(--p3d-gold-light);
+}
+
 /* Bottom Right Dock Controls (Zoom & Fullscreen) */
 .p3d-dock-controls {
   position: absolute;
@@ -1229,49 +1301,203 @@
 }
 
 /* ==========================================================================
-   RESPONSIVE DESIGN BREAKPOINTS
+   RESPONSIVE DESIGN BREAKPOINTS — APPLE HIG MOBILE OPTIMIZED
    ========================================================================== */
 @media (max-width: 1200px) {
   .p3d-workspace {
     grid-template-columns: 1fr;
     gap: 24px;
-    padding: 24px 30px 10px;
+    padding: 24px 28px 10px;
   }
   .p3d-viewport-container {
-    height: 560px;
+    height: 540px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .p3d-explorer-section {
-    padding: 24px 0;
-    border-radius: 18px;
+    padding: 24px 0 20px;
+    border-radius: 20px;
     margin: 20px 0;
   }
   .p3d-header {
     padding: 0 20px 18px;
+    gap: 14px;
   }
   .p3d-workspace {
-    padding: 16px 20px 10px;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 14px 16px 10px !important;
+    gap: 20px !important;
   }
   .p3d-viewport-container {
-    height: 450px;
-  }
-  .p3d-mobile-carousel {
-    display: flex;
+    width: 100% !important;
+    height: 420px !important;
+    min-height: 380px !important;
+    border-radius: 18px !important;
   }
   .p3d-dossier-card {
-    padding: 22px 18px;
-    height: auto;
-    max-height: 720px;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 22px 18px !important;
+    border-radius: 18px !important;
+  }
+  .p3d-mobile-carousel {
+    display: flex !important;
+  }
+  .p3d-params-nav {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .p3d-header-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .p3d-main-title {
+    font-size: clamp(1.6rem, 5.5vw, 2.1rem);
+  }
+  .p3d-modes-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .p3d-segmented-control {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+  }
+  .p3d-segmented-btn {
+    justify-content: center;
+    padding: 8px 6px;
+    font-size: 0.72rem;
+  }
+  .p3d-filter-chips {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .p3d-filter-chips::-webkit-scrollbar {
+    display: none;
+  }
+  .p3d-filter-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 7px 14px;
+  }
+  .p3d-camera-presets-dock {
+    top: 54px;
+    left: 12px;
+    right: 12px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+    padding-bottom: 2px;
+  }
+  .p3d-camera-presets-dock::-webkit-scrollbar {
+    display: none;
+  }
+  .p3d-dock-pill {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .p3d-tour-status-hud {
+    top: 96px;
+    left: 12px;
+    padding: 6px 12px;
+  }
+  .p3d-compass-hud {
+    top: 12px;
+    left: 12px;
+    padding: 5px 12px;
+  }
+  .p3d-floor-level-hud {
+    top: 12px;
+    right: 12px;
+    padding: 5px 12px;
+  }
+  .p3d-solar-time-hud {
+    bottom: 12px;
+    left: 12px;
+    padding: 6px 12px;
+    gap: 8px;
+  }
+  .p3d-solar-icon {
+    font-size: 1.15rem;
+  }
+  .p3d-dock-controls {
+    bottom: 12px;
+    right: 12px;
+    padding: 4px;
+  }
+  .p3d-dock-btn {
+    width: 32px;
+    height: 32px;
   }
   .p3d-specs-table {
     grid-template-columns: 1fr;
+    gap: 8px;
   }
   .p3d-spec-box.full-width {
     grid-column: span 1;
   }
-  .p3d-params-nav {
-    grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 480px) {
+  .p3d-explorer-section {
+    padding: 18px 0 16px;
+    border-radius: 16px;
+    margin: 16px 0;
+  }
+  .p3d-header {
+    padding: 0 14px 14px;
+  }
+  .p3d-workspace {
+    padding: 10px 12px 6px !important;
+    gap: 16px !important;
+  }
+  .p3d-viewport-container {
+    height: 350px !important;
+    border-radius: 16px !important;
+  }
+  .p3d-dossier-card {
+    padding: 18px 14px !important;
+    border-radius: 16px !important;
+  }
+  .p3d-dossier-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .p3d-dossier-surface-hero {
+    align-self: flex-start;
+  }
+  .p3d-dossier-title {
+    font-size: 1.7rem;
+  }
+  .p3d-mobile-carousel {
+    padding: 10px 12px 4px !important;
+    gap: 8px !important;
+  }
+  .p3d-mobile-card {
+    flex: 0 0 175px !important;
+    padding: 12px 10px !important;
+  }
+  .p3d-solar-info strong {
+    font-size: 0.72rem;
+  }
+  .p3d-solar-info span {
+    font-size: 0.62rem;
   }
 }

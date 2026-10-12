@@ -738,12 +738,26 @@
     grid-template-columns: 1fr;
   }
   .proj-hero {
-    padding: 120px 6vw 50px;
-  }
-  .proj-plans-box {
-    padding: 24px;
+    padding: 110px 5vw 40px;
   }
   .proj-hero-title {
-    font-size: clamp(2.4rem, 8vw, 3.2rem);
+    font-size: clamp(2.2rem, 8vw, 3rem);
+  }
+  .proj-hero-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+  .proj-hero-actions a {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+  }
+  .proj-plans-box {
+    padding: 20px 16px;
+  }
+  .proj-section {
+    padding: 60px 5vw;
   }
 }

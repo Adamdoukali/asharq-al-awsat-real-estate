@@ -1062,53 +1062,107 @@ body {
   html, body {
     overflow-x: hidden !important;
     overflow-y: auto !important;
-    height: auto !important;
+    width: 100% !important;
+    max-width: 100vw !important;
     touch-action: pan-y !important;
     -webkit-overflow-scrolling: touch !important;
   }
 
   .loam-header {
-    padding: 10px 16px;
-    flex-wrap: wrap;
-    gap: 12px;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 12px 18px !important;
+    height: auto !important;
+    background: rgba(14, 16, 15, 0.95) !important;
+  }
+
+  .loam-logo-lockup {
+    order: 1 !important;
+  }
+
+  .loam-logo-lockup img {
+    height: 28px !important;
+    width: auto !important;
+  }
+
+  .loam-header-ctas {
+    order: 2 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  .loam-btn-primary {
+    padding: 8px 16px !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.06em !important;
   }
 
   .loam-nav-projects {
-    order: 3;
-    width: 100%;
-    overflow-x: auto;
-    white-space: nowrap;
-    gap: 16px;
-    padding-bottom: 6px;
-    -webkit-overflow-scrolling: touch;
+    display: none !important; /* Clean header bar on mobile */
   }
 
   .loam-hero {
-    grid-template-columns: 1fr !important;
-    padding: 130px 20px 50px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 100px 18px 40px !important;
     height: auto !important;
-    min-height: 100vh !important;
-    gap: 36px !important;
+    min-height: auto !important;
+    gap: 28px !important;
   }
 
   .loam-hero-copy {
+    width: 100% !important;
     max-width: 100% !important;
   }
 
+  .loam-hero-eyebrow {
+    font-size: 0.72rem !important;
+    letter-spacing: 0.16em !important;
+  }
+
   .loam-hero-title {
-    font-size: clamp(2.4rem, 8vw, 3.4rem) !important;
+    font-size: clamp(2.1rem, 7.8vw, 3.2rem) !important;
+    line-height: 1.15 !important;
+    margin-bottom: 16px !important;
+  }
+
+  .loam-hero-desc {
+    font-size: 0.94rem !important;
+    line-height: 1.6 !important;
+  }
+
+  .loam-hero-actions {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+    margin-top: 20px !important;
+  }
+
+  .loam-hero-actions a,
+  .loam-hero-actions button {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 12px 18px !important;
+    font-size: 0.8rem !important;
   }
 
   .loam-hero-card {
     margin-left: 0 !important;
+    width: 100% !important;
     max-width: 100% !important;
-    padding: 28px 20px !important;
+    padding: 24px 18px !important;
+    border-radius: 20px !important;
+    margin-top: 10px !important;
   }
 
   .loam-chapter {
     height: auto !important;
-    min-height: 100vh !important;
-    padding: 85px 20px 60px !important;
+    min-height: auto !important;
+    padding: 70px 18px 40px !important;
     overflow: visible !important;
   }
 
@@ -1118,17 +1172,25 @@ body {
   }
 
   .loam-chapter-title {
-    font-size: clamp(2.4rem, 8vw, 3.4rem) !important;
+    font-size: clamp(2rem, 7vw, 2.8rem) !important;
   }
 
   .loam-figs {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr) !important;
-    gap: 12px !important;
+    gap: 8px !important;
+  }
+
+  .loam-fig {
+    padding: 12px 8px !important;
   }
 
   .loam-fig strong {
-    font-size: clamp(1.1rem, 3.8vw, 1.5rem) !important;
+    font-size: clamp(1rem, 3.5vw, 1.3rem) !important;
+  }
+
+  .loam-fig span {
+    font-size: 0.65rem !important;
   }
 
   .loam-actions-row {
@@ -1144,25 +1206,21 @@ body {
   }
 
   .loam-plans-section {
-    padding: 70px 20px 50px !important;
+    padding: 50px 18px 40px !important;
   }
 
   .loam-plans-grid {
     grid-template-columns: 1fr !important;
-    gap: 28px !important;
-  }
-
-  .loam-plan-tabs {
-    flex-direction: column !important;
+    gap: 24px !important;
   }
 
   .loam-footer {
-    padding: 60px 20px 30px !important;
+    padding: 50px 18px 30px !important;
   }
 
   .loam-footer-grid {
     grid-template-columns: 1fr !important;
-    gap: 32px !important;
+    gap: 28px !important;
   }
 
   .loam-footer-bottom {
@@ -1173,7 +1231,7 @@ body {
 
   .loam-modal-sheet {
     max-width: 100% !important;
-    padding: 24px 20px !important;
+    padding: 24px 18px !important;
   }
 }
 

@@ -390,50 +390,53 @@
     }
   ];
 
-  // --- PROCEDURAL PROCEDURAL TEXTURE GENERATOR FOR LUXURY ARCHITECTURE ---
+  // --- PROCEDURAL TEXTURE GENERATOR FOR LUXURY ARCHITECTURE ---
   const TextureGenerator = {
-    // Elegant French chevron / herringbone wood parquet
+    // Ultra-High Resolution French chevron / herringbone wood parquet (1024x1024)
     createChevronTexture(type = 'oak') {
       const canvas = document.createElement('canvas');
-      canvas.width = 512;
-      canvas.height = 512;
+      canvas.width = 1024;
+      canvas.height = 1024;
       const ctx = canvas.getContext('2d');
 
-      // Base wood tone
       const isDark = type === 'walnut';
-      ctx.fillStyle = isDark ? '#4A3525' : '#C8A882';
-      ctx.fillRect(0, 0, 512, 512);
+      // Base luxury wood tone
+      ctx.fillStyle = isDark ? '#3D2A1C' : '#D1B48E';
+      ctx.fillRect(0, 0, 1024, 1024);
 
-      // Draw angled planks
-      const plankW = 32;
-      const plankH = 128;
-      ctx.lineWidth = 1.5;
-      ctx.strokeStyle = isDark ? '#2B1E14' : '#8A6E4F';
+      const plankW = 64;
+      const plankH = 256;
+      ctx.lineWidth = 2.0;
 
-      for (let y = -plankH; y < 512 + plankH; y += plankH / 2) {
-        for (let x = -plankW * 2; x < 512 + plankW * 2; x += plankW * 2) {
-          // Plank Left Angle (45 deg)
-          const toneVar = (Math.sin(x * 12.3 + y * 7.7) * 0.5 + 0.5) * 20;
+      for (let y = -plankH; y < 1024 + plankH; y += plankH / 2) {
+        for (let x = -plankW * 2; x < 1024 + plankW * 2; x += plankW * 2) {
+          const pseudoNoise = (Math.sin(x * 17.1 + y * 11.3) * 0.5 + 0.5);
+          const toneVar = pseudoNoise * 26 - 13;
+          
           ctx.fillStyle = isDark
-            ? `rgb(${74 + toneVar}, ${53 + toneVar * 0.7}, ${37 + toneVar * 0.5})`
-            : `rgb(${200 + toneVar}, ${168 + toneVar * 0.9}, ${130 + toneVar * 0.8})`;
+            ? `rgb(${55 + toneVar}, ${38 + toneVar * 0.7}, ${26 + toneVar * 0.5})`
+            : `rgb(${208 + toneVar}, ${178 + toneVar * 0.9}, ${140 + toneVar * 0.8})`;
 
           ctx.save();
           ctx.translate(x, y);
           ctx.beginPath();
           ctx.rect(0, 0, plankW, plankH);
           ctx.fill();
+
+          // Dark beveled micro-groove between planks (V-joint)
+          ctx.strokeStyle = isDark ? 'rgba(18, 10, 5, 0.65)' : 'rgba(95, 72, 48, 0.45)';
           ctx.stroke();
 
-          // Subtle wood grain streaks
-          ctx.strokeStyle = isDark ? 'rgba(30, 20, 10, 0.25)' : 'rgba(120, 90, 60, 0.2)';
-          ctx.lineWidth = 0.8;
-          ctx.beginPath();
-          ctx.moveTo(plankW * 0.3, 0);
-          ctx.lineTo(plankW * 0.35, plankH);
-          ctx.moveTo(plankW * 0.7, 0);
-          ctx.lineTo(plankW * 0.65, plankH);
-          ctx.stroke();
+          // Realistic micro wood-grain fibers
+          ctx.strokeStyle = isDark ? 'rgba(20, 12, 6, 0.18)' : 'rgba(110, 85, 55, 0.16)';
+          ctx.lineWidth = 1.0;
+          for (let f = 6; f < plankW; f += 12) {
+            ctx.beginPath();
+            ctx.moveTo(f, 0);
+            ctx.lineTo(f + (pseudoNoise * 6 - 3), plankH);
+            ctx.stroke();
+          }
+
           ctx.restore();
         }
       }
@@ -441,77 +444,156 @@
       const tex = new THREE.CanvasTexture(canvas);
       tex.wrapS = THREE.RepeatWrapping;
       tex.wrapT = THREE.RepeatWrapping;
-      tex.repeat.set(4, 4);
+      tex.repeat.set(3, 3);
       return tex;
     },
 
-    // Luxurious Calacatta Gold Italian polished marble with gold & grey veins
+    // Photorealistic Calacatta Gold Italian polished marble (1024x1024 PBR)
     createMarbleTexture() {
+      const canvas = document.createElement('canvas');
+      canvas.width = 1024;
+      canvas.height = 1024;
+      const ctx = canvas.getContext('2d');
+
+      // Subtle ivory / warm alabaster base with gentle gradient
+      const grad = ctx.createLinearGradient(0, 0, 1024, 1024);
+      grad.addColorStop(0, '#FAF9F5');
+      grad.addColorStop(0.35, '#F4F2EB');
+      grad.addColorStop(0.7, '#F7F6F1');
+      grad.addColorStop(1, '#FFFFFF');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 1024, 1024);
+
+      // Micro-crystalline organic noise mottling
+      for (let i = 0; i < 4000; i++) {
+        const nx = Math.random() * 1024;
+        const ny = Math.random() * 1024;
+        ctx.fillStyle = Math.random() > 0.5 ? 'rgba(215, 210, 200, 0.04)' : 'rgba(255, 255, 255, 0.08)';
+        ctx.fillRect(nx, ny, Math.random() * 8 + 2, Math.random() * 8 + 2);
+      }
+
+      // Procedural organic fractal branching vein generator
+      function drawBranchingVein(startX, startY, endX, endY, color, baseWidth, branches = 3) {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = baseWidth;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        let curX = startX;
+        let curY = startY;
+        const segments = 16;
+        const dx = (endX - startX) / segments;
+        const dy = (endY - startY) / segments;
+
+        ctx.beginPath();
+        ctx.moveTo(curX, curY);
+
+        for (let s = 1; s <= segments; s++) {
+          const jitterX = (Math.sin(s * 3.7 + startX) * 24) + (Math.random() - 0.5) * 16;
+          const jitterY = (Math.cos(s * 2.9 + startY) * 22) + (Math.random() - 0.5) * 14;
+          const nextX = startX + dx * s + jitterX;
+          const nextY = startY + dy * s + jitterY;
+          ctx.lineTo(nextX, nextY);
+
+          // Sub-vein splitting
+          if (branches > 0 && s % 5 === 0 && Math.random() > 0.35) {
+            ctx.stroke();
+            const subEndX = nextX + (Math.random() - 0.5) * 220;
+            const subEndY = nextY + (Math.random() - 0.5) * 220;
+            drawBranchingVein(nextX, nextY, subEndX, subEndY, color, baseWidth * 0.5, branches - 1);
+            ctx.beginPath();
+            ctx.moveTo(nextX, nextY);
+          }
+          curX = nextX;
+          curY = nextY;
+        }
+        ctx.stroke();
+      }
+
+      // Charcoal and slate grey primary fractures
+      drawBranchingVein(60, 0, 820, 1024, 'rgba(110, 108, 102, 0.32)', 6.5, 3);
+      drawBranchingVein(320, 0, 980, 850, 'rgba(135, 130, 122, 0.25)', 4.8, 2);
+      drawBranchingVein(0, 420, 1024, 820, 'rgba(105, 100, 95, 0.28)', 5.2, 3);
+
+      // Fine golden-ochre / amber sub-veins (The signature Calacatta Gold hallmark)
+      drawBranchingVein(120, 80, 860, 1024, 'rgba(197, 160, 89, 0.45)', 4.2, 2);
+      drawBranchingVein(0, 580, 920, 980, 'rgba(218, 175, 95, 0.38)', 3.6, 2);
+      drawBranchingVein(520, 0, 1024, 460, 'rgba(182, 142, 70, 0.35)', 3.2, 1);
+      drawBranchingVein(280, 200, 680, 780, 'rgba(225, 190, 115, 0.30)', 2.5, 1);
+
+      // Delicate micro-feather fractures
+      for (let m = 0; m < 12; m++) {
+        const mx = Math.random() * 1024;
+        const my = Math.random() * 1024;
+        drawBranchingVein(mx, my, mx + (Math.random() - 0.5) * 180, my + (Math.random() - 0.5) * 180, 'rgba(160, 150, 140, 0.18)', 1.5, 0);
+      }
+
+      const tex = new THREE.CanvasTexture(canvas);
+      tex.wrapS = THREE.RepeatWrapping;
+      tex.wrapT = THREE.RepeatWrapping;
+      tex.repeat.set(1.5, 1.5);
+      return tex;
+    },
+
+    // Mediterranean Travertine & Terrazzo
+    createTravertineTexture() {
       const canvas = document.createElement('canvas');
       canvas.width = 512;
       canvas.height = 512;
       const ctx = canvas.getContext('2d');
 
-      // Soft cream-white ivory ground
-      const grad = ctx.createLinearGradient(0, 0, 512, 512);
-      grad.addColorStop(0, '#FAFAF7');
-      grad.addColorStop(0.5, '#F5F4EE');
-      grad.addColorStop(1, '#FFFFFF');
-      ctx.fillStyle = grad;
+      ctx.fillStyle = '#E8E3DA';
       ctx.fillRect(0, 0, 512, 512);
 
-      // Draw delicate flowing marble veins
-      function drawVein(x0, y0, x1, y1, color, width) {
-        ctx.strokeStyle = color;
-        ctx.lineWidth = width;
-        ctx.lineCap = 'round';
-        ctx.beginPath();
-        ctx.moveTo(x0, y0);
-        const cx1 = (x0 + x1) / 2 + (Math.sin(x0) * 80);
-        const cy1 = (y0 + y1) / 2 + (Math.cos(y0) * 70);
-        ctx.quadraticCurveTo(cx1, cy1, x1, y1);
-        ctx.stroke();
+      // Organic travertine pits and flecks
+      for (let i = 0; i < 600; i++) {
+        const px = Math.random() * 512;
+        const py = Math.random() * 512;
+        const pw = Math.random() * 16 + 2;
+        const ph = Math.random() * 3 + 1;
+        ctx.fillStyle = Math.random() > 0.4 ? 'rgba(160, 145, 130, 0.22)' : 'rgba(215, 200, 185, 0.35)';
+        ctx.fillRect(px, py, pw, ph);
       }
 
-      // Charcoal grey veins
-      drawVein(20, 0, 320, 512, 'rgba(130, 126, 120, 0.22)', 5);
-      drawVein(120, 0, 480, 400, 'rgba(150, 145, 138, 0.16)', 3);
-      drawVein(0, 200, 512, 380, 'rgba(110, 105, 100, 0.18)', 4);
-
-      // Elegant gold / ochre veins
-      drawVein(60, 40, 400, 512, 'rgba(197, 160, 89, 0.35)', 3.5);
-      drawVein(0, 300, 450, 490, 'rgba(215, 180, 110, 0.28)', 2.5);
-      drawVein(260, 0, 512, 220, 'rgba(180, 145, 75, 0.25)', 2);
+      // Elegant tile joints
+      ctx.strokeStyle = 'rgba(130, 118, 105, 0.35)';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(0, 0, 256, 256);
+      ctx.strokeRect(256, 0, 256, 256);
+      ctx.strokeRect(0, 256, 256, 256);
+      ctx.strokeRect(256, 256, 256, 256);
 
       const tex = new THREE.CanvasTexture(canvas);
       tex.wrapS = THREE.RepeatWrapping;
       tex.wrapT = THREE.RepeatWrapping;
-      tex.repeat.set(2, 2);
+      tex.repeat.set(3, 3);
       return tex;
     },
 
-    // Travertine / Stone Terrace tiles
-    createTravertineTexture() {
+    // Bouclé / Woven Fabric Texture for luxury upholstery & bedding
+    createFabricTexture(colorHex = '#2C323B') {
       const canvas = document.createElement('canvas');
       canvas.width = 256;
       canvas.height = 256;
       const ctx = canvas.getContext('2d');
 
-      ctx.fillStyle = '#E6E1D8';
+      ctx.fillStyle = colorHex;
       ctx.fillRect(0, 0, 256, 256);
 
-      // Tile grid
-      ctx.strokeStyle = 'rgba(140, 130, 120, 0.4)';
-      ctx.lineWidth = 2;
-      ctx.strokeRect(0, 0, 128, 128);
-      ctx.strokeRect(128, 0, 128, 128);
-      ctx.strokeRect(0, 128, 128, 128);
-      ctx.strokeRect(128, 128, 128, 128);
+      // Micro-weave cross-hatch
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+      ctx.lineWidth = 1;
+      for (let i = 0; i < 256; i += 4) {
+        ctx.beginPath();
+        ctx.moveTo(i, 0); ctx.lineTo(i, 256);
+        ctx.moveTo(0, i); ctx.lineTo(256, i);
+        ctx.stroke();
+      }
 
       const tex = new THREE.CanvasTexture(canvas);
       tex.wrapS = THREE.RepeatWrapping;
       tex.wrapT = THREE.RepeatWrapping;
-      tex.repeat.set(4, 4);
+      tex.repeat.set(6, 6);
       return tex;
     },
 
@@ -568,6 +650,14 @@
       this.mousePrev = { x: 0, y: 0 };
       this.spherical = { radius: 21, theta: Math.PI / 4, phi: Math.PI / 3.6 };
       this.targetSpherical = { radius: 21, theta: Math.PI / 4, phi: Math.PI / 3.6 };
+
+      // Living Animation & Cinematic Guided Tour State
+      this.isTourActive = false;
+      this.tourStep = 0;
+      this.tourTimer = null;
+      this.isSolarCycleActive = false;
+      this.solarCycleProgress = 0.35;
+      this.lastInteractionTime = Date.now();
 
       this.init();
     }
@@ -705,8 +795,24 @@
                 <span class="p3d-ft-surf">38,2 m²</span>
               </div>
 
+              <!-- Animated Guided Tour Status HUD -->
+              <div class="p3d-tour-status-hud" id="p3d-tour-status-hud">
+                <div class="p3d-tour-rec-dot"></div>
+                <div class="p3d-tour-text-wrap">
+                  <span class="p3d-tour-step-title" id="p3d-tour-step-title">Visite Guidée 3D en cours</span>
+                  <span class="p3d-tour-step-sub" id="p3d-tour-step-sub">Grand Double Salon</span>
+                </div>
+              </div>
+
               <!-- Quick Camera View Presets Dock -->
               <div class="p3d-camera-presets-dock">
+                <button type="button" class="p3d-dock-pill tour-btn" id="p3d-btn-guided-tour" title="Lancer la visite cinématographique 3D guidée">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  <span>Visite Guidée 3D</span>
+                </button>
+                <button type="button" class="p3d-dock-pill" id="p3d-btn-solar-cycle" title="Animer le cycle solaire 24H Tanger">
+                  <span>☀️ Cycle 24H</span>
+                </button>
                 <button type="button" class="p3d-dock-pill active" id="p3d-cam-iso" title="Perspective Isométrique 3D">
                   <span>Isométrique</span>
                 </button>
@@ -716,7 +822,7 @@
                 <button type="button" class="p3d-dock-pill" id="p3d-cam-living" title="Vue Salon de Réception">
                   <span>Salon</span>
                 </button>
-                <button type="button" class="p3d-dock-pill" id="p3d-cam-reset" title="Réinitialiser la vue">
+                <button type="button" class="p3d-dock-pill" id="p3d-cam-reset" title="Recentrer le modèle">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
                 </button>
               </div>
@@ -758,6 +864,11 @@
       this.solarIcon = document.getElementById('p3d-solar-icon');
       this.solarTitle = document.getElementById('p3d-solar-title');
       this.solarClock = document.getElementById('p3d-solar-clock');
+      this.btnGuidedTour = document.getElementById('p3d-btn-guided-tour');
+      this.btnSolarCycle = document.getElementById('p3d-btn-solar-cycle');
+      this.tourStatusHud = document.getElementById('p3d-tour-status-hud');
+      this.tourStepTitle = document.getElementById('p3d-tour-step-title');
+      this.tourStepSub = document.getElementById('p3d-tour-step-sub');
     }
 
     // --- THREE.JS REAL-TIME 3D ARCHITECTURAL DOLLHOUSE ENGINE ---
@@ -788,7 +899,7 @@
       this.renderer.setSize(width, height);
       this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      this.renderer.toneMappingExposure = 1.1;
+      this.renderer.toneMappingExposure = 1.15;
       this.renderer.shadowMap.enabled = true;
       this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
@@ -796,15 +907,20 @@
       this.raycaster = new THREE.Raycaster();
       this.mouse = new THREE.Vector2();
 
-      // 5. Lighting Setup
+      // 5. Lighting Setup, Ambient Contact Shadow & Atmospheric Sunbeams
       this.setupLighting();
+      this.setupGroundShadow();
+      this.setupAtmosphericParticles();
 
-      // 6. Textures Cache
+      // 6. Textures Cache (Ultra-High Resolution Procedural PBR)
       this.textures = {
         oak: TextureGenerator.createChevronTexture('oak'),
         walnut: TextureGenerator.createChevronTexture('walnut'),
         calacatta: TextureGenerator.createMarbleTexture(),
         travertine: TextureGenerator.createTravertineTexture(),
+        fabricDark: TextureGenerator.createFabricTexture('#28303C'),
+        fabricLight: TextureGenerator.createFabricTexture('#FAF8F5'),
+        fabricGold: TextureGenerator.createFabricTexture('#9E1B32'),
         blueprint: TextureGenerator.createBlueprintTexture()
       };
 
@@ -822,7 +938,7 @@
       this.scene.add(this.hemiLight);
 
       // Directional Sunlight (Simulates Mediterranean Tangier Sun)
-      this.sunLight = new THREE.DirectionalLight(0xFFF6E8, 1.4);
+      this.sunLight = new THREE.DirectionalLight(0xFFF6E8, 1.45);
       this.sunLight.castShadow = true;
       this.sunLight.shadow.mapSize.width = 2048;
       this.sunLight.shadow.mapSize.height = 2048;
@@ -846,6 +962,75 @@
 
       // Set solar angle to default (Jour 13h30)
       this.applySolarLighting('jour');
+    }
+
+    // --- AMBIENT GROUND CONTACT SHADOW PLANE ---
+    setupGroundShadow() {
+      const shadowCanvas = document.createElement('canvas');
+      shadowCanvas.width = 512;
+      shadowCanvas.height = 512;
+      const sCtx = shadowCanvas.getContext('2d');
+      const sGrad = sCtx.createRadialGradient(256, 256, 30, 256, 256, 256);
+      sGrad.addColorStop(0, 'rgba(0, 0, 0, 0.88)');
+      sGrad.addColorStop(0.35, 'rgba(0, 0, 0, 0.65)');
+      sGrad.addColorStop(0.7, 'rgba(0, 0, 0, 0.22)');
+      sGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      sCtx.fillStyle = sGrad;
+      sCtx.fillRect(0, 0, 512, 512);
+
+      const shadowTex = new THREE.CanvasTexture(shadowCanvas);
+      const shadowGeo = new THREE.PlaneGeometry(24, 20);
+      const shadowMat = new THREE.MeshBasicMaterial({
+        map: shadowTex,
+        transparent: true,
+        opacity: 0.9,
+        depthWrite: false
+      });
+      const shadowMesh = new THREE.Mesh(shadowGeo, shadowMat);
+      shadowMesh.rotation.x = -Math.PI / 2;
+      shadowMesh.position.y = -0.42;
+      this.scene.add(shadowMesh);
+    }
+
+    // --- FLOATING ATMOSPHERIC SUNBEAM PARTICLES ---
+    setupAtmosphericParticles() {
+      const count = 75;
+      const geo = new THREE.BufferGeometry();
+      const pos = new Float32Array(count * 3);
+      this.particleSpeeds = new Float32Array(count);
+
+      for (let i = 0; i < count; i++) {
+        pos[i * 3] = (Math.random() - 0.5) * 16;
+        pos[i * 3 + 1] = Math.random() * 5 + 0.2;
+        pos[i * 3 + 2] = (Math.random() - 0.5) * 14;
+        this.particleSpeeds[i] = 0.003 + Math.random() * 0.005;
+      }
+
+      geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+
+      const pCanvas = document.createElement('canvas');
+      pCanvas.width = 32;
+      pCanvas.height = 32;
+      const pCtx = pCanvas.getContext('2d');
+      const pGrad = pCtx.createRadialGradient(16, 16, 0, 16, 16, 16);
+      pGrad.addColorStop(0, 'rgba(255, 235, 180, 0.95)');
+      pGrad.addColorStop(0.4, 'rgba(215, 180, 110, 0.35)');
+      pGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      pCtx.fillStyle = pGrad;
+      pCtx.fillRect(0, 0, 32, 32);
+
+      const pTex = new THREE.CanvasTexture(pCanvas);
+      const pMat = new THREE.PointsMaterial({
+        size: 0.32,
+        map: pTex,
+        transparent: true,
+        opacity: 0.65,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+
+      this.particles = new THREE.Points(geo, pMat);
+      this.scene.add(this.particles);
     }
 
     // --- PROCEDURAL 3D DOLLHOUSE BUILDER ---
@@ -1064,107 +1249,336 @@
     }
 
     addArchitecturalFurniture(isF4, isF3) {
-      const sofaMat = new THREE.MeshStandardMaterial({ color: 0x333942, roughness: 0.8 });
-      const cushionMat = new THREE.MeshStandardMaterial({ color: 0xC5A059, roughness: 0.6 });
-      const woodMat = new THREE.MeshStandardMaterial({ color: 0x5C4632, roughness: 0.5 });
-      const marbleMat = new THREE.MeshStandardMaterial({ color: 0xF2EFE9, roughness: 0.2 });
-      const whiteMat = new THREE.MeshStandardMaterial({ color: 0xFAFAFA, roughness: 0.4 });
-      const tvMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.1, metalness: 0.8 });
+      // High-grade PBR architectural materials
+      const sofaPlinthMat = new THREE.MeshStandardMaterial({ color: 0x1E1A16, roughness: 0.7 });
+      const sofaBoucleMat = new THREE.MeshStandardMaterial({
+        color: 0x323B47,
+        roughness: 0.82,
+        map: this.textures.fabricDark
+      });
+      const rugMat = new THREE.MeshStandardMaterial({
+        color: 0xEAE6DF,
+        roughness: 0.95,
+        map: this.textures.fabricLight
+      });
+      const cushionGoldMat = new THREE.MeshStandardMaterial({ color: 0xC5A059, roughness: 0.45 });
+      const cushionBurgundyMat = new THREE.MeshStandardMaterial({
+        color: 0x9E1B32,
+        roughness: 0.55,
+        map: this.textures.fabricGold
+      });
+      const woodWalnutMat = new THREE.MeshStandardMaterial({
+        color: 0x4E3727,
+        roughness: 0.4,
+        map: this.textures.walnut
+      });
+      const marblePbrMat = new THREE.MeshPhysicalMaterial({
+        map: this.textures.calacatta,
+        roughness: 0.12,
+        clearcoat: 0.5,
+        clearcoatRoughness: 0.1
+      });
+      const brassMat = new THREE.MeshStandardMaterial({ color: 0xD4AF37, metalness: 0.85, roughness: 0.25 });
+      const smokedGlassMat = new THREE.MeshPhysicalMaterial({
+        color: 0x1A2228,
+        transparent: true,
+        opacity: 0.65,
+        roughness: 0.08,
+        transmission: 0.7
+      });
+      const tvMat = new THREE.MeshStandardMaterial({ color: 0x080808, roughness: 0.05, metalness: 0.95 });
+      const plantPotMat = new THREE.MeshStandardMaterial({ color: 0xF5F3EE, roughness: 0.3 });
+      const plantLeafMat = new THREE.MeshStandardMaterial({ color: 0x245832, roughness: 0.4 });
+      const lampGlobeMat = new THREE.MeshStandardMaterial({
+        color: 0xFFF0D0,
+        emissive: 0xFFD899,
+        emissiveIntensity: 0.85,
+        roughness: 0.2
+      });
 
-      // --- LIVING ROOM ---
-      // L-Shaped Sectional Sofa
-      const sofaBase1 = new THREE.Mesh(new THREE.BoxGeometry(3.6, 0.4, 1.1), sofaMat);
-      sofaBase1.position.set(2.4, 0.25, -1.8);
-      sofaBase1.castShadow = true;
-      this.modelGroup.add(sofaBase1);
+      // --- 1. LIVING ROOM LOUNGE & ENTERTAINMENT SUITE ---
+      // A. Luxury Berber Area Rug beneath seating group
+      const rug = new THREE.Mesh(new THREE.BoxGeometry(4.8, 0.02, 3.8), rugMat);
+      rug.position.set(2.4, 0.04, -2.6);
+      rug.receiveShadow = true;
+      this.modelGroup.add(rug);
 
-      const sofaBase2 = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.4, 2.2), sofaMat);
-      sofaBase2.position.set(4.0, 0.25, -2.8);
-      sofaBase2.castShadow = true;
-      this.modelGroup.add(sofaBase2);
+      // B. Modular L-Shaped Sectional Lounge
+      // Recessed dark shadow plinth
+      const sofaPlinth1 = new THREE.Mesh(new THREE.BoxGeometry(3.5, 0.12, 1.1), sofaPlinthMat);
+      sofaPlinth1.position.set(2.4, 0.1, -1.8);
+      this.modelGroup.add(sofaPlinth1);
 
-      // Sofa Backrest
-      const sofaBack = new THREE.Mesh(new THREE.BoxGeometry(3.6, 0.5, 0.3), sofaMat);
-      sofaBack.position.set(2.4, 0.6, -1.35);
-      this.modelGroup.add(sofaBack);
+      const sofaPlinth2 = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.12, 2.1), sofaPlinthMat);
+      sofaPlinth2.position.set(3.95, 0.1, -2.8);
+      this.modelGroup.add(sofaPlinth2);
 
-      // Throw Pillows
-      const pillow = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.25, 0.2), cushionMat);
-      pillow.position.set(1.5, 0.55, -1.5);
-      pillow.rotation.y = 0.2;
-      this.modelGroup.add(pillow);
+      // Deep plush seat cushions with bevel look
+      for (let sc = 0; sc < 3; sc++) {
+        const seat = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.32, 1.05), sofaBoucleMat);
+        seat.position.set(1.3 + sc * 1.1, 0.28, -1.8);
+        seat.castShadow = true;
+        this.modelGroup.add(seat);
+      }
+      // Chaise lounge extension cushion
+      const chaise = new THREE.Mesh(new THREE.BoxGeometry(1.05, 0.32, 1.3), sofaBoucleMat);
+      chaise.position.set(3.95, 0.28, -2.95);
+      chaise.castShadow = true;
+      this.modelGroup.add(chaise);
 
-      // Marble Coffee Table
-      const tableMesh = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.3, 0.8), marbleMat);
-      tableMesh.position.set(2.4, 0.18, -2.8);
-      tableMesh.castShadow = true;
-      this.modelGroup.add(tableMesh);
+      // Upholstered backrests
+      const backLong = new THREE.Mesh(new THREE.BoxGeometry(3.6, 0.42, 0.28), sofaBoucleMat);
+      backLong.position.set(2.4, 0.58, -1.36);
+      backLong.castShadow = true;
+      this.modelGroup.add(backLong);
 
-      // Floating TV Media Credenza
-      const tvUnit = new THREE.Mesh(new THREE.BoxGeometry(2.8, 0.35, 0.4), woodMat);
-      tvUnit.position.set(2.4, 0.22, -4.4);
-      this.modelGroup.add(tvUnit);
+      const backShort = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.42, 2.2), sofaBoucleMat);
+      backShort.position.set(4.45, 0.58, -2.75);
+      backShort.castShadow = true;
+      this.modelGroup.add(backShort);
 
-      const tvScreen = new THREE.Mesh(new THREE.BoxGeometry(2.2, 1.1, 0.04), tvMat);
-      tvScreen.position.set(2.4, 1.0, -4.38);
-      this.modelGroup.add(tvScreen);
+      // Contrast designer throw pillows (ClaroDiG Burgundy & Warm Gold)
+      const p1 = new THREE.Mesh(new THREE.BoxGeometry(0.48, 0.32, 0.18), cushionBurgundyMat);
+      p1.position.set(1.4, 0.54, -1.55);
+      p1.rotation.set(0.1, 0.25, 0);
+      this.modelGroup.add(p1);
 
-      // Dining Table + Chairs
-      const diningTable = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.65, 0.9), woodMat);
-      diningTable.position.set(-0.8, 0.35, -2.8);
+      const p2 = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.28, 0.16), cushionGoldMat);
+      p2.position.set(2.4, 0.52, -1.55);
+      p2.rotation.set(0.08, -0.15, 0);
+      this.modelGroup.add(p2);
+
+      const p3 = new THREE.Mesh(new THREE.BoxGeometry(0.44, 0.3, 0.16), cushionBurgundyMat);
+      p3.position.set(4.32, 0.54, -2.2);
+      p3.rotation.set(0, -0.3, 0.1);
+      this.modelGroup.add(p3);
+
+      // C. Bespoke Nesting Designer Coffee Tables
+      // Main circular Calacatta marble table
+      const marbleTable = new THREE.Mesh(new THREE.CylinderGeometry(0.72, 0.72, 0.28, 32), marblePbrMat);
+      marbleTable.position.set(2.1, 0.18, -2.7);
+      marbleTable.castShadow = true;
+      this.modelGroup.add(marbleTable);
+
+      // Brass pedestal base
+      const brassBase = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.45, 0.06, 24), brassMat);
+      brassBase.position.set(2.1, 0.05, -2.7);
+      this.modelGroup.add(brassBase);
+
+      // Secondary smoked glass & brass nesting table
+      const glassTable = new THREE.Mesh(new THREE.CylinderGeometry(0.48, 0.48, 0.36, 24), smokedGlassMat);
+      glassTable.position.set(3.0, 0.22, -3.1);
+      glassTable.castShadow = true;
+      this.modelGroup.add(glassTable);
+
+      // Decor books on coffee table
+      const artBook = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.04, 0.24), cushionBurgundyMat);
+      artBook.position.set(2.1, 0.34, -2.7);
+      artBook.rotation.y = 0.3;
+      this.modelGroup.add(artBook);
+
+      // D. Wall-Mounted Media Credenza & OLED Display
+      const credenza = new THREE.Mesh(new THREE.BoxGeometry(3.2, 0.36, 0.42), woodWalnutMat);
+      credenza.position.set(2.4, 0.24, -4.4);
+      credenza.castShadow = true;
+      this.modelGroup.add(credenza);
+
+      // Fluted wood vertical slats on credenza front
+      for (let s = -1.4; s <= 1.4; s += 0.2) {
+        const slat = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.34, 0.02), brassMat);
+        slat.position.set(2.4 + s, 0.24, -4.18);
+        this.modelGroup.add(slat);
+      }
+
+      // Ultra-thin OLED TV screen with brushed dark bezel
+      const oled = new THREE.Mesh(new THREE.BoxGeometry(2.4, 1.25, 0.03), tvMat);
+      oled.position.set(2.4, 1.15, -4.38);
+      this.modelGroup.add(oled);
+
+      // Minimalist soundbar
+      const soundbar = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.08, 0.08), tvMat);
+      soundbar.position.set(2.4, 0.48, -4.38);
+      this.modelGroup.add(soundbar);
+
+      // Gallery Art Frame on Living Wall
+      const artFrame = new THREE.Mesh(new THREE.BoxGeometry(1.2, 1.4, 0.03), woodWalnutMat);
+      artFrame.position.set(-1.0, 1.2, -4.38);
+      this.modelGroup.add(artFrame);
+
+      const artCanvas = new THREE.Mesh(new THREE.BoxGeometry(1.1, 1.3, 0.04), marblePbrMat);
+      artCanvas.position.set(-1.0, 1.2, -4.37);
+      this.modelGroup.add(artCanvas);
+
+      // --- 2. DINING GROUP ---
+      const diningTable = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.72, 0.95), woodWalnutMat);
+      diningTable.position.set(-0.8, 0.38, -2.6);
       diningTable.castShadow = true;
       this.modelGroup.add(diningTable);
 
-      for (let i = -0.6; i <= 0.6; i += 1.2) {
-        const chair1 = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.7, 0.38), sofaMat);
-        chair1.position.set(-0.8 + i, 0.38, -2.15);
-        this.modelGroup.add(chair1);
+      // 4 Sculptural Dining Chairs
+      for (let i = -0.65; i <= 0.65; i += 1.3) {
+        [-0.65, 0.65].forEach(side => {
+          const chairSeat = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.06, 0.42), sofaBoucleMat);
+          chairSeat.position.set(-0.8 + i, 0.44, -2.6 + side);
+          this.modelGroup.add(chairSeat);
 
-        const chair2 = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.7, 0.38), sofaMat);
-        chair2.position.set(-0.8 + i, 0.38, -3.45);
-        this.modelGroup.add(chair2);
+          const chairBack = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.34, 0.05), sofaBoucleMat);
+          chairBack.position.set(-0.8 + i, 0.62, -2.6 + side + (side > 0 ? 0.2 : -0.2));
+          this.modelGroup.add(chairBack);
+
+          const chairLegs = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.44, 8), brassMat);
+          chairLegs.position.set(-0.8 + i, 0.22, -2.6 + side);
+          this.modelGroup.add(chairLegs);
+        });
       }
 
-      // --- KITCHEN ISLAND ---
-      const islandMesh = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.85, 0.9), marbleMat);
-      islandMesh.position.set(-4.2, 0.45, -2.8);
-      islandMesh.castShadow = true;
-      this.modelGroup.add(islandMesh);
+      // --- 3. KITCHEN WATERFALL ISLAND ---
+      // Countertop
+      const islandTop = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.08, 1.0), marblePbrMat);
+      islandTop.position.set(-4.2, 0.88, -2.8);
+      islandTop.castShadow = true;
+      this.modelGroup.add(islandTop);
 
-      // --- MASTER SUITE BED ---
-      const bedHeadboard = new THREE.Mesh(new THREE.BoxGeometry(2.4, 1.1, 0.2), sofaMat);
-      bedHeadboard.position.set(-4.2, 0.6, 4.4);
-      this.modelGroup.add(bedHeadboard);
+      // Waterfall left side slab
+      const waterfallL = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.88, 1.0), marblePbrMat);
+      waterfallL.position.set(-5.36, 0.44, -2.8);
+      waterfallL.castShadow = true;
+      this.modelGroup.add(waterfallL);
 
-      const bedMattress = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.45, 2.2), whiteMat);
-      bedMattress.position.set(-4.2, 0.3, 3.2);
-      bedMattress.castShadow = true;
-      this.modelGroup.add(bedMattress);
+      // Waterfall right side slab
+      const waterfallR = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.88, 1.0), marblePbrMat);
+      waterfallR.position.set(-3.04, 0.44, -2.8);
+      waterfallR.castShadow = true;
+      this.modelGroup.add(waterfallR);
 
-      const duvet = new THREE.Mesh(new THREE.BoxGeometry(2.02, 0.2, 1.4), cushionMat);
-      duvet.position.set(-4.2, 0.45, 2.7);
-      this.modelGroup.add(duvet);
+      // Island cabinetry body
+      const islandBody = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.82, 0.94), woodWalnutMat);
+      islandBody.position.set(-4.2, 0.43, -2.8);
+      this.modelGroup.add(islandBody);
 
-      // Dual Nightstands with Lamps
-      [-1.4, 1.4].forEach(offset => {
-        const stand = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.4, 0.4), woodMat);
-        stand.position.set(-4.2 + offset, 0.22, 4.2);
-        this.modelGroup.add(stand);
+      // Undermount composite sink & arched mixer tap
+      const sink = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.02, 0.4), tvMat);
+      sink.position.set(-4.6, 0.92, -2.8);
+      this.modelGroup.add(sink);
 
-        const lamp = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.16, 0.35, 12), marbleMat);
-        lamp.position.set(-4.2 + offset, 0.58, 4.2);
-        this.modelGroup.add(lamp);
+      const faucet = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 0.22, 12), brassMat);
+      faucet.position.set(-4.9, 1.03, -2.8);
+      this.modelGroup.add(faucet);
+
+      // Luxury Leather Barstools with brass footrests
+      [-0.45, 0.45].forEach(stOffset => {
+        const stoolSeat = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 0.08, 16), sofaBoucleMat);
+        stoolSeat.position.set(-4.2 + stOffset, 0.62, -1.95);
+        this.modelGroup.add(stoolSeat);
+
+        const stoolLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.6, 8), brassMat);
+        stoolLeg.position.set(-4.2 + stOffset, 0.31, -1.95);
+        this.modelGroup.add(stoolLeg);
       });
 
-      // --- SECOND BEDROOM BED ---
-      if (isF4 || isF3) {
-        const bed2 = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.4, 2.0), whiteMat);
-        bed2.position.set(0.2, 0.25, 3.2);
-        bed2.castShadow = true;
-        this.modelGroup.add(bed2);
+      // --- 4. MASTER SUITE ROYALE ---
+      // Vertical channel-tufted upholstered tall headboard
+      const headboard = new THREE.Mesh(new THREE.BoxGeometry(2.6, 1.35, 0.18), sofaBoucleMat);
+      headboard.position.set(-4.2, 0.72, 4.4);
+      headboard.castShadow = true;
+      this.modelGroup.add(headboard);
 
-        const desk = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.65, 0.6), woodMat);
-        desk.position.set(1.5, 0.35, 4.3);
+      // Warm fluted walnut panel backdrop behind bed
+      const bedPanel = new THREE.Mesh(new THREE.BoxGeometry(3.6, 1.5, 0.04), woodWalnutMat);
+      bedPanel.position.set(-4.2, 0.8, 4.48);
+      this.modelGroup.add(bedPanel);
+
+      // Two-tier plush luxury mattress
+      const bedBase = new THREE.Mesh(new THREE.BoxGeometry(2.1, 0.25, 2.2), woodWalnutMat);
+      bedBase.position.set(-4.2, 0.14, 3.2);
+      this.modelGroup.add(bedBase);
+
+      const mattress = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.32, 2.1), rugMat);
+      mattress.position.set(-4.2, 0.38, 3.2);
+      mattress.castShadow = true;
+      this.modelGroup.add(mattress);
+
+      // Folded luxury duvet in ClaroDiG gold/taupe velvet
+      const duvet = new THREE.Mesh(new THREE.BoxGeometry(2.02, 0.2, 1.35), cushionGoldMat);
+      duvet.position.set(-4.2, 0.49, 2.75);
+      this.modelGroup.add(duvet);
+
+      // 4 Layered Pillows
+      [-0.55, 0.55].forEach(po => {
+        const pBack = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.24, 0.3), rugMat);
+        pBack.position.set(-4.2 + po, 0.6, 3.9);
+        pBack.rotation.x = -0.35;
+        this.modelGroup.add(pBack);
+
+        const pFront = new THREE.Mesh(new THREE.BoxGeometry(0.48, 0.2, 0.24), cushionBurgundyMat);
+        pFront.position.set(-4.2 + po, 0.54, 3.65);
+        pFront.rotation.x = -0.25;
+        this.modelGroup.add(pFront);
+      });
+
+      // Floating Walnut Nightstands with glowing frosted orb lamps
+      [-1.55, 1.55].forEach(no => {
+        const nStand = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.28, 0.42), woodWalnutMat);
+        nStand.position.set(-4.2 + no, 0.32, 4.2);
+        this.modelGroup.add(nStand);
+
+        // Glowing glass orb lamp with warm PointLight
+        const orbLamp = new THREE.Mesh(new THREE.SphereGeometry(0.14, 16, 16), lampGlobeMat);
+        orbLamp.position.set(-4.2 + no, 0.6, 4.2);
+        this.modelGroup.add(orbLamp);
+
+        const lampLight = new THREE.PointLight(0xFFB75E, 0.35, 3.5);
+        lampLight.position.set(-4.2 + no, 0.65, 4.2);
+        this.modelGroup.add(lampLight);
+      });
+
+      // --- 5. BALCONY MEDITERRANEAN OUTDOOR LIVING ---
+      // 2 Teak Outdoor Armchairs
+      [-1.2, 1.2].forEach(bOff => {
+        const bChair = new THREE.Mesh(new THREE.BoxGeometry(0.65, 0.42, 0.65), woodWalnutMat);
+        bChair.position.set(1.8 + bOff, 0.24, -5.2);
+        bChair.castShadow = true;
+        this.modelGroup.add(bChair);
+
+        const bCushion = new THREE.Mesh(new THREE.BoxGeometry(0.58, 0.08, 0.58), rugMat);
+        bCushion.position.set(1.8 + bOff, 0.46, -5.2);
+        this.modelGroup.add(bCushion);
+      });
+
+      // Round cocktail table
+      const bTable = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.35, 0.45, 20), brassMat);
+      bTable.position.set(1.8, 0.24, -5.2);
+      this.modelGroup.add(bTable);
+
+      // Potted Mediterranean Plants (Monstera / Ficus) on Balcony
+      [-2.6, 2.6].forEach(pOff => {
+        const pot = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.18, 0.5, 16), plantPotMat);
+        pot.position.set(1.8 + pOff, 0.26, -5.3);
+        this.modelGroup.add(pot);
+
+        for (let l = 0; l < 5; l++) {
+          const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.16, 8, 8), plantLeafMat);
+          leaf.scale.set(1.2, 0.2, 0.8);
+          leaf.position.set(1.8 + pOff + (Math.sin(l * 1.3) * 0.15), 0.55 + l * 0.07, -5.3 + (Math.cos(l * 1.3) * 0.15));
+          leaf.rotation.set(0.4, l * 1.2, 0.3);
+          this.modelGroup.add(leaf);
+        }
+      });
+
+      // --- 6. SECOND BEDROOM (If F3 or F4) ---
+      if (isF4 || isF3) {
+        const bed2Base = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.35, 2.1), woodWalnutMat);
+        bed2Base.position.set(0.2, 0.2, 3.2);
+        this.modelGroup.add(bed2Base);
+
+        const bed2Mattress = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.25, 2.0), rugMat);
+        bed2Mattress.position.set(0.2, 0.42, 3.2);
+        bed2Mattress.castShadow = true;
+        this.modelGroup.add(bed2Mattress);
+
+        const desk = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.68, 0.65), woodWalnutMat);
+        desk.position.set(1.5, 0.36, 4.3);
+        desk.castShadow = true;
         this.modelGroup.add(desk);
       }
     }
@@ -1332,10 +1746,60 @@
     animate() {
       requestAnimationFrame(this.animate);
 
-      // Smooth camera interpolation (Apple-like fluid damping)
-      this.spherical.radius += (this.targetSpherical.radius - this.spherical.radius) * 0.08;
-      this.spherical.theta += (this.targetSpherical.theta - this.spherical.theta) * 0.08;
-      this.spherical.phi += (this.targetSpherical.phi - this.spherical.phi) * 0.08;
+      const now = Date.now();
+
+      // 1. Continuous Idle Turntable Auto-Orbit (Gently rotates when user is reading)
+      if (!this.isMouseDown && !this.isTourActive && !this.isSolarCycleActive && (now - this.lastInteractionTime > 2400)) {
+        this.targetSpherical.theta += 0.0015;
+      }
+
+      // 2. Animated Floating Atmospheric Sunbeam Particles
+      if (this.particles && this.particles.geometry && this.particles.geometry.attributes.position) {
+        const positions = this.particles.geometry.attributes.position.array;
+        for (let i = 0; i < 75; i++) {
+          positions[i * 3 + 1] += this.particleSpeeds[i];
+          if (positions[i * 3 + 1] > 5.5) {
+            positions[i * 3 + 1] = 0.2;
+          }
+        }
+        this.particles.geometry.attributes.position.needsUpdate = true;
+      }
+
+      // 3. Dynamic Animated Solar Cycle (24H Tangier Sun Simulation)
+      if (this.isSolarCycleActive && this.sunLight) {
+        this.solarCycleProgress = (this.solarCycleProgress + 0.0014) % 1.0;
+        const angle = this.solarCycleProgress * Math.PI * 2;
+        const sunR = 30;
+        const sunX = Math.sin(angle) * sunR;
+        const sunY = Math.max(3, Math.cos(angle) * 28 + 12);
+        const sunZ = Math.cos(angle * 0.8) * 22;
+        this.sunLight.position.set(sunX, sunY, sunZ);
+
+        if (sunY > 18) {
+          this.sunLight.color.setHex(0xFFF9F0);
+          this.sunLight.intensity = 1.5;
+          this.solarIcon.textContent = '☀️';
+          this.solarTitle.textContent = 'Cycle Solaire Continu';
+          this.solarClock.textContent = 'Zénith Ensoleillé Tanger';
+        } else if (sunY > 8) {
+          this.sunLight.color.setHex(0xFFA048);
+          this.sunLight.intensity = 1.35;
+          this.solarIcon.textContent = '🌇';
+          this.solarTitle.textContent = 'Cycle Solaire Continu';
+          this.solarClock.textContent = 'Crépuscule Atlantique & Détroit';
+        } else {
+          this.sunLight.color.setHex(0x2B3D5E);
+          this.sunLight.intensity = 0.25;
+          this.solarIcon.textContent = '🌙';
+          this.solarTitle.textContent = 'Cycle Solaire Continu';
+          this.solarClock.textContent = 'Ambiance Nocturne Étoilée';
+        }
+      }
+
+      // 4. Smooth camera interpolation (Apple-like fluid damping)
+      this.spherical.radius += (this.targetSpherical.radius - this.spherical.radius) * 0.07;
+      this.spherical.theta += (this.targetSpherical.theta - this.spherical.theta) * 0.07;
+      this.spherical.phi += (this.targetSpherical.phi - this.spherical.phi) * 0.07;
 
       this.updateCameraFromSpherical();
 
@@ -1358,6 +1822,118 @@
       this.camera.position.z = this.cameraTarget.z + sinPhiRadius * Math.cos(this.spherical.theta);
 
       this.camera.lookAt(this.cameraTarget);
+    }
+
+    // --- CINEMATIC GUIDED 3D TOUR & SOLAR SIMULATION CONTROLS ---
+    toggleGuidedTour() {
+      if (this.isTourActive) {
+        this.stopGuidedTour();
+      } else {
+        this.startGuidedTour();
+      }
+    }
+
+    startGuidedTour() {
+      this.isTourActive = true;
+      this.tourStep = 0;
+      if (this.btnGuidedTour) {
+        this.btnGuidedTour.classList.add('tour-active');
+        const span = this.btnGuidedTour.querySelector('span');
+        if (span) span.textContent = 'Arrêter Visite';
+      }
+      if (this.tourStatusHud) {
+        this.tourStatusHud.classList.add('visible');
+      }
+      this.runTourStep();
+    }
+
+    stopGuidedTour() {
+      this.isTourActive = false;
+      if (this.tourTimer) clearTimeout(this.tourTimer);
+      if (this.btnGuidedTour) {
+        this.btnGuidedTour.classList.remove('tour-active');
+        const span = this.btnGuidedTour.querySelector('span');
+        if (span) span.textContent = 'Visite Guidée 3D';
+      }
+      if (this.tourStatusHud) {
+        this.tourStatusHud.classList.remove('visible');
+      }
+      this.targetSpherical = { radius: 21, theta: Math.PI / 4, phi: Math.PI / 3.6 };
+      this.cameraTarget.set(0, 0.4, -0.6);
+    }
+
+    runTourStep() {
+      if (!this.isTourActive) return;
+
+      const steps = [
+        {
+          title: 'Vue d’Ensemble Axonométrique',
+          sub: 'Appartement N°2 • 91,4 m² • Vue Étage Courant',
+          target: new THREE.Vector3(0, 0.4, -0.6),
+          spherical: { radius: 21, theta: Math.PI / 4, phi: Math.PI / 3.5 },
+          duration: 4800,
+          roomKey: null
+        },
+        {
+          title: 'Grand Double Salon de Réception',
+          sub: '38,2 m² • Marbre Calacatta Gold & Baies Vitrées',
+          target: new THREE.Vector3(2.4, 0.5, -2.4),
+          spherical: { radius: 10.5, theta: Math.PI / 3.2, phi: Math.PI / 3.8 },
+          duration: 5200,
+          roomKey: 'salon'
+        },
+        {
+          title: 'Cuisine de Chef & Îlot Américain',
+          sub: '11,4 m² • Plan Waterfall & Buanderie',
+          target: new THREE.Vector3(-4.2, 0.5, -2.5),
+          spherical: { radius: 9.5, theta: Math.PI / 1.8, phi: Math.PI / 3.5 },
+          duration: 4800,
+          roomKey: 'cuisine'
+        },
+        {
+          title: 'Balcon Filant & Exposition Sud-Ouest',
+          sub: '9,5 m² • Vue Dégagée & Ensoleillement Optimal',
+          target: new THREE.Vector3(1.8, 0.4, -5.2),
+          spherical: { radius: 9.2, theta: 0.1, phi: Math.PI / 3.4 },
+          duration: 4800,
+          roomKey: 'balcon'
+        },
+        {
+          title: 'Suite Parentale Royale & Dressing',
+          sub: '18,5 m² • Parquet Chêne de France & SDB Privative',
+          target: new THREE.Vector3(-4.2, 0.6, 3.2),
+          spherical: { radius: 10.0, theta: Math.PI / 1.4, phi: Math.PI / 3.6 },
+          duration: 5200,
+          roomKey: 'suite'
+        }
+      ];
+
+      const current = steps[this.tourStep % steps.length];
+      if (this.tourStepTitle) this.tourStepTitle.textContent = current.title;
+      if (this.tourStepSub) this.tourStepSub.textContent = current.sub;
+
+      this.cameraTarget.copy(current.target);
+      this.targetSpherical = { ...current.spherical };
+
+      if (current.roomKey) {
+        this.focusOnRoom(current.roomKey);
+      }
+
+      this.tourTimer = setTimeout(() => {
+        if (this.isTourActive) {
+          this.tourStep = (this.tourStep + 1) % steps.length;
+          this.runTourStep();
+        }
+      }, current.duration);
+    }
+
+    toggleSolarCycle() {
+      this.isSolarCycleActive = !this.isSolarCycleActive;
+      if (this.btnSolarCycle) {
+        this.btnSolarCycle.classList.toggle('active', this.isSolarCycleActive);
+        const span = this.btnSolarCycle.querySelector('span');
+        if (span) span.textContent = this.isSolarCycleActive ? '☀️ Cycle Actif' : '☀️ Cycle 24H';
+      }
     }
 
     // --- UNIT SELECTION & DOSSIER REFRESH ---
@@ -1753,30 +2329,54 @@
       });
 
       // 4. Camera Presets Dock
+      const btnGuidedTour = document.getElementById('p3d-btn-guided-tour');
+      const btnSolarCycle = document.getElementById('p3d-btn-solar-cycle');
       const btnCamIso = document.getElementById('p3d-cam-iso');
       const btnCamTop = document.getElementById('p3d-cam-top');
       const btnCamLiving = document.getElementById('p3d-cam-living');
       const btnCamReset = document.getElementById('p3d-cam-reset');
 
+      if (btnGuidedTour) {
+        btnGuidedTour.addEventListener('click', () => {
+          this.lastInteractionTime = Date.now();
+          this.toggleGuidedTour();
+        });
+      }
+
+      if (btnSolarCycle) {
+        btnSolarCycle.addEventListener('click', () => {
+          this.lastInteractionTime = Date.now();
+          this.toggleSolarCycle();
+        });
+      }
+
       if (btnCamIso) {
         btnCamIso.addEventListener('click', () => {
+          this.lastInteractionTime = Date.now();
+          if (this.isTourActive) this.stopGuidedTour();
           this.targetSpherical = { radius: 21, theta: Math.PI / 4, phi: Math.PI / 3.6 };
           this.cameraTarget.set(0, 0.4, -0.6);
         });
       }
       if (btnCamTop) {
         btnCamTop.addEventListener('click', () => {
+          this.lastInteractionTime = Date.now();
+          if (this.isTourActive) this.stopGuidedTour();
           this.targetSpherical = { radius: 23, theta: 0, phi: 0.1 };
           this.cameraTarget.set(0, 0, -0.6);
         });
       }
       if (btnCamLiving) {
         btnCamLiving.addEventListener('click', () => {
+          this.lastInteractionTime = Date.now();
+          if (this.isTourActive) this.stopGuidedTour();
           this.focusOnRoom('salon');
         });
       }
       if (btnCamReset) {
         btnCamReset.addEventListener('click', () => {
+          this.lastInteractionTime = Date.now();
+          if (this.isTourActive) this.stopGuidedTour();
           this.targetSpherical = { radius: 18, theta: Math.PI / 4, phi: Math.PI / 3.4 };
           this.cameraTarget.set(0, 0.8, 0);
         });
@@ -1787,11 +2387,13 @@
       const btnZoomOut = document.getElementById('p3d-btn-zoom-out');
       if (btnZoomIn) {
         btnZoomIn.addEventListener('click', () => {
+          this.lastInteractionTime = Date.now();
           this.targetSpherical.radius = Math.max(7, this.targetSpherical.radius - 3);
         });
       }
       if (btnZoomOut) {
         btnZoomOut.addEventListener('click', () => {
+          this.lastInteractionTime = Date.now();
           this.targetSpherical.radius = Math.min(36, this.targetSpherical.radius + 3);
         });
       }
@@ -1799,11 +2401,14 @@
       // 6. Interactive Three.js Mouse & Touch Orbit Controls
       this.canvas.addEventListener('mousedown', e => {
         this.isMouseDown = true;
+        this.lastInteractionTime = Date.now();
+        if (this.isTourActive) this.stopGuidedTour();
         this.mousePrev = { x: e.clientX, y: e.clientY };
       });
 
       window.addEventListener('mouseup', () => {
         this.isMouseDown = false;
+        this.lastInteractionTime = Date.now();
       });
 
       window.addEventListener('mousemove', e => {
@@ -1812,6 +2417,7 @@
           return;
         }
 
+        this.lastInteractionTime = Date.now();
         const deltaX = e.clientX - this.mousePrev.x;
         const deltaY = e.clientY - this.mousePrev.y;
         this.mousePrev = { x: e.clientX, y: e.clientY };
@@ -1824,18 +2430,23 @@
       // Mouse Wheel Zoom
       this.canvas.addEventListener('wheel', e => {
         e.preventDefault();
+        this.lastInteractionTime = Date.now();
+        if (this.isTourActive) this.stopGuidedTour();
         this.targetSpherical.radius += e.deltaY * 0.015;
         this.targetSpherical.radius = Math.max(6, Math.min(38, this.targetSpherical.radius));
       }, { passive: false });
 
       // Click on 3D Room or Unit
       this.canvas.addEventListener('click', e => {
+        this.lastInteractionTime = Date.now();
         this.checkRaycastClick(e);
       });
 
       // Touch Controls for Mobile / iPad
       let touchStartDist = 0;
       this.canvas.addEventListener('touchstart', e => {
+        this.lastInteractionTime = Date.now();
+        if (this.isTourActive) this.stopGuidedTour();
         if (e.touches.length === 1) {
           this.mousePrev = { x: e.touches[0].clientX, y: e.touches[0].clientY };
         } else if (e.touches.length === 2) {
@@ -1847,6 +2458,7 @@
       }, { passive: true });
 
       this.canvas.addEventListener('touchmove', e => {
+        this.lastInteractionTime = Date.now();
         if (e.touches.length === 1) {
           const deltaX = e.touches[0].clientX - this.mousePrev.x;
           const deltaY = e.touches[0].clientY - this.mousePrev.y;
