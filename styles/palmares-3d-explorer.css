@@ -5,13 +5,13 @@
    ========================================================================== */
 
 :root {
-  --p3d-gold: #C5A059;
-  --p3d-gold-light: #DFC282;
-  --p3d-gold-glow: rgba(197, 160, 89, 0.45);
+  --p3d-gold: #9E1B32;
+  --p3d-gold-light: #C42340;
+  --p3d-gold-glow: rgba(196, 35, 64, 0.45);
   --p3d-dark-bg: #090B0E;
   --p3d-card-bg: rgba(15, 19, 26, 0.82);
   --p3d-border: rgba(255, 255, 255, 0.12);
-  --p3d-border-gold: rgba(197, 160, 89, 0.38);
+  --p3d-border-gold: rgba(196, 35, 64, 0.45);
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 }

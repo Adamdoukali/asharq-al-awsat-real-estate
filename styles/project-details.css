@@ -4,6 +4,13 @@
    Builds seamlessly upon loam.css design system
    ========================================================================== */
 
+:root {
+  --loam-gold: #9E1B32;
+  --loam-gold-light: #C42340;
+  --loam-gold-glow: rgba(196, 35, 64, 0.40);
+  --loam-burgundy: #800020;
+}
+
 /* Hero Banner */
 .proj-hero {
   position: relative;
