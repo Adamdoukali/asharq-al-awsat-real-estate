@@ -521,18 +521,18 @@
       brochurePage: 'Pages 24-26',
       brochureBadge: 'Plan Type Studio Signature (33 à 49 m²)',
       roomPins2D: [
-        { key: 'suite', name: 'Espace Nuit & Dressing', surf: '16,2 m²', x: 33, y: 46 },
-        { key: 'salon', name: 'Salon Séjour Lumineux', surf: '15,8 m²', x: 67, y: 48 },
-        { key: 'cuisine', name: 'Cuisine Américaine Équipée', surf: '6,5 m²', x: 65, y: 22 },
-        { key: 'sdb', name: 'Salle d’Eau Italienne', surf: '4,0 m²', x: 25, y: 84 },
-        { key: 'balcon', name: 'Balcon Plein Ouest', surf: '5,0 m²', x: 50, y: 92 }
+        { key: 'balcon', name: 'Balcon & Terrasse Plein Ciel', surf: '5,0 m²', x: 50, y: 10 },
+        { key: 'suite', name: 'Espace Nuit & Dressing Privatif', surf: '16,2 m²', x: 32, y: 44 },
+        { key: 'salon', name: 'Salon Séjour Lumineux', surf: '15,8 m²', x: 68, y: 44 },
+        { key: 'cuisine', name: 'Cuisine Américaine Équipée', surf: '6,5 m²', x: 78, y: 80 },
+        { key: 'sdb', name: 'Salle d’Eau Italienne', surf: '4,0 m²', x: 24, y: 82 }
       ],
       roomPins3D: [
-        { key: 'suite', name: 'Espace Nuit & Dressing', surf: '16,2 m²', x: 28, y: 56 },
-        { key: 'salon', name: 'Salon Séjour Lumineux', surf: '15,8 m²', x: 64, y: 56 },
-        { key: 'cuisine', name: 'Cuisine Américaine Équipée', surf: '6,5 m²', x: 48, y: 15 },
-        { key: 'sdb', name: 'Salle d’Eau Italienne', surf: '4,0 m²', x: 25, y: 16 },
-        { key: 'balcon', name: 'Balcon & Terrasse', surf: '5,0 m²', x: 48, y: 88 }
+        { key: 'suite', name: 'Espace Nuit & Dressing Privatif', surf: '16,2 m²', x: 30, y: 60 },
+        { key: 'salon', name: 'Salon Séjour Lumineux & TV', surf: '15,8 m²', x: 66, y: 60 },
+        { key: 'cuisine', name: 'Cuisine Américaine Équipée', surf: '6,5 m²', x: 48, y: 18 },
+        { key: 'sdb', name: 'Salle d’Eau Italienne', surf: '4,0 m²', x: 25, y: 18 },
+        { key: 'balcon', name: 'Balcon & Terrasse Panoramique', surf: '5,0 m²', x: 48, y: 88 }
       ],
       roomsDetail: [
         { name: 'Espace Nuit & Dressing Privatif', surf: '16,2 m²', pct: 38, key: 'suite' },
