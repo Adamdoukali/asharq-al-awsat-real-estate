@@ -16,6 +16,7 @@
   'use strict';
 
   // --- COMPREHENSIVE ARCHITECTURAL DATASET (17 AUTHENTIC UNITS FROM MB ARCHITECTS) ---
+// --- COMPREHENSIVE ARCHITECTURAL DATASET (AUTHENTIC FROM MB ARCHITECTS & PALMARES BROCHURE) ---
   const PALMARES_UNITS = [
     // --- AILE OUEST (WING A) ---
     {
@@ -37,11 +38,24 @@
       rooms: '3 Chambres • Double Salon • 2 Salles de Bain • Balcon Angle',
       estimatedPrice: '1 280 000 DH',
       priceVal: 1280000,
-      detailPlanImg: 'assets/projects/plan_detail_a02.png',
+      plan3DImg: 'assets/projects/brochure_plans/p19_img0_xref237_800x800.png',
+      plan2DImg: 'assets/projects/brochure_plans/p19_img1_xref238_800x800.png',
+      cadDetailImg: 'assets/projects/plan_detail_a02.png',
+      brochurePage: 'Page 19',
+      brochureBadge: 'Plan Type 3 Chambres • 2 SDB (85 à 110 m²)',
+      roomPins2D: [
+        { key: 'salon', name: 'Grand Double Salon', surf: '38,2 m²', x: 55, y: 14 },
+        { key: 'cuisine', name: 'Cuisine Équipée & Buanderie', surf: '11,4 m²', x: 53, y: 32 },
+        { key: 'suite', name: 'Suite Parentale & SDB', surf: '18,5 m²', x: 34, y: 80 },
+        { key: 'chambre2', name: 'Chambre Enfants 2', surf: '13,8 m²', x: 62, y: 79 },
+        { key: 'chambre3', name: 'Chambre 3 & Placard', surf: '12,5 m²', x: 62, y: 55 },
+        { key: 'sdb', name: 'SDB Familiale', surf: '5,0 m²', x: 28, y: 52 }
+      ],
       roomsDetail: [
         { name: 'Grand Double Salon de Réception', surf: '38,2 m²', pct: 42, key: 'salon' },
         { name: 'Suite Parentale avec SDB Privative', surf: '18,5 m²', pct: 20, key: 'suite' },
         { name: 'Chambre Enfants 2 & Dressing', surf: '13,8 m²', pct: 15, key: 'chambre2' },
+        { name: 'Chambre 3 / Bureau', surf: '12,5 m²', pct: 14, key: 'chambre3' },
         { name: 'Cuisine de Chef Équipée & Buanderie', surf: '11,4 m²', pct: 12, key: 'cuisine' },
         { name: 'Balcon Filant d’Angle Panoramique', surf: '9,5 m²', pct: 11, key: 'balcon' }
       ],
@@ -82,7 +96,18 @@
       rooms: '2 Chambres • Salon Spacieux • Cuisine & Loggia • SDB',
       estimatedPrice: '890 000 DH',
       priceVal: 890000,
-      detailPlanImg: 'assets/projects/plan_detail_a02.png',
+      plan3DImg: 'assets/projects/brochure_plans/p14_img1_xref192_800x800.png',
+      plan2DImg: 'assets/projects/brochure_plans/p14_img2_xref193_800x800.png',
+      cadDetailImg: 'assets/projects/plan_detail_a02.png',
+      brochurePage: 'Page 14',
+      brochureBadge: 'Plan Type 2 Chambres • 1 SDB (65 m²)',
+      roomPins2D: [
+        { key: 'salon', name: 'Salon Familial Lumineux', surf: '27,4 m²', x: 66, y: 56 },
+        { key: 'suite', name: 'Chambre Principale', surf: '15,2 m²', x: 30, y: 22 },
+        { key: 'chambre2', name: 'Chambre 2 Modulable', surf: '11,8 m²', x: 68, y: 30 },
+        { key: 'cuisine', name: 'Cuisine Aménagée', surf: '7,2 m²', x: 60, y: 84 },
+        { key: 'sdb', name: 'Salle d’Eau Italienne', surf: '4,0 m²', x: 25, y: 44 }
+      ],
       roomsDetail: [
         { name: 'Salon Familial Lumineux', surf: '27,4 m²', pct: 42, key: 'salon' },
         { name: 'Chambre Principale avec Placard', surf: '15,2 m²', pct: 23, key: 'suite' },
@@ -124,7 +149,18 @@
       rooms: '1 Grande Chambre • Séjour Ouvert • Cuisine Équipée • SDB',
       estimatedPrice: '780 000 DH',
       priceVal: 780000,
-      detailPlanImg: 'assets/projects/plan_detail_a02.png',
+      plan3DImg: 'assets/projects/brochure_plans/p12_img1_xref177_800x800.png',
+      plan2DImg: 'assets/projects/brochure_plans/p12_img2_xref178_800x800.png',
+      cadDetailImg: 'assets/projects/plan_detail_a02.png',
+      brochurePage: 'Page 12',
+      brochureBadge: 'Plan Type 2 Chambres • 1 SDB (55 m²)',
+      roomPins2D: [
+        { key: 'salon', name: 'Salon & Espace Repas', surf: '26,5 m²', x: 50, y: 15 },
+        { key: 'cuisine', name: 'Cuisine Américaine Design', surf: '9,5 m²', x: 48, y: 36 },
+        { key: 'suite', name: 'Chambre Royale', surf: '16,0 m²', x: 44, y: 58 },
+        { key: 'chambre2', name: 'Chambre 2 / Bureau', surf: '11,0 m²', x: 42, y: 83 },
+        { key: 'sdb', name: 'Salle d’Eau Douche', surf: '5,5 m²', x: 74, y: 86 }
+      ],
       roomsDetail: [
         { name: 'Salon & Espace Repas Ouvert', surf: '26,5 m²', pct: 46, key: 'salon' },
         { name: 'Chambre Royale avec Penderie', surf: '16,0 m²', pct: 28, key: 'suite' },
@@ -163,7 +199,20 @@
       rooms: '2 Chambres • Grand Séjour • Cuisine Aménagée • SDB Familiale',
       estimatedPrice: '995 000 DH',
       priceVal: 995000,
-      detailPlanImg: 'assets/projects/plan_detail_a02.png',
+      plan3DImg: 'assets/projects/brochure_plans/p16_img1_xref209_800x800.png',
+      plan2DImg: 'assets/projects/brochure_plans/p16_img2_xref210_800x800.png',
+      cadDetailImg: 'assets/projects/plan_detail_a02.png',
+      brochurePage: 'Page 16',
+      brochureBadge: 'Plan Type 2 Chambres • 2 SDB (70 m²)',
+      roomPins2D: [
+        { key: 'salon', name: 'Grand Salon Panoramique', surf: '28,6 m²', x: 34, y: 16 },
+        { key: 'cuisine', name: 'Cuisine Contemporaine', surf: '8,8 m²', x: 33, y: 44 },
+        { key: 'suite', name: 'Suite Parentale & Dressing', surf: '17,2 m²', x: 45, y: 54 },
+        { key: 'chambre2', name: 'Chambre Enfants 2', surf: '12,4 m²', x: 47, y: 86 },
+        { key: 'sdb', name: 'SDB Privative Suite', surf: '4,5 m²', x: 78, y: 60 },
+        { key: 'sdb2', name: 'SDB Familiale', surf: '4,0 m²', x: 70, y: 90 },
+        { key: 'balcon', name: 'Balcon Terrasse', surf: '7,5 m²', x: 22, y: 78 }
+      ],
       roomsDetail: [
         { name: 'Grand Séjour & Salle à Manger', surf: '31,5 m²', pct: 42, key: 'salon' },
         { name: 'Chambre Parentale Spacieuse', surf: '16,2 m²', pct: 22, key: 'suite' },
@@ -205,7 +254,19 @@
       rooms: '3 Grandes Chambres • Vaste Réception Royale • 2 SDB • Balcon Filant',
       estimatedPrice: '1 360 000 DH',
       priceVal: 1360000,
-      detailPlanImg: 'assets/projects/plan_detail_b08.png',
+      plan3DImg: 'assets/projects/brochure_plans/p22_img2_xref270_800x705.png',
+      plan2DImg: 'assets/projects/brochure_plans/p22_img1_xref269_562x800.png',
+      cadDetailImg: 'assets/projects/plan_detail_b08.png',
+      brochurePage: 'Page 22',
+      brochureBadge: 'Plan Type 4 Chambres • 3 SDB (125 m²)',
+      roomPins2D: [
+        { key: 'salon', name: 'Grand Salon de Réception', surf: '42,0 m²', x: 50, y: 15 },
+        { key: 'cuisine', name: 'Cuisine de Chef & Cellier', surf: '12,0 m²', x: 25, y: 40 },
+        { key: 'suite', name: 'Suite Royale Parentale', surf: '22,0 m²', x: 65, y: 50 },
+        { key: 'chambre2', name: 'Chambre Enfants 2', surf: '14,0 m²', x: 25, y: 75 },
+        { key: 'chambre3', name: 'Chambre Invités 3', surf: '13,5 m²', x: 50, y: 80 },
+        { key: 'sdb', name: 'Salles de Bain Marbre', surf: '9,5 m²', x: 24, y: 44 }
+      ],
       roomsDetail: [
         { name: 'Vaste Salon d’Honneur & Réception', surf: '41,5 m²', pct: 43, key: 'salon' },
         { name: 'Suite Parentale Royale & SDB', surf: '19,8 m²', pct: 20, key: 'suite' },
@@ -249,7 +310,18 @@
       rooms: '3 Chambres • Double Réception • 2 Salles de Bain • Terrasse',
       estimatedPrice: '1 260 000 DH',
       priceVal: 1260000,
-      detailPlanImg: 'assets/projects/plan_detail_b08.png',
+      plan3DImg: 'assets/projects/brochure_plans/p19_img0_xref237_800x800.png',
+      plan2DImg: 'assets/projects/brochure_plans/p19_img1_xref238_800x800.png',
+      cadDetailImg: 'assets/projects/plan_detail_b08.png',
+      brochurePage: 'Page 19',
+      brochureBadge: 'Plan Type 3 Chambres • 2 SDB (85 à 110 m²)',
+      roomPins2D: [
+        { key: 'salon', name: 'Double Salon Sud-Est', surf: '37,5 m²', x: 55, y: 14 },
+        { key: 'cuisine', name: 'Cuisine Équipée Américaine', surf: '11,0 m²', x: 53, y: 32 },
+        { key: 'suite', name: 'Suite Parentale avec Bain', surf: '18,2 m²', x: 34, y: 80 },
+        { key: 'chambre2', name: 'Chambre 2 avec Balcon', surf: '13,5 m²', x: 62, y: 79 },
+        { key: 'sdb', name: 'Salle de Bain Familiale', surf: '5,0 m²', x: 28, y: 52 }
+      ],
       roomsDetail: [
         { name: 'Double Salon de Réception', surf: '37,5 m²', pct: 42, key: 'salon' },
         { name: 'Suite Parentale Complète', surf: '18,0 m²', pct: 20, key: 'suite' },
@@ -289,7 +361,18 @@
       rooms: '2 Chambres • Salon Agréable • Cuisine avec Loggia • SDB',
       estimatedPrice: '845 000 DH',
       priceVal: 845000,
-      detailPlanImg: 'assets/projects/plan_detail_b05.png',
+      plan3DImg: 'assets/projects/brochure_plans/p14_img1_xref192_800x800.png',
+      plan2DImg: 'assets/projects/brochure_plans/p14_img2_xref193_800x800.png',
+      cadDetailImg: 'assets/projects/plan_detail_b08.png',
+      brochurePage: 'Page 14',
+      brochureBadge: 'Plan Type 2 Chambres • 1 SDB (65 m²)',
+      roomPins2D: [
+        { key: 'salon', name: 'Séjour Matinal Ensoleillé', surf: '27,0 m²', x: 66, y: 56 },
+        { key: 'suite', name: 'Chambre Principale', surf: '15,0 m²', x: 30, y: 22 },
+        { key: 'chambre2', name: 'Chambre 2 Modulable', surf: '11,5 m²', x: 68, y: 30 },
+        { key: 'cuisine', name: 'Cuisine & Buanderie', surf: '7,0 m²', x: 60, y: 84 },
+        { key: 'sdb', name: 'Salle de Bain Italienne', surf: '4,0 m²', x: 25, y: 44 }
+      ],
       roomsDetail: [
         { name: 'Séjour Matinal Lumineux', surf: '26,0 m²', pct: 42, key: 'salon' },
         { name: 'Chambre Principale', surf: '14,5 m²', pct: 23, key: 'suite' },
@@ -329,7 +412,18 @@
       rooms: '1 Chambre • Salon Baigné de Soleil • Cuisine • SDB',
       estimatedPrice: '775 000 DH',
       priceVal: 775000,
-      detailPlanImg: 'assets/projects/plan_detail_b05.png',
+      plan3DImg: 'assets/projects/brochure_plans/p12_img1_xref177_800x800.png',
+      plan2DImg: 'assets/projects/brochure_plans/p12_img2_xref178_800x800.png',
+      cadDetailImg: 'assets/projects/plan_detail_b05.png',
+      brochurePage: 'Page 12',
+      brochureBadge: 'Plan Type 2 Chambres • 1 SDB (55 m²)',
+      roomPins2D: [
+        { key: 'salon', name: 'Salon Ouvert & Loggia', surf: '25,5 m²', x: 50, y: 15 },
+        { key: 'cuisine', name: 'Cuisine Américaine Ouverte', surf: '9,0 m²', x: 48, y: 36 },
+        { key: 'suite', name: 'Chambre Principale & Dressing', surf: '15,5 m²', x: 44, y: 58 },
+        { key: 'chambre2', name: 'Chambre 2 / Bureau', surf: '10,8 m²', x: 42, y: 83 },
+        { key: 'sdb', name: 'Salle d’Eau Moderne', surf: '5,0 m²', x: 74, y: 86 }
+      ],
       roomsDetail: [
         { name: 'Espace Séjour Plein Sud', surf: '25,5 m²', pct: 45, key: 'salon' },
         { name: 'Chambre Intime avec Placard', surf: '15,5 m²', pct: 27, key: 'suite' },
@@ -367,7 +461,20 @@
       rooms: '2 Chambres • Séjour Familial • Cuisine & Séchoir • SDB',
       estimatedPrice: '895 000 DH',
       priceVal: 895000,
-      detailPlanImg: 'assets/projects/plan_detail_b05.png',
+      plan3DImg: 'assets/projects/brochure_plans/p16_img1_xref209_800x800.png',
+      plan2DImg: 'assets/projects/brochure_plans/p16_img2_xref210_800x800.png',
+      cadDetailImg: 'assets/projects/plan_detail_b05.png',
+      brochurePage: 'Page 16',
+      brochureBadge: 'Plan Type 2 Chambres • 2 SDB (70 m²)',
+      roomPins2D: [
+        { key: 'salon', name: 'Salon Lumineux Plein Sud', surf: '26,8 m²', x: 34, y: 16 },
+        { key: 'cuisine', name: 'Cuisine avec Verrière', surf: '8,5 m²', x: 33, y: 44 },
+        { key: 'suite', name: 'Suite Parentale avec SDB', surf: '16,8 m²', x: 45, y: 54 },
+        { key: 'chambre2', name: 'Chambre Enfants 2', surf: '12,0 m²', x: 47, y: 86 },
+        { key: 'sdb', name: 'SDB Privative', surf: '4,2 m²', x: 78, y: 60 },
+        { key: 'sdb2', name: 'SDB Commune', surf: '3,8 m²', x: 70, y: 90 },
+        { key: 'balcon', name: 'Balcon Ensoleillé', surf: '6,2 m²', x: 22, y: 78 }
+      ],
       roomsDetail: [
         { name: 'Salon Double Exposition', surf: '27,8 m²', pct: 42, key: 'salon' },
         { name: 'Chambre Parentale Spacieuse', surf: '15,0 m²', pct: 23, key: 'suite' },
@@ -387,6 +494,112 @@
       ],
       standing: 'Résidence gardée 24h/24, accès sécurisé par badge',
       guarantee: '100% Déclaré Notaire • Prêt Bancaire Garanti'
+    },
+    // --- STUDIOS & PENTHOUSES BROCHURE ---
+    {
+      id: 'pal-t8-studio',
+      wing: 'A',
+      wingName: 'Aile Ouest',
+      num: 'Studio',
+      label: 'Studio Signature Investisseur',
+      surface: '42,50 m²',
+      surfaceVal: 42.5,
+      category: 'f2',
+      typology: 'Studio Signature Haut Rendement',
+      orientation: 'Façade Ouest • Lumière Douce',
+      solarAngle: 260,
+      solarHours: '13h30 – 19h00 (5.5h de soleil de fin de journée)',
+      floor: 'Étage Courant (R+2 à R+7)',
+      x: 35.5,
+      y: 57.0,
+      rooms: 'Espace Nuit • Séjour Lumineux • Cuisine Américaine • SDB',
+      estimatedPrice: '520 000 DH',
+      priceVal: 520000,
+      plan3DImg: 'assets/projects/brochure_plans/p24_img1_xref291_644x800.png',
+      plan2DImg: 'assets/projects/brochure_plans/studio_p26_xref310.png',
+      cadDetailImg: 'assets/projects/plan_detail_a05.png',
+      brochurePage: 'Pages 24-26',
+      brochureBadge: 'Plan Type Studio Signature (33 à 49 m²)',
+      roomPins2D: [
+        { key: 'suite', name: 'Espace Nuit & Dressing', surf: '16,2 m²', x: 33, y: 46 },
+        { key: 'salon', name: 'Salon Séjour Lumineux', surf: '15,8 m²', x: 67, y: 48 },
+        { key: 'cuisine', name: 'Cuisine Américaine Équipée', surf: '6,5 m²', x: 65, y: 22 },
+        { key: 'sdb', name: 'Salle d’Eau Italienne', surf: '4,0 m²', x: 25, y: 84 }
+      ],
+      roomsDetail: [
+        { name: 'Espace Nuit & Dressing Privatif', surf: '16,2 m²', pct: 38, key: 'suite' },
+        { name: 'Salon & Espace Réception Ouvert', surf: '15,8 m²', pct: 37, key: 'salon' },
+        { name: 'Cuisine Américaine Équipée', surf: '6,5 m²', pct: 15, key: 'cuisine' },
+        { name: 'Salle d’Eau Italienne', surf: '4,0 m²', pct: 10, key: 'sdb' }
+      ],
+      breakdown: [
+        'Espace studio optimisé sans perte de place avec finitions de standing',
+        'Séjour lumineux ouvert sur baie vitrée panoramique',
+        'Espace nuit semi-séparé avec dressing intégré toute hauteur',
+        'Cuisine américaine avec comptoir bar convivial',
+        'Salle d’eau avec douche à l’italienne et sanitaires suspendus'
+      ],
+      finishes: [
+        { title: 'Rentabilité Locative', desc: 'Idéal investissement locatif moyenne/longue durée ou pied-à-terre tangerin.' }
+      ],
+      standing: 'Idéal Investissement • Rendement Locatif Supérieur • Studio Optimisé',
+      guarantee: '100% Déclaré Notaire • Titre Foncier Individuel'
+    },
+    {
+      id: 'pal-t8-f4-125',
+      wing: 'B',
+      wingName: 'Aile Sud-Est',
+      num: 'Penthouse',
+      label: 'Grand F4 Haute Couture (125 m²)',
+      surface: '125,00 m²',
+      surfaceVal: 125.0,
+      category: 'f4',
+      typology: 'Grand F4 Penthouse 4 Chambres & 3 SDB',
+      orientation: 'Triple Façade Sud-Est-Nord • Vue Panoramique Grand Stade & Détroit',
+      solarAngle: 160,
+      solarHours: '08h00 – 18h30 (10.5h d’ensoleillement maximal)',
+      floor: 'Derniers Étages (R+6 / R+7)',
+      x: 75.5,
+      y: 38.5,
+      rooms: '4 Chambres • 3 SDB • Double Salon Majestueux • Cuisine de Chef • Terrasses',
+      estimatedPrice: '1 650 000 DH',
+      priceVal: 1650000,
+      plan3DImg: 'assets/projects/brochure_plans/p22_img2_xref270_800x705.png',
+      plan2DImg: 'assets/projects/brochure_plans/p22_img1_xref269_562x800.png',
+      cadDetailImg: 'assets/projects/plan_detail_b08.png',
+      brochurePage: 'Page 22',
+      brochureBadge: 'Plan Type 4 Chambres • 3 SDB (125 m²)',
+      roomPins2D: [
+        { key: 'salon', name: 'Double Salon & Réception', surf: '44,0 m²', x: 50, y: 15 },
+        { key: 'suite', name: 'Suite Royale Parentale', surf: '22,0 m²', x: 65, y: 50 },
+        { key: 'chambre2', name: 'Chambre 2', surf: '14,0 m²', x: 25, y: 75 },
+        { key: 'chambre3', name: 'Chambre 3', surf: '13,5 m²', x: 50, y: 80 },
+        { key: 'chambre4', name: 'Chambre 4 / Bureau', surf: '12,5 m²', x: 75, y: 75 },
+        { key: 'cuisine', name: 'Cuisine de Chef & Cellier', surf: '12,0 m²', x: 25, y: 40 },
+        { key: 'sdb', name: '3 Salles de Bain Marbre', surf: '10,0 m²', x: 24, y: 44 }
+      ],
+      roomsDetail: [
+        { name: 'Double Salon de Réception Majestueux', surf: '44,0 m²', pct: 35, key: 'salon' },
+        { name: 'Suite Royale Parentale avec Dressing & SDB', surf: '22,0 m²', pct: 18, key: 'suite' },
+        { name: 'Chambre Enfants 2 avec Placards', surf: '14,0 m²', pct: 11, key: 'chambre2' },
+        { name: 'Chambre Enfants 3 Lumineuse', surf: '13,5 m²', pct: 11, key: 'chambre3' },
+        { name: 'Chambre 4 / Bureau de Direction', surf: '12,5 m²', pct: 10, key: 'chambre4' },
+        { name: 'Cuisine de Chef Équipée & Cellier', surf: '12,0 m²', pct: 10, key: 'cuisine' },
+        { name: 'Trois Salles de Bain Marbre', surf: '10,0 m²', pct: 8, key: 'sdb' }
+      ],
+      breakdown: [
+        'Le sommet du luxe à Palmares : appartement familial d’exception de 125 m²',
+        'Vaste double réception royale ouvrant sur terrasses panoramiques',
+        'Suite parentale royale avec dressing privatif et salle de bain d’eau',
+        'Trois grandes chambres secondaires pour les enfants et invités',
+        'Cuisine de chef entièrement agencée avec électroménager haut de gamme',
+        'Climatisation gainée réversible multi-zones Daikin'
+      ],
+      finishes: [
+        { title: 'Finition Haute Couture', desc: 'Revêtements marbre Calacatta Gold 80x160 cm, parquets chêne massif, menuiseries Technal.' }
+      ],
+      standing: 'Sommet du Luxe • 4 Chambres • 3 Salles de Bain • Penthouse',
+      guarantee: '100% Déclaré Notaire • Titre Foncier Disponible'
     }
   ];
 
@@ -658,6 +871,10 @@
       this.isSolarCycleActive = false;
       this.solarCycleProgress = 0.35;
       this.lastInteractionTime = Date.now();
+      this.plan2DType = 'brochure'; // 'brochure' (Plan Décoré Brochure) or 'cad' (Plan Technique MB Architects)
+      this.panZoom2D = { scale: 1, x: 0, y: 0 };
+      this.panZoomPlateau = { scale: 1, x: 0, y: 0 };
+      this.panZoomB3D = { scale: 1, x: 0, y: 0 };
 
       this.init();
     }
@@ -721,47 +938,147 @@
                   <span class="count-badge">8</span>
                 </button>
                 <button type="button" class="p3d-filter-btn" data-filter="f2">
-                  <span>Studios & F2 (56–65 m²)</span>
-                  <span class="count-badge">8</span>
+                  <span>Studios & F2 (42–65 m²)</span>
+                  <span class="count-badge">9</span>
                 </button>
                 <button type="button" class="p3d-filter-btn" data-filter="f3">
                   <span>F3 Familiaux (66–75 m²)</span>
                   <span class="count-badge">6</span>
                 </button>
                 <button type="button" class="p3d-filter-btn" data-filter="f4">
-                  <span>Grands F4 & Angles (90–97 m²)</span>
-                  <span class="count-badge">3</span>
+                  <span>Grands F4 & Penthouses (90–125 m²)</span>
+                  <span class="count-badge">5</span>
                 </button>
               </div>
 
-              <!-- 3D View Modes & Solar Ambiance -->
+              <!-- 3D & 2D Architectural View Dimensions Switcher -->
               <div class="p3d-modes-bar">
-                <!-- Apple Segmented Mode Switcher -->
                 <div class="p3d-segmented-control" id="p3d-mode-segmented">
                   <button type="button" class="p3d-segmented-btn active" data-mode="dollhouse" title="Modèle 3D Intérieur de l'appartement">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                    <span>3D Dollhouse</span>
+                    <span>3D Isométrique</span>
                   </button>
-                  <button type="button" class="p3d-segmented-btn" data-mode="plateau" title="Plateau d'étage complet avec les 17 lots">
+                  <button type="button" class="p3d-segmented-btn" data-mode="cad" title="Plan 2D Architectural & Cotations (Brochure Officielle)">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                    <span>Plan 2D Architectural</span>
+                  </button>
+                  <button type="button" class="p3d-segmented-btn" data-mode="plateau" title="Plateau d'étage complet Tranche 8 (17 lots MB Architects)">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M2 9h20M9 21V9"/></svg>
                     <span>Plateau R+7 (17 Lots)</span>
-                  </button>
-                  <button type="button" class="p3d-segmented-btn" data-mode="cad" title="Coupe technique axonométrique">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-                    <span>Plan CAD</span>
                   </button>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Main Workspace: Left 3D WebGL Canvas + Right 4-Parameter Dossier -->
+          <!-- Main Workspace: Left Viewport (3D / 2D / Plateau) + Right 4-Parameter Dossier -->
           <div class="p3d-workspace">
             
-            <!-- Left: True WebGL Three.js Viewport -->
+            <!-- Left: True WebGL Three.js & Multi-Dimension Viewport -->
             <div class="p3d-viewport-container" id="p3d-viewport">
               <!-- Three.js Canvas -->
               <canvas id="p3d-three-canvas" class="p3d-three-canvas"></canvas>
+
+              <!-- Dedicated 2D Architectural Blueprint Viewer Container -->
+              <div id="p3d-2d-plan-container" class="p3d-2d-plan-container">
+                <div class="p3d-plan-header-hud">
+                  <div class="p3d-plan-header-info">
+                    <span class="p3d-plan-badge-dot"></span>
+                    <div>
+                      <div class="p3d-plan-header-title" id="p3d-2d-title">PLAN 2D ARCHITECTURAL</div>
+                      <div class="p3d-plan-header-sub" id="p3d-2d-sub">Brochure Officielle Palmares 2026 • MB Interior Architects</div>
+                    </div>
+                  </div>
+                  <div class="p3d-plan-header-controls">
+                    <button type="button" class="p3d-plan-toggle-btn active" id="p3d-2d-btn-brochure" title="Afficher le plan décoré haute définition de la brochure">
+                      <span>Brochure Décorée</span>
+                    </button>
+                    <button type="button" class="p3d-plan-toggle-btn" id="p3d-2d-btn-cad" title="Afficher le plan technique MB Architects">
+                      <span>Plan CAD Technique</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="p3d-plan-stage-wrap" id="p3d-2d-stage-wrap">
+                  <div class="p3d-plan-stage" id="p3d-2d-stage">
+                    <img src="" alt="Plan 2D Architectural" class="p3d-plan-img" id="p3d-2d-img">
+                    <div id="p3d-2d-pins-layer"></div>
+                  </div>
+                </div>
+
+                <div class="p3d-plan-bottom-hud">
+                  <div class="p3d-plan-rooms-strip" id="p3d-2d-rooms-strip"></div>
+                  <div class="p3d-plan-zoom-dock">
+                    <button type="button" class="p3d-plan-zoom-btn" id="p3d-2d-zoom-in" title="Zoomer">+</button>
+                    <button type="button" class="p3d-plan-zoom-btn" id="p3d-2d-zoom-out" title="Dézoomer">−</button>
+                    <button type="button" class="p3d-plan-zoom-btn" id="p3d-2d-zoom-reset" title="Recentrer">↺</button>
+                    <a href="assets/projects/palmares_plan_tranche8.pdf" target="_blank" download class="p3d-plan-zoom-btn" title="Télécharger le plan PDF officiel">📥</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Dedicated Plateau R+7 (17 Lots) Master Floorplate Container -->
+              <div id="p3d-plateau-container" class="p3d-plateau-container">
+                <div class="p3d-plan-header-hud">
+                  <div class="p3d-plan-header-info">
+                    <span class="p3d-plan-badge-dot" style="background: #E53935; box-shadow: 0 0 10px #E53935;"></span>
+                    <div>
+                      <div class="p3d-plan-header-title">PLATEAU TRANCHE 8 — 17 LOTS</div>
+                      <div class="p3d-plan-header-sub">Étage Courant R+1 à R+7 • MB Interior Architects</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="p3d-plan-stage-wrap" id="p3d-plateau-stage-wrap">
+                  <div class="p3d-plan-stage" id="p3d-plateau-stage">
+                    <img src="assets/projects/palmares_plan_tranche8_web.png" alt="Plateau Tranche 8" class="p3d-plan-img" id="p3d-plateau-img">
+                    <div id="p3d-plateau-pins-layer"></div>
+                  </div>
+                </div>
+
+                <div class="p3d-plan-bottom-hud">
+                  <div class="p3d-plan-header-info">
+                    <span style="font-size: 0.73rem; color: rgba(255,255,255,0.85);">✦ Cliquez sur un lot pour afficher sa vue 3D et son plan 2D</span>
+                  </div>
+                  <div class="p3d-plan-zoom-dock">
+                    <button type="button" class="p3d-plan-zoom-btn" id="p3d-plateau-zoom-in" title="Zoomer">+</button>
+                    <button type="button" class="p3d-plan-zoom-btn" id="p3d-plateau-zoom-out" title="Dézoomer">−</button>
+                    <button type="button" class="p3d-plan-zoom-btn" id="p3d-plateau-zoom-reset" title="Recentrer">↺</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Dedicated Brochure 3D HD Overlay -->
+              <div id="p3d-brochure-3d-overlay" class="p3d-brochure-3d-overlay">
+                <div class="p3d-plan-header-hud">
+                  <div class="p3d-plan-header-info">
+                    <span class="p3d-plan-badge-dot" style="background: #9E1B32; box-shadow: 0 0 10px #9E1B32;"></span>
+                    <div>
+                      <div class="p3d-plan-header-title" id="p3d-b3d-title">RENDU 3D ISOMÉTRIQUE BROCHURE</div>
+                      <div class="p3d-plan-header-sub">Rendu Axonométrique Officiel Palmares 2026</div>
+                    </div>
+                  </div>
+                  <div class="p3d-plan-header-controls">
+                    <button type="button" class="p3d-plan-toggle-btn active" id="p3d-b3d-close-btn" title="Revenir au modèle 3D WebGL interactif">
+                      <span>← Retour 3D WebGL</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="p3d-plan-stage-wrap" id="p3d-b3d-stage-wrap">
+                  <div class="p3d-plan-stage" id="p3d-b3d-stage">
+                    <img src="" alt="Rendu 3D Brochure" class="p3d-plan-img" id="p3d-b3d-img">
+                  </div>
+                </div>
+
+                <div class="p3d-plan-bottom-hud">
+                  <div class="p3d-plan-zoom-dock">
+                    <button type="button" class="p3d-plan-zoom-btn" id="p3d-b3d-zoom-in" title="Zoomer">+</button>
+                    <button type="button" class="p3d-plan-zoom-btn" id="p3d-b3d-zoom-out" title="Dézoomer">−</button>
+                    <button type="button" class="p3d-plan-zoom-btn" id="p3d-b3d-zoom-reset" title="Recentrer">↺</button>
+                  </div>
+                </div>
+              </div>
 
               <!-- Floating Apple Liquid Glass Compass HUD -->
               <div class="p3d-compass-hud" id="p3d-compass-hud">
@@ -812,6 +1129,9 @@
                 </button>
                 <button type="button" class="p3d-dock-pill" id="p3d-btn-solar-cycle" title="Animer le cycle solaire 24H Tanger">
                   <span>☀️ Cycle 24H</span>
+                </button>
+                <button type="button" class="p3d-dock-pill" id="p3d-cam-brochure-3d" title="Voir le rendu 3D haute définition de la brochure">
+                  <span>🎨 Rendu Brochure HD</span>
                 </button>
                 <button type="button" class="p3d-dock-pill active" id="p3d-cam-iso" title="Perspective Isométrique 3D">
                   <span>Isométrique</span>
@@ -1719,7 +2039,7 @@
       }
     }
 
-    // --- VIEW MODES ---
+    // --- VIEW MODES (3D ISOMÉTRIQUE, PLAN 2D ARCHITECTURAL, PLATEAU 17 LOTS) ---
     setMode(mode) {
       this.currentMode = mode;
 
@@ -1727,19 +2047,300 @@
         btn.classList.toggle('active', btn.dataset.mode === mode);
       });
 
-      if (mode === 'plateau') {
-        this.targetSpherical = { radius: 34, theta: Math.PI / 4, phi: Math.PI / 3.2 };
-        this.cameraTarget.set(0, 0, 0);
-      } else if (mode === 'cad') {
-        this.targetSpherical = { radius: 22, theta: Math.PI / 2.05, phi: Math.PI / 2.1 };
-        this.cameraTarget.set(0, 0.4, -0.6);
+      const canvas = document.getElementById('p3d-three-canvas');
+      const plan2d = document.getElementById('p3d-2d-plan-container');
+      const plateau = document.getElementById('p3d-plateau-container');
+      const brochure3d = document.getElementById('p3d-brochure-3d-overlay');
+      const compass = document.getElementById('p3d-compass-hud');
+      const floorHud = this.container.querySelector('.p3d-floor-level-hud');
+      const solarHud = document.getElementById('p3d-solar-time-hud');
+      const camDock = this.container.querySelector('.p3d-camera-presets-dock');
+      const tourHud = document.getElementById('p3d-tour-status-hud');
+
+      if (mode === 'cad') {
+        // Dimension 2: Plan 2D Architectural (Brochure Officielle & CAD)
+        if (canvas) canvas.style.display = 'none';
+        if (plateau) plateau.style.display = 'none';
+        if (brochure3d) brochure3d.style.display = 'none';
+        if (plan2d) plan2d.style.display = 'flex';
+
+        if (compass) compass.style.display = 'none';
+        if (floorHud) floorHud.style.display = 'none';
+        if (solarHud) solarHud.style.display = 'none';
+        if (camDock) camDock.style.display = 'none';
+        if (tourHud) tourHud.style.display = 'none';
+
+        if (this.isTourActive) this.stopGuidedTour();
+        this.render2DPlan();
+      } else if (mode === 'plateau') {
+        // Dimension 3: Master Floorplate Plateau Tranche 8 (17 Lots MB Architects)
+        if (canvas) canvas.style.display = 'none';
+        if (plan2d) plan2d.style.display = 'none';
+        if (brochure3d) brochure3d.style.display = 'none';
+        if (plateau) plateau.style.display = 'flex';
+
+        if (compass) compass.style.display = 'none';
+        if (floorHud) floorHud.style.display = 'none';
+        if (solarHud) solarHud.style.display = 'none';
+        if (camDock) camDock.style.display = 'none';
+        if (tourHud) tourHud.style.display = 'none';
+
+        if (this.isTourActive) this.stopGuidedTour();
+        this.renderPlateau();
       } else {
-        // Dollhouse
+        // Dimension 1: 3D Dollhouse Isométrique WebGL
+        if (plan2d) plan2d.style.display = 'none';
+        if (plateau) plateau.style.display = 'none';
+        if (brochure3d) brochure3d.style.display = 'none';
+        if (canvas) canvas.style.display = 'block';
+
+        if (compass) compass.style.display = 'flex';
+        if (floorHud) floorHud.style.display = 'flex';
+        if (solarHud) solarHud.style.display = 'flex';
+        if (camDock) camDock.style.display = 'flex';
+
         this.targetSpherical = { radius: 21, theta: Math.PI / 4, phi: Math.PI / 3.6 };
         this.cameraTarget.set(0, 0.4, -0.6);
+        this.buildCurrent3DModel();
+      }
+    }
+
+    render2DPlan() {
+      const unit = PALMARES_UNITS.find(u => u.id === this.selectedUnitId) || PALMARES_UNITS[0];
+      const titleEl = document.getElementById('p3d-2d-title');
+      const subEl = document.getElementById('p3d-2d-sub');
+      const imgEl = document.getElementById('p3d-2d-img');
+      const pinsLayer = document.getElementById('p3d-2d-pins-layer');
+      const roomsStrip = document.getElementById('p3d-2d-rooms-strip');
+      const btnBrochure = document.getElementById('p3d-2d-btn-brochure');
+      const btnCad = document.getElementById('p3d-2d-btn-cad');
+
+      if (!imgEl) return;
+
+      if (titleEl) {
+        titleEl.textContent = `PLAN 2D — ${unit.num} (${unit.surface})`;
+      }
+      if (subEl) {
+        subEl.textContent = `${unit.typology} • ${unit.brochureBadge || 'Brochure Officielle Palmares 2026'}`;
       }
 
-      this.buildCurrent3DModel();
+      const isCad = this.plan2DType === 'cad';
+      if (btnBrochure) btnBrochure.classList.toggle('active', !isCad);
+      if (btnCad) btnCad.classList.toggle('active', isCad);
+
+      const targetImg = isCad ? (unit.cadDetailImg || unit.plan2DImg) : unit.plan2DImg;
+      imgEl.src = targetImg;
+
+      // Reset Pan & Zoom on unit change
+      this.panZoom2D = { scale: 1, x: 0, y: 0 };
+      this.applyPanZoom('p3d-2d-stage', this.panZoom2D);
+
+      // Render Interactive Room Pins
+      if (pinsLayer) {
+        pinsLayer.innerHTML = '';
+        if (!isCad && unit.roomPins2D && unit.roomPins2D.length > 0) {
+          unit.roomPins2D.forEach(pin => {
+            const pinEl = document.createElement('div');
+            pinEl.className = 'p3d-2d-room-pin';
+            pinEl.style.left = `${pin.x}%`;
+            pinEl.style.top = `${pin.y}%`;
+            pinEl.dataset.roomkey = pin.key;
+            pinEl.innerHTML = `
+              <span class="p3d-2d-room-pin-dot"></span>
+              <span class="p3d-2d-room-pin-name">${pin.name}</span>
+              <span class="p3d-2d-room-pin-surf">${pin.surf}</span>
+            `;
+            pinEl.addEventListener('click', (e) => {
+              e.stopPropagation();
+              this.highlightRoom(pin.key);
+            });
+            pinsLayer.appendChild(pinEl);
+          });
+        }
+      }
+
+      // Render Bottom Room Chips
+      if (roomsStrip) {
+        roomsStrip.innerHTML = unit.roomsDetail.map(r => `
+          <button type="button" class="p3d-plan-room-chip" data-roomkey="${r.key}">
+            <span>${r.name}</span>
+            <small style="opacity: 0.7; margin-left: 4px;">${r.surf}</small>
+          </button>
+        `).join('');
+
+        roomsStrip.querySelectorAll('.p3d-plan-room-chip').forEach(chip => {
+          chip.addEventListener('click', () => {
+            this.highlightRoom(chip.dataset.roomkey);
+          });
+        });
+      }
+    }
+
+    highlightRoom(roomKey) {
+      // 1. Highlight room pin on 2D plan
+      const pinsLayer = document.getElementById('p3d-2d-pins-layer');
+      if (pinsLayer) {
+        pinsLayer.querySelectorAll('.p3d-2d-room-pin').forEach(pin => {
+          pin.classList.toggle('active', pin.dataset.roomkey === roomKey);
+        });
+      }
+
+      // 2. Highlight room chip in bottom strip
+      const roomsStrip = document.getElementById('p3d-2d-rooms-strip');
+      if (roomsStrip) {
+        roomsStrip.querySelectorAll('.p3d-plan-room-chip').forEach(chip => {
+          chip.classList.toggle('active', chip.dataset.roomkey === roomKey);
+        });
+      }
+
+      // 3. Focus and highlight in Parameter 1 of Dossier
+      this.setParameter('typologie');
+      if (this.dossier) {
+        const roomRow = this.dossier.querySelector(`.p3d-room-bar-row[data-roomkey="${roomKey}"]`);
+        if (roomRow) {
+          this.dossier.querySelectorAll('.p3d-room-bar-row').forEach(r => r.classList.remove('active'));
+          roomRow.classList.add('active');
+          roomRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }
+    }
+
+    renderPlateau() {
+      const pinsLayer = document.getElementById('p3d-plateau-pins-layer');
+      if (!pinsLayer) return;
+
+      this.panZoomPlateau = { scale: 1, x: 0, y: 0 };
+      this.applyPanZoom('p3d-plateau-stage', this.panZoomPlateau);
+
+      pinsLayer.innerHTML = '';
+      PALMARES_UNITS.forEach(u => {
+        const pin = document.createElement('div');
+        pin.className = `p3d-plateau-lot-pin ${u.id === this.selectedUnitId ? 'active' : ''}`;
+        pin.style.left = `${u.x}%`;
+        pin.style.top = `${u.y}%`;
+        pin.dataset.id = u.id;
+        pin.title = `${u.label} (${u.surface}) - Cliquez pour inspecter`;
+        pin.innerHTML = `
+          <span class="p3d-plateau-lot-num">${u.num}</span>
+          <span class="p3d-plateau-lot-surf">${u.surface.split(' ')[0]}m²</span>
+        `;
+        pin.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.selectUnit(u.id);
+        });
+        pinsLayer.appendChild(pin);
+      });
+    }
+
+    toggleBrochure3DOverlay(show) {
+      const overlay = document.getElementById('p3d-brochure-3d-overlay');
+      const canvas = document.getElementById('p3d-three-canvas');
+      const img = document.getElementById('p3d-b3d-img');
+      const title = document.getElementById('p3d-b3d-title');
+
+      if (!overlay) return;
+
+      if (show) {
+        const unit = PALMARES_UNITS.find(u => u.id === this.selectedUnitId) || PALMARES_UNITS[0];
+        if (img) img.src = unit.plan3DImg;
+        if (title) title.textContent = `RENDU 3D ISOMÉTRIQUE — ${unit.num} (${unit.surface})`;
+        overlay.style.display = 'flex';
+        if (canvas) canvas.style.display = 'none';
+        this.panZoomB3D = { scale: 1, x: 0, y: 0 };
+        this.applyPanZoom('p3d-b3d-stage', this.panZoomB3D);
+      } else {
+        overlay.style.display = 'none';
+        if (canvas) canvas.style.display = 'block';
+      }
+    }
+
+    setupPanZoomInteraction(wrapId, stageId, state) {
+      const wrap = document.getElementById(wrapId);
+      const stage = document.getElementById(stageId);
+      if (!wrap || !stage) return;
+
+      let isDragging = false;
+      let startX = 0, startY = 0;
+      let initialDist = 0;
+
+      const updateTransform = () => {
+        stage.style.transform = `translate(${state.x}px, ${state.y}px) scale(${state.scale})`;
+      };
+
+      // Mouse drag
+      wrap.addEventListener('mousedown', (e) => {
+        if (e.target.closest('.p3d-2d-room-pin') || e.target.closest('.p3d-plateau-lot-pin') || e.target.closest('button') || e.target.closest('a')) return;
+        isDragging = true;
+        startX = e.clientX - state.x;
+        startY = e.clientY - state.y;
+        wrap.style.cursor = 'grabbing';
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        state.x = e.clientX - startX;
+        state.y = e.clientY - startY;
+        updateTransform();
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (isDragging) {
+          isDragging = false;
+          wrap.style.cursor = 'grab';
+        }
+      });
+
+      // Wheel Zoom
+      wrap.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = e.deltaY < 0 ? 0.12 : -0.12;
+        state.scale = Math.min(3.5, Math.max(0.65, state.scale + delta));
+        updateTransform();
+      }, { passive: false });
+
+      // Touch Pan & Pinch Zoom
+      wrap.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          isDragging = true;
+          startX = e.touches[0].clientX - state.x;
+          startY = e.touches[0].clientY - state.y;
+        } else if (e.touches.length === 2) {
+          isDragging = false;
+          initialDist = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
+        }
+      }, { passive: true });
+
+      wrap.addEventListener('touchmove', (e) => {
+        if (e.touches.length === 1 && isDragging) {
+          state.x = e.touches[0].clientX - startX;
+          state.y = e.touches[0].clientY - startY;
+          updateTransform();
+        } else if (e.touches.length === 2 && initialDist > 0) {
+          const currentDist = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
+          const factor = currentDist / initialDist;
+          state.scale = Math.min(3.5, Math.max(0.65, state.scale * factor));
+          initialDist = currentDist;
+          updateTransform();
+        }
+      }, { passive: true });
+
+      wrap.addEventListener('touchend', () => {
+        isDragging = false;
+        initialDist = 0;
+      });
+    }
+
+    applyPanZoom(stageId, state) {
+      const stage = document.getElementById(stageId);
+      if (stage) {
+        stage.style.transform = `translate(${state.x}px, ${state.y}px) scale(${state.scale})`;
+      }
     }
 
     // --- SMOOTH CAMERA UPDATE & ANIMATION LOOP ---
@@ -1941,8 +2542,23 @@
       this.selectedUnitId = unitId;
       const unit = PALMARES_UNITS.find(u => u.id === unitId) || PALMARES_UNITS[0];
 
-      // Refresh 3D model
-      this.buildCurrent3DModel();
+      // Refresh corresponding dimension view
+      if (this.currentMode === 'dollhouse') {
+        this.buildCurrent3DModel();
+        const b3dImg = document.getElementById('p3d-b3d-img');
+        const b3dTitle = document.getElementById('p3d-b3d-title');
+        if (b3dImg) b3dImg.src = unit.plan3DImg;
+        if (b3dTitle) b3dTitle.textContent = `RENDU 3D ISOMÉTRIQUE — ${unit.num} (${unit.surface})`;
+      } else if (this.currentMode === 'cad') {
+        this.render2DPlan();
+      } else if (this.currentMode === 'plateau') {
+        const pinsLayer = document.getElementById('p3d-plateau-pins-layer');
+        if (pinsLayer) {
+          pinsLayer.querySelectorAll('.p3d-plateau-lot-pin').forEach(p => {
+            p.classList.toggle('active', p.dataset.id === unitId);
+          });
+        }
+      }
 
       // Render extended Apple HIG Dossier
       this.renderDossier(unit);
@@ -2358,14 +2974,123 @@
           this.cameraTarget.set(0, 0.4, -0.6);
         });
       }
+      const btnBrochure3D = document.getElementById('p3d-cam-brochure-3d');
+      const btnCloseBrochure3D = document.getElementById('p3d-b3d-close-btn');
+
+      if (btnBrochure3D) {
+        btnBrochure3D.addEventListener('click', () => {
+          this.lastInteractionTime = Date.now();
+          if (this.isTourActive) this.stopGuidedTour();
+          this.toggleBrochure3DOverlay(true);
+        });
+      }
+
+      if (btnCloseBrochure3D) {
+        btnCloseBrochure3D.addEventListener('click', () => {
+          this.lastInteractionTime = Date.now();
+          this.toggleBrochure3DOverlay(false);
+        });
+      }
+
       if (btnCamTop) {
         btnCamTop.addEventListener('click', () => {
           this.lastInteractionTime = Date.now();
           if (this.isTourActive) this.stopGuidedTour();
-          this.targetSpherical = { radius: 23, theta: 0, phi: 0.1 };
+          this.targetSpherical = { radius: 24, theta: 0, phi: 0.001 };
           this.cameraTarget.set(0, 0, -0.6);
         });
       }
+
+      // 2D Plan Controls
+      const btn2DBrochure = document.getElementById('p3d-2d-btn-brochure');
+      const btn2DCad = document.getElementById('p3d-2d-btn-cad');
+      const btn2DZoomIn = document.getElementById('p3d-2d-zoom-in');
+      const btn2DZoomOut = document.getElementById('p3d-2d-zoom-out');
+      const btn2DZoomReset = document.getElementById('p3d-2d-zoom-reset');
+
+      if (btn2DBrochure) {
+        btn2DBrochure.addEventListener('click', () => {
+          this.plan2DType = 'brochure';
+          this.render2DPlan();
+        });
+      }
+      if (btn2DCad) {
+        btn2DCad.addEventListener('click', () => {
+          this.plan2DType = 'cad';
+          this.render2DPlan();
+        });
+      }
+      if (btn2DZoomIn) {
+        btn2DZoomIn.addEventListener('click', () => {
+          this.panZoom2D.scale = Math.min(3.5, this.panZoom2D.scale + 0.25);
+          this.applyPanZoom('p3d-2d-stage', this.panZoom2D);
+        });
+      }
+      if (btn2DZoomOut) {
+        btn2DZoomOut.addEventListener('click', () => {
+          this.panZoom2D.scale = Math.max(0.65, this.panZoom2D.scale - 0.25);
+          this.applyPanZoom('p3d-2d-stage', this.panZoom2D);
+        });
+      }
+      if (btn2DZoomReset) {
+        btn2DZoomReset.addEventListener('click', () => {
+          this.panZoom2D = { scale: 1, x: 0, y: 0 };
+          this.applyPanZoom('p3d-2d-stage', this.panZoom2D);
+        });
+      }
+
+      // Plateau Zoom Controls
+      const btnPlatZoomIn = document.getElementById('p3d-plateau-zoom-in');
+      const btnPlatZoomOut = document.getElementById('p3d-plateau-zoom-out');
+      const btnPlatZoomReset = document.getElementById('p3d-plateau-zoom-reset');
+
+      if (btnPlatZoomIn) {
+        btnPlatZoomIn.addEventListener('click', () => {
+          this.panZoomPlateau.scale = Math.min(3.5, this.panZoomPlateau.scale + 0.25);
+          this.applyPanZoom('p3d-plateau-stage', this.panZoomPlateau);
+        });
+      }
+      if (btnPlatZoomOut) {
+        btnPlatZoomOut.addEventListener('click', () => {
+          this.panZoomPlateau.scale = Math.max(0.65, this.panZoomPlateau.scale - 0.25);
+          this.applyPanZoom('p3d-plateau-stage', this.panZoomPlateau);
+        });
+      }
+      if (btnPlatZoomReset) {
+        btnPlatZoomReset.addEventListener('click', () => {
+          this.panZoomPlateau = { scale: 1, x: 0, y: 0 };
+          this.applyPanZoom('p3d-plateau-stage', this.panZoomPlateau);
+        });
+      }
+
+      // Brochure 3D Zoom Controls
+      const btnB3DZoomIn = document.getElementById('p3d-b3d-zoom-in');
+      const btnB3DZoomOut = document.getElementById('p3d-b3d-zoom-out');
+      const btnB3DZoomReset = document.getElementById('p3d-b3d-zoom-reset');
+
+      if (btnB3DZoomIn) {
+        btnB3DZoomIn.addEventListener('click', () => {
+          this.panZoomB3D.scale = Math.min(3.5, this.panZoomB3D.scale + 0.25);
+          this.applyPanZoom('p3d-b3d-stage', this.panZoomB3D);
+        });
+      }
+      if (btnB3DZoomOut) {
+        btnB3DZoomOut.addEventListener('click', () => {
+          this.panZoomB3D.scale = Math.max(0.65, this.panZoomB3D.scale - 0.25);
+          this.applyPanZoom('p3d-b3d-stage', this.panZoomB3D);
+        });
+      }
+      if (btnB3DZoomReset) {
+        btnB3DZoomReset.addEventListener('click', () => {
+          this.panZoomB3D = { scale: 1, x: 0, y: 0 };
+          this.applyPanZoom('p3d-b3d-stage', this.panZoomB3D);
+        });
+      }
+
+      // Pan & Zoom Stage Wraps
+      this.setupPanZoomInteraction('p3d-2d-stage-wrap', 'p3d-2d-stage', this.panZoom2D);
+      this.setupPanZoomInteraction('p3d-plateau-stage-wrap', 'p3d-plateau-stage', this.panZoomPlateau);
+      this.setupPanZoomInteraction('p3d-b3d-stage-wrap', 'p3d-b3d-stage', this.panZoomB3D);
       if (btnCamLiving) {
         btnCamLiving.addEventListener('click', () => {
           this.lastInteractionTime = Date.now();

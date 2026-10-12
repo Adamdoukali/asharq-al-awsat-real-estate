@@ -1501,3 +1501,418 @@
     font-size: 0.62rem;
   }
 }
+
+/* ==========================================================================
+   2D ARCHITECTURAL BLUEPRINT VIEWER & PLATEAU 17 LOTS (BROCHURE AUTHENTIC)
+   ========================================================================== */
+
+/* 2D Plan Container: Dedicated High-Resolution Architectural Blueprint View */
+.p3d-2d-plan-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 15;
+  display: none;
+  flex-direction: column;
+  background: radial-gradient(circle at center, #111824 0%, #07090D 100%);
+  overflow: hidden;
+  user-select: none;
+  touch-action: none;
+}
+
+/* Plateau 17 Lots Container */
+.p3d-plateau-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 15;
+  display: none;
+  flex-direction: column;
+  background: radial-gradient(circle at center, #111824 0%, #07090D 100%);
+  overflow: hidden;
+  user-select: none;
+  touch-action: none;
+}
+
+/* Brochure 3D HD Overlay */
+.p3d-brochure-3d-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 15;
+  display: none;
+  flex-direction: column;
+  background: radial-gradient(circle at center, #111824 0%, #07090D 100%);
+  overflow: hidden;
+  user-select: none;
+  touch-action: none;
+}
+
+/* Top Floating Glass HUD for 2D Plan & Plateau */
+.p3d-plan-header-hud {
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  right: 18px;
+  z-index: 25;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.p3d-plan-header-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(14, 18, 25, 0.88);
+  backdrop-filter: blur(24px) saturate(140%);
+  padding: 8px 16px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  pointer-events: auto;
+}
+
+.p3d-plan-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--p3d-gold);
+  box-shadow: 0 0 10px var(--p3d-gold);
+}
+
+.p3d-plan-header-title {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.p3d-plan-header-sub {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+}
+
+.p3d-plan-header-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.p3d-plan-toggle-btn {
+  padding: 7px 14px;
+  border-radius: 9999px;
+  background: rgba(14, 18, 25, 0.88);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.22s ease;
+}
+
+.p3d-plan-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.26);
+}
+
+.p3d-plan-toggle-btn.active {
+  background: var(--p3d-gold);
+  color: #FFFFFF;
+  border-color: var(--p3d-gold);
+  box-shadow: 0 4px 14px var(--p3d-gold-glow);
+}
+
+/* Interactive Viewport Stage (Pan & Zoom) */
+.p3d-plan-stage-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  overflow: hidden;
+  padding: 65px 20px 50px;
+  box-sizing: border-box;
+}
+
+.p3d-plan-stage-wrap:active {
+  cursor: grabbing;
+}
+
+.p3d-plan-stage {
+  position: relative;
+  display: inline-block;
+  transform-origin: center center;
+  transition: transform 0.08s ease-out;
+  user-select: none;
+  max-width: 90%;
+  max-height: 85%;
+}
+
+.p3d-plan-img {
+  max-width: 78vmin;
+  max-height: 62vmin;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  border-radius: 12px;
+  filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.85));
+  user-select: none;
+  pointer-events: none;
+}
+
+/* High-Precision Interactive Room Pins on 2D Plan */
+.p3d-2d-room-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 30;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(14, 18, 25, 0.88);
+  backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid var(--p3d-border-gold);
+  padding: 5px 12px 5px 8px;
+  border-radius: 9999px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65), 0 0 16px rgba(196, 35, 64, 0.35);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.p3d-2d-room-pin:hover,
+.p3d-2d-room-pin.active {
+  background: var(--p3d-gold);
+  border-color: #FFFFFF;
+  transform: translate(-50%, -50%) scale(1.12);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8), 0 0 24px rgba(196, 35, 64, 0.7);
+}
+
+.p3d-2d-room-pin-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 0 0 6px #FFFFFF;
+  flex-shrink: 0;
+}
+
+.p3d-2d-room-pin-name {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.p3d-2d-room-pin-surf {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #FFD1D8;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 2px 6px;
+  border-radius: 9999px;
+}
+
+/* Plateau 17 Lots Pins on Master Floorplate */
+.p3d-plateau-lot-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 30;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(14, 18, 25, 0.92);
+  backdrop-filter: blur(20px);
+  border: 1.5px solid var(--p3d-border-gold);
+  padding: 6px 12px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: center;
+  min-width: 65px;
+}
+
+.p3d-plateau-lot-pin:hover,
+.p3d-plateau-lot-pin.active {
+  background: var(--p3d-gold);
+  border-color: #FFFFFF;
+  transform: translate(-50%, -50%) scale(1.15);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.85), 0 0 25px rgba(196, 35, 64, 0.8);
+  z-index: 35;
+}
+
+.p3d-plateau-lot-num {
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.p3d-plateau-lot-surf {
+  font-family: var(--font-sans);
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #FFD1D8;
+}
+
+/* Bottom Floating Controls Bar for 2D Plan & Plateau */
+.p3d-plan-bottom-hud {
+  position: absolute;
+  bottom: 16px;
+  left: 18px;
+  right: 18px;
+  z-index: 25;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
+  flex-wrap: wrap;
+}
+
+.p3d-plan-rooms-strip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(14, 18, 25, 0.85);
+  backdrop-filter: blur(24px);
+  padding: 5px 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  pointer-events: auto;
+  max-width: 65%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.p3d-plan-rooms-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.p3d-plan-room-chip {
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid transparent;
+  color: rgba(255, 255, 255, 0.75);
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.p3d-plan-room-chip:hover,
+.p3d-plan-room-chip.active {
+  background: var(--p3d-gold);
+  color: #FFFFFF;
+  border-color: var(--p3d-gold);
+}
+
+.p3d-plan-zoom-dock {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(14, 18, 25, 0.88);
+  backdrop-filter: blur(24px);
+  padding: 4px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  pointer-events: auto;
+}
+
+.p3d-plan-zoom-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.p3d-plan-zoom-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+}
+
+@media (max-width: 768px) {
+  .p3d-plan-header-hud {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .p3d-plan-header-info {
+    padding: 6px 12px;
+  }
+  .p3d-plan-header-sub {
+    display: none;
+  }
+  .p3d-plan-bottom-hud {
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+  }
+  .p3d-plan-rooms-strip {
+    max-width: 100%;
+  }
+  .p3d-plan-stage-wrap {
+    padding: 75px 8px 55px;
+  }
+  .p3d-2d-room-pin {
+    padding: 3px 8px 3px 6px;
+    font-size: 0.65rem;
+  }
+  .p3d-2d-room-pin-name {
+    font-size: 0.62rem;
+  }
+  .p3d-2d-room-pin-surf {
+    font-size: 0.58rem;
+  }
+  .p3d-plateau-lot-pin {
+    padding: 3px 6px;
+    min-width: 48px;
+  }
+  .p3d-plateau-lot-num {
+    font-size: 0.65rem;
+  }
+  .p3d-plateau-lot-surf {
+    font-size: 0.58rem;
+  }
+  .p3d-plan-toggle-btn {
+    padding: 5px 10px;
+    font-size: 0.68rem;
+  }
+}
+
