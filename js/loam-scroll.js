@@ -446,6 +446,7 @@
         callBtn.textContent = `📞 ${data.phone}`;
       }
 
+      modalDrawer.setAttribute('data-project', projectKey);
       modalDrawer.classList.add('active');
       document.body.style.overflow = 'hidden';
     }
@@ -453,6 +454,7 @@
     function closeProjectModal() {
       if (!modalDrawer) return;
       modalDrawer.classList.remove('active');
+      modalDrawer.removeAttribute('data-project');
       document.body.style.overflow = '';
     }
 

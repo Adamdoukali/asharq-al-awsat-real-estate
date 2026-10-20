@@ -19,35 +19,35 @@
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-display: 'Cinzel', 'Playfair Display', Georgia, serif;
 
-  /* Default Light Theme Tokens (Atmos Inspired: #F5F5F3 surface) */
-  --bg-primary: #F5F5F3;
-  --bg-secondary: #EBEBE8;
-  --bg-tertiary: #E2E2DE;
-  --bg-card: rgba(255, 255, 255, 0.75);
-  --bg-card-hover: rgba(255, 255, 255, 0.95);
+  /* Default Light Theme Tokens (Crisp Modern Pure White & Architectural Light Grey) */
+  --bg-primary: #F8F9FB;
+  --bg-secondary: #F1F3F7;
+  --bg-tertiary: #E5E8EF;
+  --bg-card: rgba(255, 255, 255, 0.94);
+  --bg-card-hover: #FFFFFF;
   
-  --text-primary: #141413;
-  --text-secondary: #5A5A55;
-  --text-muted: #8E8E88;
+  --text-primary: #0E1015;
+  --text-secondary: #333A48;
+  --text-muted: #64748B;
   
-  --border-subtle: rgba(20, 20, 19, 0.08);
-  --border-medium: rgba(20, 20, 19, 0.16);
+  --border-subtle: rgba(14, 16, 21, 0.08);
+  --border-medium: rgba(14, 16, 21, 0.14);
   --border-gold: rgba(158, 27, 50, 0.35);
 
-  --glass-bg: rgba(245, 245, 243, 0.75);
-  --glass-border: rgba(255, 255, 255, 0.6);
-  --glass-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+  --glass-bg: rgba(255, 255, 255, 0.90);
+  --glass-border: rgba(14, 16, 21, 0.10);
+  --glass-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
   
-  --nav-bg: rgba(245, 245, 243, 0.85);
-  --badge-bg: rgba(20, 20, 19, 0.05);
+  --nav-bg: rgba(255, 255, 255, 0.92);
+  --badge-bg: rgba(158, 27, 50, 0.06);
 
-  --loader-bg: #F5F5F3;
-  --loader-ink: #141413;
-  --loader-track: rgba(20, 20, 19, 0.12);
+  --loader-bg: #F8F9FB;
+  --loader-ink: #0E1015;
+  --loader-track: rgba(14, 16, 21, 0.10);
 
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.10);
 
   --radius-sm: 8px;
   --radius-md: 16px;

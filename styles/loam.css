@@ -4,13 +4,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --loam-bg: #141615;
-  --loam-ink: #0E100F;
-  --loam-chalk: #F6F5F2;
-  --loam-card: rgba(18, 22, 18, 0.92);
-  --loam-gold: #C5A059;
-  --loam-gold-light: #DFC282;
-  --loam-border: rgba(255, 255, 255, 0.22);
+  --loam-bg: #F8F9FB;
+  --loam-ink: #0E1015;
+  --loam-chalk: #0E1015;
+  --loam-card: rgba(255, 255, 255, 0.95);
+  --loam-gold: #9E1B32;
+  --loam-gold-light: #C42340;
+  --loam-border: rgba(14, 16, 21, 0.12);
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 }
@@ -59,10 +59,11 @@ body {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  background: linear-gradient(to bottom, rgba(14, 16, 15, 0.85) 0%, rgba(14, 16, 15, 0.4) 70%, transparent 100%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.88) 70%, rgba(255, 255, 255, 0.72) 100%);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(14, 16, 21, 0.08);
+  box-shadow: 0 4px 20px rgba(14, 16, 21, 0.03);
   transition: transform 0.4s ease, background 0.4s ease;
 }
 
@@ -78,10 +79,10 @@ body {
   align-items: center;
   gap: 8px;
   font-size: 0.82rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(14, 16, 21, 0.75);
   text-decoration: none;
   transition: color 0.25s ease;
   position: relative;
@@ -98,7 +99,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 2.5px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   transition: transform 0.25s ease;
 }
 
@@ -113,7 +114,7 @@ body {
 }
 
 .loam-nav-link:hover, .loam-nav-link.active {
-  color: #fff;
+  color: var(--loam-gold);
 }
 
 .loam-nav-link.active::after {
@@ -122,7 +123,7 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 1.5px;
+  height: 2px;
   background: var(--loam-gold);
 }
 
@@ -143,14 +144,16 @@ body {
   height: 52px;
   width: auto;
   object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(158, 27, 50, 0.18));
 }
 
 .loam-logo-lockup span {
   font-family: var(--font-serif);
-  font-size: 0.72rem;
+  font-size: 0.74rem;
+  font-weight: 700;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--loam-chalk);
+  color: #0E1015;
   margin-top: 2px;
 }
 
@@ -168,9 +171,9 @@ body {
   gap: 8px;
   padding: 10px 20px;
   border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.05);
-  color: #fff;
+  border: 1px solid rgba(14, 16, 21, 0.2);
+  background: rgba(255, 255, 255, 0.85);
+  color: #0E1015;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -182,9 +185,9 @@ body {
 }
 
 .loam-btn-outline:hover {
-  background: #fff;
-  color: var(--loam-ink);
-  border-color: #fff;
+  background: #0E1015;
+  color: #FFFFFF;
+  border-color: #0E1015;
   transform: translateY(-1px);
 }
 
@@ -194,20 +197,22 @@ body {
   gap: 8px;
   padding: 10px 22px;
   border-radius: 9999px;
-  background: #fff;
-  color: var(--loam-ink);
+  background: linear-gradient(135deg, #9E1B32 0%, #C42340 100%);
+  color: #FFFFFF;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
+  box-shadow: 0 4px 14px rgba(158, 27, 50, 0.25);
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .loam-btn-primary:hover {
-  background: var(--loam-gold-light);
+  background: linear-gradient(135deg, #7D1528 0%, #9E1B32 100%);
   transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(158, 27, 50, 0.35);
 }
 
 /* ==========================================================================
@@ -240,7 +245,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.85);
+  filter: brightness(0.95);
   will-change: transform;
 }
 
@@ -251,9 +256,9 @@ body {
   z-index: 2;
   background: repeating-linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0) 0px,
-    rgba(0, 0, 0, 0) 2px,
-    rgba(0, 0, 0, 0.12) 3px
+    rgba(255, 255, 255, 0) 0px,
+    rgba(255, 255, 255, 0) 2px,
+    rgba(14, 16, 21, 0.03) 3px
   );
   pointer-events: none;
 }
@@ -262,8 +267,8 @@ body {
   position: absolute;
   inset: 0;
   z-index: 3;
-  background: radial-gradient(circle at 20% 50%, rgba(14, 16, 15, 0.4) 0%, rgba(14, 16, 15, 0.85) 100%),
-              linear-gradient(to top, rgba(14, 16, 15, 0.9) 0%, transparent 60%);
+  background: radial-gradient(circle at 20% 50%, rgba(248, 249, 251, 0.94) 0%, rgba(248, 249, 251, 0.78) 55%, rgba(248, 249, 251, 0.35) 100%),
+              linear-gradient(to top, rgba(248, 249, 251, 0.98) 0%, transparent 60%);
 }
 
 .loam-hero-copy {
@@ -279,7 +284,8 @@ body {
   font-size: 0.82rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--loam-gold);
+  font-weight: 700;
 }
 
 .loam-hero-title {
@@ -288,8 +294,8 @@ body {
   font-weight: 300;
   line-height: 0.98;
   letter-spacing: -0.02em;
-  color: #fff;
-  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+  color: #0E1015;
+  text-shadow: none;
 }
 
 .loam-hero-title em {
@@ -302,12 +308,12 @@ body {
 .loam-hero-bottom {
   margin-top: 16px;
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.85);
+  color: #333A48;
   line-height: 1.5;
 }
 
 .loam-hero-bottom strong {
-  color: #fff;
+  color: #0E1015;
 }
 
 /* Floating Inquiry Card (Right Side, Same as Loam House) */
@@ -315,9 +321,9 @@ body {
   position: relative;
   z-index: 4;
   background: var(--loam-card);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.6);
-  border-radius: 4px;
+  border: 1px solid rgba(14, 16, 21, 0.1);
+  box-shadow: 0 24px 60px rgba(14, 16, 21, 0.08);
+  border-radius: 12px;
   padding: 38px 36px 32px;
   max-width: 440px;
   margin-left: auto;
@@ -330,13 +336,22 @@ body {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--loam-gold);
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 8px;
+}
+
+.loam-hero-card h2 {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #0E1015 !important;
+  margin-bottom: 8px;
+  line-height: 1.25;
 }
 
 .card-intro {
   font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: #4B5563;
   margin-bottom: 24px;
   line-height: 1.45;
 }
@@ -357,7 +372,7 @@ body {
   font-size: 0.68rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
+  color: #6B7280;
   margin-bottom: 6px;
 }
 
@@ -365,8 +380,8 @@ body {
   width: 100%;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-  color: #fff;
+  border-bottom: 1px solid rgba(14, 16, 21, 0.2);
+  color: #0E1015;
   padding: 6px 0 10px;
   font-family: inherit;
   font-size: 0.95rem;
@@ -375,14 +390,19 @@ body {
 }
 
 .card-field input:focus, .card-field select:focus {
-  border-color: #fff;
+  border-color: var(--loam-gold);
+}
+
+.card-field select option {
+  background-color: #FFFFFF;
+  color: #0E1015;
 }
 
 .card-btn-submit {
   width: 100%;
   padding: 14px;
-  background: #fff;
-  color: var(--loam-ink);
+  background: linear-gradient(135deg, #9E1B32 0%, #C42340 100%);
+  color: #FFFFFF;
   border: none;
   border-radius: 9999px;
   font-size: 0.85rem;
@@ -390,17 +410,19 @@ body {
   letter-spacing: 0.05em;
   cursor: pointer;
   margin-top: 8px;
-  transition: background 0.25s, transform 0.2s;
+  box-shadow: 0 4px 14px rgba(158, 27, 50, 0.25);
+  transition: all 0.25s ease;
 }
 
 .card-btn-submit:hover {
-  background: var(--loam-gold-light);
+  background: linear-gradient(135deg, #7D1528 0%, #9E1B32 100%);
   transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(158, 27, 50, 0.35);
 }
 
 .card-trust {
   font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.45);
+  color: #6B7280;
   text-align: center;
   margin-top: 14px;
   display: block;
@@ -446,21 +468,21 @@ body {
   transform: scale(1);
 }
 
-/* Clean dark shade only on the text side, NO white overlays */
+/* Clean luminous shade */
 .loam-chapter-shade {
   position: absolute;
   inset: 0;
   z-index: 2;
   background: linear-gradient(
     to right,
-    rgba(14, 16, 15, 0.88) 0%,
-    rgba(14, 16, 15, 0.5) 45%,
-    rgba(14, 16, 15, 0.1) 75%,
+    rgba(248, 249, 251, 0.96) 0%,
+    rgba(248, 249, 251, 0.9) 45%,
+    rgba(248, 249, 251, 0.45) 75%,
     transparent 100%
   ),
   linear-gradient(
     to top,
-    rgba(14, 16, 15, 0.75) 0%,
+    rgba(248, 249, 251, 0.92) 0%,
     transparent 40%
   );
   pointer-events: none;
@@ -481,7 +503,7 @@ body {
   font-size: clamp(2rem, 3.5vw, 3.2rem);
   font-weight: 300;
   line-height: 1;
-  color: rgba(255, 255, 255, 0.85);
+  color: #0E1015;
   letter-spacing: -0.02em;
 }
 
@@ -490,7 +512,7 @@ body {
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--loam-gold);
-  font-weight: 600;
+  font-weight: 700;
   margin-top: 4px;
   display: block;
 }
@@ -503,15 +525,15 @@ body {
   background: #FFFFFF;
   padding: 8px 18px;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 24px rgba(14, 16, 21, 0.08);
+  border: 1px solid rgba(14, 16, 21, 0.08);
   margin: 6px 0 8px;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
 }
 
 .loam-project-brand-badge:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 12px 30px rgba(14, 16, 21, 0.12);
 }
 
 .loam-project-brand-logo {
@@ -529,7 +551,8 @@ body {
   background: #FFFFFF;
   padding: 6px 14px;
   border-radius: 10px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 14px rgba(14, 16, 21, 0.08);
+  border: 1px solid rgba(14, 16, 21, 0.08);
   flex-shrink: 0;
 }
 
@@ -553,7 +576,7 @@ body {
   padding: 2.5px;
   margin-right: 8px;
   vertical-align: middle;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
 .plan-tab-badge img {
@@ -568,8 +591,8 @@ body {
   font-weight: 300;
   line-height: 1.05;
   letter-spacing: -0.02em;
-  color: #fff;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  color: #0E1015;
+  text-shadow: none;
 }
 
 .loam-chapter-title em {
@@ -580,9 +603,9 @@ body {
 
 .loam-chapter-lede {
   font-size: 1.15rem;
-  color: rgba(255, 255, 255, 0.85);
+  color: #333A48;
   line-height: 1.6;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  text-shadow: none;
 }
 
 /* Bottom Figures Bar (Matches Loam House .figs) */
@@ -609,14 +632,14 @@ body {
   font-size: clamp(2rem, 3.2vw, 2.8rem);
   font-weight: 400;
   line-height: 1;
-  color: #fff;
+  color: #0E1015;
 }
 
 .loam-fig span {
   font-size: 0.72rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.65);
+  color: #64748B;
   margin-top: 6px;
 }
 
@@ -624,6 +647,210 @@ body {
   display: flex;
   gap: 16px;
   margin-top: 12px;
+}
+
+/* ==========================================================================
+   Project Identity Theming (Palmares Green, Assalam Blue, Villas Turquoise/Teal)
+   Faithfully matched to each project's official logo color palette
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   01. PALMARES (Palm Leaf & Forest Emerald Green #1E5128 / #2D6A4F)
+   -------------------------------------------------------------------------- */
+.loam-chapter-palmares {
+  --ch-accent: #1E5128;
+  --ch-accent-light: #2D6A4F;
+  --ch-accent-dark: #153E26;
+  --ch-glow: rgba(30, 81, 40, 0.28);
+}
+
+.loam-chapter-palmares .loam-chapter-shade {
+  background: 
+    radial-gradient(ellipse 70% 60% at 16% 48%, rgba(30, 81, 40, 0.12) 0%, rgba(45, 106, 79, 0.03) 55%, transparent 75%),
+    linear-gradient(to right, rgba(248, 249, 251, 0.96) 0%, rgba(248, 249, 251, 0.90) 45%, rgba(248, 249, 251, 0.45) 75%, transparent 100%),
+    linear-gradient(to top, rgba(248, 249, 251, 0.92) 0%, transparent 40%) !important;
+}
+
+.loam-chapter-palmares .section-tagline,
+.loam-chapter-palmares .loam-eyebrow,
+.loam-chapter-palmares .loam-chapter-title em {
+  color: #1E5128 !important;
+}
+
+.loam-chapter-palmares .loam-project-brand-badge {
+  border-color: rgba(30, 81, 40, 0.22);
+  box-shadow: 0 8px 24px rgba(30, 81, 40, 0.08);
+}
+
+.loam-chapter-palmares .loam-figs {
+  border-top-color: rgba(30, 81, 40, 0.2);
+}
+
+.loam-chapter-palmares .loam-btn-primary {
+  background: linear-gradient(135deg, #1E5128 0%, #2D6A4F 100%) !important;
+  box-shadow: 0 4px 16px rgba(30, 81, 40, 0.3) !important;
+}
+
+.loam-chapter-palmares .loam-btn-primary:hover {
+  background: linear-gradient(135deg, #153E26 0%, #1E5128 100%) !important;
+  box-shadow: 0 6px 20px rgba(30, 81, 40, 0.4) !important;
+}
+
+.loam-chapter-palmares .loam-btn-outline:hover {
+  border-color: #1E5128 !important;
+  color: #1E5128 !important;
+  background: rgba(30, 81, 40, 0.05) !important;
+}
+
+/* Nav Link Palmares */
+.loam-nav-palmares:hover,
+.loam-nav-palmares.active {
+  color: #1E5128 !important;
+}
+.loam-nav-palmares::after {
+  background: #1E5128 !important;
+}
+
+/* --------------------------------------------------------------------------
+   02. ASSALAM (Ocean Mediterranean Sapphire Blue #12488B / #1A69BD)
+   -------------------------------------------------------------------------- */
+.loam-chapter-assalam {
+  --ch-accent: #12488B;
+  --ch-accent-light: #1A69BD;
+  --ch-accent-dark: #0C366B;
+  --ch-glow: rgba(18, 72, 139, 0.28);
+}
+
+.loam-chapter-assalam .loam-chapter-shade {
+  background: 
+    radial-gradient(ellipse 70% 60% at 16% 48%, rgba(18, 72, 139, 0.12) 0%, rgba(26, 105, 189, 0.03) 55%, transparent 75%),
+    linear-gradient(to right, rgba(248, 249, 251, 0.96) 0%, rgba(248, 249, 251, 0.90) 45%, rgba(248, 249, 251, 0.45) 75%, transparent 100%),
+    linear-gradient(to top, rgba(248, 249, 251, 0.92) 0%, transparent 40%) !important;
+}
+
+.loam-chapter-assalam .section-tagline,
+.loam-chapter-assalam .loam-eyebrow,
+.loam-chapter-assalam .loam-chapter-title em {
+  color: #12488B !important;
+}
+
+.loam-chapter-assalam .loam-project-brand-badge {
+  border-color: rgba(18, 72, 139, 0.22);
+  box-shadow: 0 8px 24px rgba(18, 72, 139, 0.08);
+}
+
+.loam-chapter-assalam .loam-figs {
+  border-top-color: rgba(18, 72, 139, 0.2);
+}
+
+.loam-chapter-assalam .loam-btn-primary {
+  background: linear-gradient(135deg, #12488B 0%, #1A69BD 100%) !important;
+  box-shadow: 0 4px 16px rgba(18, 72, 139, 0.3) !important;
+}
+
+.loam-chapter-assalam .loam-btn-primary:hover {
+  background: linear-gradient(135deg, #0C366B 0%, #12488B 100%) !important;
+  box-shadow: 0 6px 20px rgba(18, 72, 139, 0.4) !important;
+}
+
+.loam-chapter-assalam .loam-btn-outline:hover {
+  border-color: #12488B !important;
+  color: #12488B !important;
+  background: rgba(18, 72, 139, 0.05) !important;
+}
+
+/* Nav Link Assalam */
+.loam-nav-assalam:hover,
+.loam-nav-assalam.active {
+  color: #12488B !important;
+}
+.loam-nav-assalam::after {
+  background: #12488B !important;
+}
+
+/* --------------------------------------------------------------------------
+   03. LES VILLAS ASSALAM (Malabata Turquoise / Teal / Seafoam #0F766E / #14B8A6)
+   -------------------------------------------------------------------------- */
+.loam-chapter-villas {
+  --ch-accent: #0F766E;
+  --ch-accent-light: #14B8A6;
+  --ch-accent-dark: #0A504B;
+  --ch-glow: rgba(15, 118, 110, 0.28);
+}
+
+.loam-chapter-villas .loam-chapter-shade {
+  background: 
+    radial-gradient(ellipse 70% 60% at 16% 48%, rgba(15, 118, 110, 0.12) 0%, rgba(20, 184, 166, 0.03) 55%, transparent 75%),
+    linear-gradient(to right, rgba(248, 249, 251, 0.96) 0%, rgba(248, 249, 251, 0.90) 45%, rgba(248, 249, 251, 0.45) 75%, transparent 100%),
+    linear-gradient(to top, rgba(248, 249, 251, 0.92) 0%, transparent 40%) !important;
+}
+
+.loam-chapter-villas .section-tagline,
+.loam-chapter-villas .loam-eyebrow,
+.loam-chapter-villas .loam-chapter-title em {
+  color: #0F766E !important;
+}
+
+.loam-chapter-villas .loam-project-brand-badge {
+  border-color: rgba(15, 118, 110, 0.22);
+  box-shadow: 0 8px 24px rgba(15, 118, 110, 0.08);
+}
+
+.loam-chapter-villas .loam-figs {
+  border-top-color: rgba(15, 118, 110, 0.2);
+}
+
+.loam-chapter-villas .loam-btn-primary {
+  background: linear-gradient(135deg, #0F766E 0%, #14B8A6 100%) !important;
+  box-shadow: 0 4px 16px rgba(15, 118, 110, 0.3) !important;
+}
+
+.loam-chapter-villas .loam-btn-primary:hover {
+  background: linear-gradient(135deg, #0A504B 0%, #0F766E 100%) !important;
+  box-shadow: 0 6px 20px rgba(15, 118, 110, 0.4) !important;
+}
+
+.loam-chapter-villas .loam-btn-outline:hover {
+  border-color: #0F766E !important;
+  color: #0F766E !important;
+  background: rgba(15, 118, 110, 0.05) !important;
+}
+
+/* Nav Link Villas */
+.loam-nav-villas:hover,
+.loam-nav-villas.active {
+  color: #0F766E !important;
+}
+.loam-nav-villas::after {
+  background: #0F766E !important;
+}
+
+/* Modal Drawer dynamic project themes */
+#project-modal[data-project="palmares"] #modal-loc,
+#project-modal[data-project="palmares"] #modal-price {
+  color: #1E5128 !important;
+}
+#project-modal[data-project="palmares"] .loam-btn-primary {
+  background: linear-gradient(135deg, #1E5128 0%, #2D6A4F 100%) !important;
+  box-shadow: 0 4px 14px rgba(30, 81, 40, 0.3) !important;
+}
+
+#project-modal[data-project="assalam"] #modal-loc,
+#project-modal[data-project="assalam"] #modal-price {
+  color: #12488B !important;
+}
+#project-modal[data-project="assalam"] .loam-btn-primary {
+  background: linear-gradient(135deg, #12488B 0%, #1A69BD 100%) !important;
+  box-shadow: 0 4px 14px rgba(18, 72, 139, 0.3) !important;
+}
+
+#project-modal[data-project="villas"] #modal-loc,
+#project-modal[data-project="villas"] #modal-price {
+  color: #0F766E !important;
+}
+#project-modal[data-project="villas"] .loam-btn-primary {
+  background: linear-gradient(135deg, #0F766E 0%, #14B8A6 100%) !important;
+  box-shadow: 0 4px 14px rgba(15, 118, 110, 0.3) !important;
 }
 
 /* ==========================================================================
@@ -639,9 +866,9 @@ body {
 .loam-tag-btn {
   padding: 8px 18px;
   border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  background: rgba(14, 16, 15, 0.5);
-  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(14, 16, 21, 0.15);
+  background: rgba(255, 255, 255, 0.85);
+  color: #0E1015;
   font-size: 0.8rem;
   letter-spacing: 0.05em;
   cursor: pointer;
@@ -650,9 +877,9 @@ body {
 }
 
 .loam-tag-btn.active, .loam-tag-btn:hover {
-  background: #fff;
-  color: var(--loam-ink);
-  border-color: #fff;
+  background: #9E1B32;
+  color: #FFFFFF;
+  border-color: #9E1B32;
 }
 
 /* ==========================================================================
@@ -697,8 +924,8 @@ body {
   position: relative;
   min-height: 100vh;
   padding: 120px 6vw 80px;
-  background: #0E100F;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: #F8F9FB;
+  border-top: 1px solid rgba(14, 16, 21, 0.08);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -726,27 +953,28 @@ body {
 .loam-plan-tab {
   padding: 10px 22px;
   border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(14, 16, 21, 0.12);
+  background: rgba(255, 255, 255, 0.9);
+  color: #333A48;
   font-size: 0.82rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.04em;
   cursor: pointer;
   transition: all 0.25s ease;
 }
 
 .loam-plan-tab.active, .loam-plan-tab:hover {
-  background: #fff;
-  color: var(--loam-ink);
-  border-color: #fff;
+  background: #9E1B32;
+  color: #FFFFFF;
+  border-color: #9E1B32;
 }
 
 .loam-spec-card {
-  background: rgba(18, 22, 18, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 4px;
+  background: #FFFFFF;
+  border: 1px solid rgba(14, 16, 21, 0.1);
+  border-radius: 12px;
   padding: 36px;
+  box-shadow: 0 16px 45px rgba(14, 16, 21, 0.06);
   backdrop-filter: blur(16px);
 }
 
@@ -754,13 +982,13 @@ body {
   font-family: var(--font-serif);
   font-size: 2.2rem;
   font-weight: 300;
-  color: #fff;
+  color: #0E1015;
   margin-bottom: 10px;
 }
 
 .loam-spec-summary {
   font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: #4B5563;
   line-height: 1.55;
   margin-bottom: 28px;
 }
@@ -771,41 +999,41 @@ body {
   gap: 20px;
   margin-bottom: 32px;
   padding-bottom: 24px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(14, 16, 21, 0.08);
 }
 
 .loam-spec-item span {
   font-size: 0.7rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
+  color: #64748B;
   display: block;
   margin-bottom: 4px;
 }
 
 .loam-spec-item strong {
   font-size: 1.25rem;
-  color: #fff;
+  color: #0E1015;
   font-family: var(--font-serif);
 }
 
 .loam-spec-item strong.gold {
-  color: var(--loam-gold-light);
+  color: var(--loam-gold);
 }
 
 /* 3D Canvas Card Viewport */
 .loam-plan-viewer {
   position: relative;
-  background: radial-gradient(circle at center, #1b201d 0%, #0d0f0e 100%);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 4px;
+  background: linear-gradient(135deg, #FFFFFF 0%, #F1F3F7 100%);
+  border: 1px solid rgba(14, 16, 21, 0.1);
+  border-radius: 12px;
   padding: 32px;
   min-height: 520px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 50px rgba(14, 16, 21, 0.08);
   overflow: hidden;
 }
 
@@ -823,20 +1051,21 @@ body {
   top: 24px;
   right: 24px;
   padding: 8px 18px;
-  background: rgba(14, 16, 15, 0.85);
+  background: rgba(255, 255, 255, 0.92);
   border: 1px solid var(--loam-gold);
   border-radius: 9999px;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--loam-gold-light);
+  color: var(--loam-gold);
   backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(158, 27, 50, 0.15);
 }
 
 .loam-plan-canvas-caption {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.45);
+  color: #64748B;
   letter-spacing: 0.05em;
   margin-top: 14px;
   text-align: center;
@@ -852,8 +1081,8 @@ body {
   align-items: center;
   justify-content: center;
   padding: 120px 6vw;
-  background: #0E100F;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: #F1F3F7;
+  border-top: 1px solid rgba(14, 16, 21, 0.08);
 }
 
 .loam-contact-bg {
@@ -866,7 +1095,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.35);
+  filter: brightness(0.9) opacity(0.35);
 }
 
 .loam-contact-container {
@@ -884,11 +1113,12 @@ body {
 .loam-contact-form {
   width: 100%;
   max-width: 580px;
-  background: rgba(18, 22, 18, 0.94);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(14, 16, 21, 0.1);
+  box-shadow: 0 24px 60px rgba(14, 16, 21, 0.08);
   backdrop-filter: blur(20px);
   padding: 40px 36px;
-  border-radius: 4px;
+  border-radius: 12px;
   text-align: left;
   display: flex;
   flex-direction: column;
@@ -903,7 +1133,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: 2000;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(14, 16, 21, 0.6);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   display: flex;
@@ -922,8 +1152,8 @@ body {
   width: 100%;
   max-width: 640px;
   height: 100%;
-  background: #141615;
-  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  background: #FFFFFF;
+  border-left: 1px solid rgba(14, 16, 21, 0.1);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -942,13 +1172,13 @@ body {
   align-items: flex-start;
   margin-bottom: 24px;
   padding-bottom: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(14, 16, 21, 0.08);
 }
 
 .loam-modal-close {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(14, 16, 21, 0.06);
   border: none;
-  color: #fff;
+  color: #0E1015;
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -961,7 +1191,7 @@ body {
 }
 
 .loam-modal-close:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(14, 16, 21, 0.12);
 }
 
 .loam-modal-body {
@@ -974,8 +1204,8 @@ body {
   width: 100%;
   height: 260px;
   object-fit: cover;
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(14, 16, 21, 0.1);
 }
 
 .loam-modal-specs {
@@ -984,7 +1214,7 @@ body {
 }
 
 .loam-modal-specs tr {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(14, 16, 21, 0.06);
 }
 
 .loam-modal-specs td {
@@ -993,22 +1223,22 @@ body {
 }
 
 .loam-modal-specs td:first-child {
-  color: rgba(255, 255, 255, 0.5);
+  color: #64748B;
   font-weight: 500;
 }
 
 .loam-modal-specs td:last-child {
-  color: #fff;
+  color: #0E1015;
   text-align: right;
   font-weight: 600;
 }
 
 /* Master Footer */
 .loam-footer {
-  background: #0A0C0B;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: #ECEEF2;
+  border-top: 1px solid rgba(14, 16, 21, 0.08);
   padding: 80px 6vw 40px;
-  color: rgba(255, 255, 255, 0.7);
+  color: #333A48;
 }
 
 .loam-footer-grid {
@@ -1035,24 +1265,24 @@ body {
 }
 
 .loam-footer-col a {
-  color: rgba(255, 255, 255, 0.65);
+  color: #4B5563;
   text-decoration: none;
   font-size: 0.88rem;
   transition: color 0.2s;
 }
 
 .loam-footer-col a:hover {
-  color: #fff;
+  color: #0E1015;
 }
 
 .loam-footer-bottom {
   padding-top: 28px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgba(14, 16, 21, 0.08);
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.4);
+  color: #64748B;
 }
 
 /* ==========================================================================
@@ -1074,7 +1304,8 @@ body {
     align-items: center !important;
     padding: 12px 18px !important;
     height: auto !important;
-    background: rgba(14, 16, 15, 0.95) !important;
+    background: rgba(255, 255, 255, 0.96) !important;
+    border-bottom: 1px solid rgba(14, 16, 21, 0.08) !important;
   }
 
   .loam-logo-lockup {
