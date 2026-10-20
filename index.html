@@ -13,8 +13,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Loam House Architectural Styles -->
-  <link rel="stylesheet" href="styles/loam.css?v=declutter_1">
-  <link rel="stylesheet" href="styles/palmares-3d-explorer.css?v=apple3d_2">
+  <link rel="stylesheet" href="styles/loam.css?v=pagescroll_2">
+  <link rel="stylesheet" href="styles/palmares-3d-explorer.css?v=pagescroll_2">
 
   <!-- Lenis & GSAP CDN Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
@@ -23,10 +23,21 @@
 </head>
 <body>
 
+  <!-- Floating Luxury Page Indicator (7 Discrete Slides / Sections — Identical to Holding Group) -->
+  <nav class="page-scroll-dots" id="page-scroll-dots" aria-label="Pagination des résidences">
+    <button class="scroll-dot active" data-page="0" data-label="01. Accueil" aria-label="Écran 1 : Accueil"></button>
+    <button class="scroll-dot" data-page="1" data-label="02. Palmares" aria-label="Écran 2 : Résidence Palmares"></button>
+    <button class="scroll-dot" data-page="2" data-label="03. Assalam" aria-label="Écran 3 : Résidence Assalam"></button>
+    <button class="scroll-dot" data-page="3" data-label="04. Villas Malabata" aria-label="Écran 4 : Les Villas Assalam"></button>
+    <button class="scroll-dot" data-page="4" data-label="05. Finitions" aria-label="Écran 5 : Finitions & Design"></button>
+    <button class="scroll-dot" data-page="5" data-label="06. Maquette 3D" aria-label="Écran 6 : Maquette 3D"></button>
+    <button class="scroll-dot" data-page="6" data-label="07. Contact & Visite" aria-label="Écran 7 : Contact & Visite"></button>
+  </nav>
+
   <!-- ==========================================================================
        Master Site Header (Loam House Style)
        ========================================================================== -->
-  <header class="loam-header">
+  <header class="loam-header" id="master-header">
     <!-- Left: The 3 Main Projects & 3D Plans -->
     <nav class="loam-nav-projects" aria-label="Nos Trois Projets Phares">
       <a href="palmares.html" class="loam-nav-link loam-nav-palmares">
@@ -64,7 +75,7 @@
     <!-- ==========================================================================
          HERO SECTION: Loam House Style with Birds Flying Video & Floating Card
          ========================================================================== -->
-    <section class="loam-hero">
+    <section id="hero" class="loam-hero">
       <!-- Background Video: Skyline Birds in Flight at Dusk -->
       <div class="loam-hero-media">
         <video autoplay muted loop playsinline poster="assets/hero-video/hero-poster.jpg">
@@ -100,7 +111,7 @@
       </div>
 
       <!-- Right Column: Floating Dark Glass Inquiry Card (Loam House Exact Pattern) -->
-      <aside class="loam-hero-card">
+      <aside class="loam-hero-card desktop-only">
         <div class="card-eyebrow">Consultation Privilégiée</div>
         <h2 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; color: #0E1015; margin-bottom: 8px;">
           Recevoir les Brochures & Prix
@@ -309,7 +320,7 @@
     <!-- ==========================================================================
          CHAPTER 04: Finitions & Architecture (Loam House Interactive Swatches)
          ========================================================================== -->
-    <section class="loam-chapter">
+    <section id="finitions" class="loam-chapter">
       <div class="loam-chapter-bg">
         <img id="loam-finish-img" src="assets/loam/INT01_Penthouse-Living.jpg" alt="Finitions Intérieures et Volumes">
       </div>
@@ -352,7 +363,7 @@
          CHAPTER 05: 3D Plans & Typologies Explorer (Interactive Master Model)
          ========================================================================== -->
     <section id="plans3d" class="loam-plans-section">
-      <div class="loam-plans-header">
+      <div class="loam-plans-header desktop-only">
         <div class="section-number">
           05 <span class="section-tagline">Architecture & Typologies 3D</span>
         </div>
@@ -360,9 +371,12 @@
           Maquette 3D Interactive & <em>Dollhouse Palmares</em>
         </h2>
         <p style="color: #4B5563; font-size: 1.05rem; margin-top: 12px; line-height: 1.6;">
-          <span class="desktop-only">Naviguez en 3D temps réel au cœur de la <strong>Tranche 8 (Étage Courant)</strong> de la Résidence Palmares conçue par MB Interior Architects. Basculez entre la maquette 3D dollhouse de l'appartement et la vue du plateau des 17 lots, simulez l'ensoleillement de Tanger heure par heure, et personnalisez les finitions intérieures.</span>
-          <span class="mobile-only">Explorez la maquette 3D dollhouse et les typologies d'appartements en temps réel.</span>
+          Naviguez en 3D temps réel au cœur de la <strong>Tranche 8 (Étage Courant)</strong> de la Résidence Palmares conçue par MB Interior Architects. Basculez entre la maquette 3D dollhouse de l'appartement et la vue du plateau des 17 lots, simulez l'ensoleillement de Tanger heure par heure, et personnalisez les finitions intérieures.
         </p>
+      </div>
+
+      <div class="mobile-only section-number" style="margin-bottom: 8px;">
+        05 <span class="section-tagline">Architecture & Typologies 3D</span>
       </div>
 
       <div id="palmares-3d-explorer"></div>
@@ -526,10 +540,10 @@
   </footer>
 
   <!-- Controller Script -->
-  <script src="js/loam-scroll.js"></script>
+  <script src="js/loam-scroll.js?v=pagescroll_2"></script>
   <!-- Three.js WebGL 3D Engine -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <!-- Palmares 3D Architectural Master Explorer Script -->
-  <script src="js/palmares-3d-explorer.js?v=apple3d_2"></script>
+  <script src="js/palmares-3d-explorer.js?v=pagescroll_2"></script>
 </body>
 </html>

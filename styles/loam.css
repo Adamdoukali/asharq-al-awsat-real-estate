@@ -65,6 +65,85 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Section Scroll Snap & Offset Grounding (Holding Style) */
+#hero, #palmares, #assalam, #villas, #finitions, #plans3d, #contact {
+  scroll-margin-top: 70px !important;
+}
+
+/* Floating Luxury Page Indicators (7 Discrete Slides — Identical to Holding Group) */
+.page-scroll-dots {
+  position: fixed;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 999;
+  pointer-events: auto;
+}
+
+.scroll-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(14, 16, 21, 0.25);
+  border: 1px solid rgba(14, 16, 21, 0.35);
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+  position: relative;
+}
+
+.scroll-dot::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+}
+
+.scroll-dot::before {
+  content: attr(data-label);
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%) translateX(8px);
+  background: #FFFFFF;
+  border: 1px solid rgba(14, 16, 21, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 5px 12px;
+  border-radius: 9999px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #0E1015;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-dot:hover {
+  background: #9E1B32;
+  border-color: #9E1B32;
+  transform: scale(1.3);
+}
+
+.scroll-dot:hover::before {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+.scroll-dot.active {
+  background: #9E1B32;
+  box-shadow: 0 0 12px rgba(158, 27, 50, 0.6);
+  transform: scale(1.45);
+  border-color: #C42340;
+}
+
 /* ==========================================================================
    Header: Loam House Style with the 3 Main Projects & Centered Logo
    ========================================================================== */
@@ -1357,6 +1436,10 @@ body {
     display: none !important;
   }
 
+  .page-scroll-dots {
+    display: none !important;
+  }
+
   .mobile-only {
     display: block !important;
   }
@@ -1368,10 +1451,12 @@ body {
   .loam-hero {
     display: flex !important;
     flex-direction: column !important;
-    padding: 85px 18px 30px !important;
-    height: auto !important;
-    min-height: auto !important;
-    gap: 20px !important;
+    justify-content: center !important;
+    padding: 100px 20px 48px !important;
+    min-height: 88vh !important;
+    min-height: 88svh !important;
+    gap: 16px !important;
+    box-sizing: border-box !important;
   }
 
   .loam-hero-copy {

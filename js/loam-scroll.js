@@ -9,17 +9,17 @@
   document.addEventListener('DOMContentLoaded', () => {
     const isMobile = window.innerWidth <= 900 || ('ontouchstart' in window && window.innerWidth <= 1024);
 
-    // 1. Initialize Lenis Smooth Scroll (Desktop Only — allow native fluid touch scroll on mobile phones)
+    // 1. Initialize Lenis Smooth Scroll Engine & Holding Group Discrete Page Controller
     let lenis = null;
-    if (typeof Lenis !== 'undefined' && !isMobile) {
+    if (typeof Lenis !== 'undefined') {
       lenis = new Lenis({
-        duration: 1.2,
+        duration: 1.15,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         orientation: 'vertical',
-        smoothWheel: true,
-        wheelMultiplier: 1,
-        touchMultiplier: 1
+        smoothWheel: false, // Controlled discretely by wheel accumulator on desktop
+        syncTouch: false
       });
+      window.lenis = lenis;
 
       function raf(time) {
         lenis.raf(time);
@@ -36,6 +36,222 @@
         gsap.ticker.lagSmoothing(0);
       }
     }
+
+    // 2. Discrete Page Navigation & Scroll Indicator System (Exact Holding Group Engine)
+    const pageIds = [
+      '#hero',
+      '#palmares',
+      '#assalam',
+      '#villas',
+      '#finitions',
+      '#plans3d',
+      '#contact'
+    ];
+
+    let currentPageIndex = 0;
+    let isPageScrolling = false;
+    let pageScrollLockTimer = null;
+    const masterHeader = document.getElementById('master-header');
+    const scrollDots = document.querySelectorAll('.scroll-dot');
+
+    function updatePageIndicator(targetIndex) {
+      scrollDots.forEach((dot, idx) => {
+        if (idx === targetIndex) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }
+
+    function checkHeaderScroll(targetIndex) {
+      const idx = (typeof targetIndex === 'number') ? targetIndex : currentPageIndex;
+      if (masterHeader) {
+        if (idx > 0) {
+          masterHeader.classList.add('scrolled');
+        } else {
+          masterHeader.classList.remove('scrolled');
+        }
+      }
+    }
+
+    const isMobileMode = () => window.innerWidth <= 900 || (('ontouchstart' in window) && window.innerWidth <= 1024);
+
+    // Dynamic Header & Scroll Position Tracking (Mobile & Free Scroll)
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY || window.pageYOffset;
+      if (masterHeader) {
+        if (scrollY > 50) {
+          masterHeader.classList.add('scrolled');
+        } else {
+          masterHeader.classList.remove('scrolled');
+        }
+      }
+
+      pageIds.forEach((id, idx) => {
+        const el = document.querySelector(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= window.innerHeight * 0.45 && rect.bottom >= window.innerHeight * 0.45) {
+            currentPageIndex = idx;
+            window.currentPageIndex = idx;
+            updatePageIndicator(idx);
+          }
+        }
+      });
+    }, { passive: true });
+
+    // Discrete Page Navigation Function (Same as Holding Group)
+    function goToPage(targetIndex, instant = false) {
+      if (targetIndex < 0) targetIndex = 0;
+      if (targetIndex >= pageIds.length) targetIndex = pageIds.length - 1;
+
+      const targetEl = document.querySelector(pageIds[targetIndex]);
+      if (!targetEl && targetIndex !== 0) return;
+
+      currentPageIndex = targetIndex;
+      window.currentPageIndex = currentPageIndex;
+      updatePageIndicator(targetIndex);
+      checkHeaderScroll(targetIndex);
+
+      // Mobile Handling: Native smooth scrolling with NO lock
+      if (isMobileMode()) {
+        if (targetIndex === 0) {
+          window.scrollTo({ top: 0, behavior: instant ? 'auto' : 'smooth' });
+        } else if (targetEl) {
+          targetEl.scrollIntoView({ behavior: instant ? 'auto' : 'smooth' });
+        }
+        return;
+      }
+
+      // Desktop Handling: Discrete snap navigation with Lenis & lock
+      isPageScrolling = true;
+      window.isPageScrolling = true;
+      clearTimeout(pageScrollLockTimer);
+
+      if (instant) {
+        if (lenis) {
+          lenis.scrollTo(targetIndex === 0 ? 0 : targetEl, { immediate: true });
+        } else {
+          window.scrollTo(0, targetIndex === 0 ? 0 : targetEl.offsetTop);
+        }
+        isPageScrolling = false;
+        window.isPageScrolling = false;
+        return;
+      }
+
+      if (lenis) {
+        lenis.scrollTo(targetIndex === 0 ? 0 : targetEl, {
+          duration: 1.15,
+          lock: true,
+          onComplete: () => {
+            clearTimeout(pageScrollLockTimer);
+            pageScrollLockTimer = setTimeout(() => {
+              isPageScrolling = false;
+              window.isPageScrolling = false;
+            }, 100);
+          }
+        });
+      } else {
+        if (targetIndex === 0) {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          targetEl.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+
+      pageScrollLockTimer = setTimeout(() => {
+        isPageScrolling = false;
+        window.isPageScrolling = false;
+      }, 1300);
+    }
+    window.goToPage = goToPage;
+
+    // Dot Navigation Click Listeners
+    scrollDots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        goToPage(index);
+      });
+    });
+
+    // Navigation Links to Discrete Pages
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        const targetIdx = pageIds.indexOf(href);
+        if (targetIdx !== -1) {
+          e.preventDefault();
+          goToPage(targetIdx);
+        }
+      });
+    });
+
+    // Wheel Event Interception: Active ONLY on Desktop Mice/Trackpads (Same as Holding Group)
+    let wheelAccumulator = 0;
+    let wheelResetTimeout = null;
+    const WHEEL_THRESHOLD = 26;
+
+    window.addEventListener('wheel', (e) => {
+      // Allow natural fluid scrolling on mobile devices
+      if (isMobileMode()) return;
+
+      // Prevent continuous browser scrolling on desktop for 7 crisp slides
+      e.preventDefault();
+
+      if (isPageScrolling) return;
+
+      wheelAccumulator += e.deltaY;
+      clearTimeout(wheelResetTimeout);
+      wheelResetTimeout = setTimeout(() => {
+        wheelAccumulator = 0;
+      }, 200);
+
+      if (wheelAccumulator >= WHEEL_THRESHOLD) {
+        wheelAccumulator = 0;
+        if (currentPageIndex < pageIds.length - 1) {
+          goToPage(currentPageIndex + 1);
+        }
+      } else if (wheelAccumulator <= -WHEEL_THRESHOLD) {
+        wheelAccumulator = 0;
+        if (currentPageIndex > 0) {
+          goToPage(currentPageIndex - 1);
+        }
+      }
+    }, { passive: false });
+
+    // Touch Swipe Handling: Only active on desktop/large screens, NEVER block mobile thumb scrolling
+    let touchStartY = 0;
+    let touchStartX = 0;
+    let touchStartTime = 0;
+
+    window.addEventListener('touchstart', (e) => {
+      if (isMobileMode()) return;
+      if (e.touches.length > 0) {
+        touchStartY = e.touches[0].clientY;
+        touchStartX = e.touches[0].clientX;
+        touchStartTime = Date.now();
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchend', (e) => {
+      if (isMobileMode()) return;
+      if (isPageScrolling) return;
+      if (e.changedTouches.length > 0) {
+        const touchEndY = e.changedTouches[0].clientY;
+        const touchEndX = e.changedTouches[0].clientX;
+        const deltaY = touchStartY - touchEndY;
+        const deltaX = touchStartX - touchEndX;
+        const duration = Date.now() - touchStartTime;
+
+        if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 38 && duration < 750) {
+          if (deltaY > 0 && currentPageIndex < pageIds.length - 1) {
+            goToPage(currentPageIndex + 1);
+          } else if (deltaY < 0 && currentPageIndex > 0) {
+            goToPage(currentPageIndex - 1);
+          }
+        }
+      }
+    }, { passive: true });
 
     // 2. Differential Speed Parallax Scroll Engine (Background vs Foreground at Different Speeds)
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
