@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Loam House Architectural Styles -->
-  <link rel="stylesheet" href="styles/loam.css">
+  <link rel="stylesheet" href="styles/loam.css?v=declutter_1">
   <link rel="stylesheet" href="styles/palmares-3d-explorer.css?v=apple3d_2">
 
   <!-- Lenis & GSAP CDN Scripts -->
@@ -53,7 +53,8 @@
     <!-- Right: Navigation CTAs -->
     <div class="loam-header-ctas">
       <a href="#contact" class="loam-btn-primary">
-        <span>Brochure & Visite</span>
+        <span class="desktop-only">Brochure & Visite</span>
+        <span class="mobile-only">Brochure</span>
       </a>
     </div>
   </header>
@@ -83,15 +84,16 @@
           <em>L'Art de Vivre à Tanger.</em>
         </h1>
         <p class="loam-hero-bottom">
-          <strong>Asharq Al Awsat Group</strong> conçoit et édifie des adresses d'exception face à la Méditerranée et au cœur des pôles dynamiques de la ville. Architecture contemporaine, finitions nobles et déclaration légale à 100%.
+          <span class="desktop-only"><strong>Asharq Al Awsat Group</strong> conçoit et édifie des adresses d'exception face à la Méditerranée et au cœur des pôles dynamiques de la ville. Architecture contemporaine, finitions nobles et déclaration légale à 100%.</span>
+          <span class="mobile-only">L'excellence résidentielle à Tanger • Finitions nobles & déclaration 100%.</span>
         </p>
 
-        <div style="display: flex; gap: 16px; margin-top: 12px;">
-          <a href="#palmares" class="loam-btn-primary" style="padding: 14px 28px;">
+        <div class="loam-hero-actions">
+          <a href="#palmares" class="loam-btn-primary">
             <span>Découvrir les Projets</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
           </a>
-          <a href="#plans3d" class="loam-btn-outline" style="padding: 14px 24px;">
+          <a href="#plans3d" class="loam-btn-outline">
             <span>Modèles 3D & Plans</span>
           </a>
         </div>
@@ -103,7 +105,7 @@
         <h2 style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; color: #0E1015; margin-bottom: 8px;">
           Recevoir les Brochures & Prix
         </h2>
-        <p class="card-intro">
+        <p class="card-intro desktop-only">
           Accédez aux plans architecturaux confidentiels et aux disponibilités en avant-première.
         </p>
 
@@ -130,7 +132,7 @@
           <button type="submit" class="card-btn-submit">
             Recevoir la Documentation
           </button>
-          <span class="card-trust">✦ Service commercial direct promoteur • Zéro intermédiaire</span>
+          <span class="card-trust">✦ Direct promoteur • Zéro intermédiaire</span>
         </form>
       </aside>
     </section>
@@ -151,12 +153,13 @@
         <div class="loam-project-brand-badge">
           <img src="assets/projects/logo_palmares.png" alt="Logo Officiel Résidence Palmares" class="loam-project-brand-logo">
         </div>
-        <p class="loam-eyebrow">Grand Stade • Avenue Principale • Centre-Ville</p>
+        <p class="loam-eyebrow desktop-only">Grand Stade • Avenue Principale • Centre-Ville</p>
         <h2 class="loam-chapter-title">
           Résidence <em>Palmares</em>
         </h2>
         <p class="loam-chapter-lede">
-          Dans un environnement d’exception se dresse majestueusement Palmares. Un ensemble résidentiel clos et sécurisé 24h/24 alliant appartements spacieux, complexe scolaire complet, terrains omnisports et piscines privatives au cœur de la vitalité tangéroise.
+          <span class="desktop-only">Dans un environnement d’exception se dresse majestueusement Palmares. Un ensemble résidentiel clos et sécurisé 24h/24 alliant appartements spacieux, complexe scolaire complet, terrains omnisports et piscines privatives au cœur de la vitalité tangéroise.</span>
+          <span class="mobile-only">Ensemble résidentiel clos et sécurisé avec école, omnisports et piscines privatives.</span>
         </p>
 
         <div class="loam-figs">
@@ -166,29 +169,29 @@
           </div>
           <div class="loam-fig">
             <strong>40–155 m²</strong>
-            <span>Surfaces Disponibles</span>
+            <span>Surfaces</span>
           </div>
           <div class="loam-fig">
             <strong>100%</strong>
-            <span>Déclaration Légale</span>
+            <span>Déclaration</span>
           </div>
         </div>
 
         <div class="loam-actions-row">
           <a href="palmares.html" class="loam-btn-primary">
-            <span>Découvrir la Page Complète</span>
+            <span>Découvrir le Projet</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
-          <a href="assets/projects/Pres-RESIDENCE-PALMARES-2026.pdf" target="_blank" download class="loam-btn-outline" style="gap: 6px;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-            <span>Brochure PDF (43 Mo)</span>
-          </a>
-          <button type="button" class="loam-btn-outline" data-inspect="palmares">
-            <span>Fiche Rapide</span>
-          </button>
-          <a href="https://wa.me/212665276901?text=Bonjour,%20je%20souhaite%20recevoir%20la%20brochure%20de%20la%20Résidence%20Palmares" target="_blank" class="loam-btn-outline">
+          <a href="https://wa.me/212665276901?text=Bonjour,%20je%20souhaite%20recevoir%20la%20brochure%20de%20la%20Résidence%20Palmares" target="_blank" class="loam-btn-outline loam-btn-wa">
             <span>WhatsApp Ventes</span>
           </a>
+          <a href="assets/projects/Pres-RESIDENCE-PALMARES-2026.pdf" target="_blank" download class="loam-btn-outline desktop-only" style="gap: 6px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            <span>Brochure PDF</span>
+          </a>
+          <button type="button" class="loam-btn-outline desktop-only" data-inspect="palmares">
+            <span>Fiche Rapide</span>
+          </button>
         </div>
       </div>
     </section>
@@ -209,12 +212,13 @@
         <div class="loam-project-brand-badge">
           <img src="assets/projects/logo_assalam.png" alt="Logo Officiel Résidence Assalam" class="loam-project-brand-logo">
         </div>
-        <p class="loam-eyebrow">Littoral Nord • Vue Panoramique Méditerranée</p>
+        <p class="loam-eyebrow desktop-only">Littoral Nord • Vue Panoramique Méditerranée</p>
         <h2 class="loam-chapter-title">
           Résidence <em>Assalam</em>
         </h2>
         <p class="loam-chapter-lede">
-          Face à la brise marine, la Résidence Assalam offre une perspective nouvelle sur l'art de vivre en famille. Des appartements baignés de lumière naturelle, dotés d'une climatisation centrale réversible, de piscines paysagères et d'une mosquée intégrée au domaine.
+          <span class="desktop-only">Face à la brise marine, la Résidence Assalam offre une perspective nouvelle sur l'art de vivre en famille. Des appartements baignés de lumière naturelle, dotés d'une climatisation centrale réversible, de piscines paysagères et d'une mosquée intégrée au domaine.</span>
+          <span class="mobile-only">Appartements d'exception face à la mer avec piscines paysagères et mosquée au domaine.</span>
         </p>
 
         <div class="loam-figs">
@@ -224,25 +228,25 @@
           </div>
           <div class="loam-fig">
             <strong>94–115 m²</strong>
-            <span>Appartements Familiaux</span>
+            <span>Surfaces</span>
           </div>
           <div class="loam-fig">
-            <strong>Panoramique</strong>
-            <span>Vue Mer & Horizon</span>
+            <strong>Vue Mer</strong>
+            <span>Horizon</span>
           </div>
         </div>
 
         <div class="loam-actions-row">
           <a href="residence-assalam.html" class="loam-btn-primary">
-            <span>Découvrir la Page Complète</span>
+            <span>Découvrir le Projet</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
-          <button type="button" class="loam-btn-outline" data-inspect="assalam">
-            <span>Fiche Rapide</span>
-          </button>
-          <a href="https://wa.me/212661103547?text=Bonjour,%20je%20souhaite%20des%20informations%20sur%20la%20Résidence%20Assalam" target="_blank" class="loam-btn-outline">
+          <a href="https://wa.me/212661103547?text=Bonjour,%20je%20souhaite%20des%20informations%20sur%20la%20Résidence%20Assalam" target="_blank" class="loam-btn-outline loam-btn-wa">
             <span>WhatsApp Ventes</span>
           </a>
+          <button type="button" class="loam-btn-outline desktop-only" data-inspect="assalam">
+            <span>Fiche Rapide</span>
+          </button>
         </div>
       </div>
     </section>
@@ -263,12 +267,13 @@
         <div class="loam-project-brand-badge">
           <img src="assets/projects/logo_villas.png" alt="Logo Officiel Les Villas Assalam" class="loam-project-brand-logo">
         </div>
-        <p class="loam-eyebrow">Colline de Malabata • Baie de Tanger</p>
+        <p class="loam-eyebrow desktop-only">Colline de Malabata • Baie de Tanger</p>
         <h2 class="loam-chapter-title">
           Les Villas <em>Assalam</em>
         </h2>
         <p class="loam-chapter-lede">
-          Une collection confidentielle de villas contemporaines jumelées surplombant la baie de Malabata. 300 m² de terrain et 360 m² de surface construite sur 4 niveaux avec solarium privatif, jardin paysager et piscine individuelle.
+          <span class="desktop-only">Une collection confidentielle de villas contemporaines jumelées surplombant la baie de Malabata. 300 m² de terrain et 360 m² de surface construite sur 4 niveaux avec solarium privatif, jardin paysager et piscine individuelle.</span>
+          <span class="mobile-only">Villas de prestige sur 4 niveaux avec solarium privatif, jardin et piscine à Malabata.</span>
         </p>
 
         <div class="loam-figs">
@@ -278,25 +283,25 @@
           </div>
           <div class="loam-fig">
             <strong>360 m²</strong>
-            <span>Habitable / 4 Niveaux</span>
+            <span>Habitable</span>
           </div>
           <div class="loam-fig">
             <strong>300 m²</strong>
-            <span>Parcelle Privative</span>
+            <span>Parcelle</span>
           </div>
         </div>
 
         <div class="loam-actions-row">
           <a href="villas-assalam.html" class="loam-btn-primary">
-            <span>Découvrir la Page Complète</span>
+            <span>Découvrir le Projet</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
-          <button type="button" class="loam-btn-outline" data-inspect="villas">
-            <span>Fiche Rapide</span>
-          </button>
-          <a href="https://wa.me/212600907262?text=Bonjour,%20je%20souhaite%20visiter%20les%20Villas%20Assalam%20Malabata" target="_blank" class="loam-btn-outline">
+          <a href="https://wa.me/212600907262?text=Bonjour,%20je%20souhaite%20visiter%20les%20Villas%20Assalam%20Malabata" target="_blank" class="loam-btn-outline loam-btn-wa">
             <span>WhatsApp Ventes</span>
           </a>
+          <button type="button" class="loam-btn-outline desktop-only" data-inspect="villas">
+            <span>Fiche Rapide</span>
+          </button>
         </div>
       </div>
     </section>
@@ -319,7 +324,8 @@
           La Perfection dans <em>Chaque Ligne</em>
         </h2>
         <p class="loam-chapter-lede">
-          Nous marions le savoir-faire artisanal marocain aux standards architecturaux internationaux les plus stricts : marbres polis de premier choix, menuiseries nobles, vitrages isolants thermo-acoustiques et agencements baignés de clarté.
+          <span class="desktop-only">Nous marions le savoir-faire artisanal marocain aux standards architecturaux internationaux les plus stricts : marbres polis de premier choix, menuiseries nobles, vitrages isolants thermo-acoustiques et agencements baignés de clarté.</span>
+          <span class="mobile-only">Marbres polis de premier choix, menuiseries nobles et vitrages thermo-acoustiques.</span>
         </p>
 
         <div class="loam-tags">
@@ -354,7 +360,8 @@
           Maquette 3D Interactive & <em>Dollhouse Palmares</em>
         </h2>
         <p style="color: #4B5563; font-size: 1.05rem; margin-top: 12px; line-height: 1.6;">
-          Naviguez en 3D temps réel au cœur de la <strong>Tranche 8 (Étage Courant)</strong> de la Résidence Palmares conçue par MB Interior Architects. Basculez entre la maquette 3D dollhouse de l'appartement et la vue du plateau des 17 lots, simulez l'ensoleillement de Tanger heure par heure, et personnalisez les finitions intérieures.
+          <span class="desktop-only">Naviguez en 3D temps réel au cœur de la <strong>Tranche 8 (Étage Courant)</strong> de la Résidence Palmares conçue par MB Interior Architects. Basculez entre la maquette 3D dollhouse de l'appartement et la vue du plateau des 17 lots, simulez l'ensoleillement de Tanger heure par heure, et personnalisez les finitions intérieures.</span>
+          <span class="mobile-only">Explorez la maquette 3D dollhouse et les typologies d'appartements en temps réel.</span>
         </p>
       </div>
 
@@ -377,7 +384,8 @@
           Votre Nouvelle Demeure <em>Vous Attend</em>
         </h2>
         <p style="color: #4B5563; font-size: 1.1rem; line-height: 1.6;">
-          Nos conseillers vous reçoivent sur rendez-vous au siège ou directement sur nos chantiers pour une visite des appartements témoins et la remise de la brochure officielle.
+          <span class="desktop-only">Nos conseillers vous reçoivent sur rendez-vous au siège ou directement sur nos chantiers pour une visite des appartements témoins et la remise de la brochure officielle.</span>
+          <span class="mobile-only">Prenez rendez-vous pour une visite privée ou recevez la brochure officielle.</span>
         </p>
 
         <form class="loam-contact-form" id="contact-master-form">
