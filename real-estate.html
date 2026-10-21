@@ -14,7 +14,6 @@
 
   <!-- Loam House Architectural Styles -->
   <link rel="stylesheet" href="styles/loam.css?v=pagescroll_2">
-  <link rel="stylesheet" href="styles/palmares-3d-explorer.css?v=pagescroll_2">
 
   <!-- Lenis & GSAP CDN Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
@@ -23,22 +22,20 @@
 </head>
 <body>
 
-  <!-- Floating Luxury Page Indicator (7 Discrete Slides / Sections — Identical to Holding Group) -->
+  <!-- Floating Luxury Page Indicator (5 Discrete Slides / Sections) -->
   <nav class="page-scroll-dots" id="page-scroll-dots" aria-label="Pagination des résidences">
     <button class="scroll-dot active" data-page="0" data-label="01. Accueil" aria-label="Écran 1 : Accueil"></button>
     <button class="scroll-dot" data-page="1" data-label="02. Palmares" aria-label="Écran 2 : Résidence Palmares"></button>
     <button class="scroll-dot" data-page="2" data-label="03. Assalam" aria-label="Écran 3 : Résidence Assalam"></button>
     <button class="scroll-dot" data-page="3" data-label="04. Villas Malabata" aria-label="Écran 4 : Les Villas Assalam"></button>
-    <button class="scroll-dot" data-page="4" data-label="05. Finitions" aria-label="Écran 5 : Finitions & Design"></button>
-    <button class="scroll-dot" data-page="5" data-label="06. Maquette 3D" aria-label="Écran 6 : Maquette 3D"></button>
-    <button class="scroll-dot" data-page="6" data-label="07. Contact & Visite" aria-label="Écran 7 : Contact & Visite"></button>
+    <button class="scroll-dot" data-page="4" data-label="05. Contact & Visite" aria-label="Écran 5 : Contact & Visite"></button>
   </nav>
 
   <!-- ==========================================================================
        Master Site Header (Loam House Style)
        ========================================================================== -->
   <header class="loam-header" id="master-header">
-    <!-- Left: The 3 Main Projects & 3D Plans -->
+    <!-- Left: The 3 Main Projects -->
     <nav class="loam-nav-projects" aria-label="Nos Trois Projets Phares">
       <a href="palmares.html" class="loam-nav-link loam-nav-palmares">
         <span class="loam-nav-badge"><img src="assets/projects/chip_emblem_palmares.png" alt="Palmares"></span>
@@ -46,13 +43,12 @@
       </a>
       <a href="residence-assalam.html" class="loam-nav-link loam-nav-assalam">
         <span class="loam-nav-badge"><img src="assets/projects/chip_emblem_assalam.png" alt="Assalam"></span>
-        <span>02. Assalam</span>
+        <span>02. Assalam <em class="nav-sold-tag" style="font-size: 0.65rem; color: #DC2626; font-style: normal; font-weight: 700; margin-left: 3px;">(Sold Out)</em></span>
       </a>
       <a href="villas-assalam.html" class="loam-nav-link loam-nav-villas">
         <span class="loam-nav-badge"><img src="assets/projects/chip_emblem_villas.png" alt="Villas Malabata"></span>
-        <span>03. Villas Malabata</span>
+        <span>03. Villas Malabata <em class="nav-sold-tag" style="font-size: 0.65rem; color: #DC2626; font-style: normal; font-weight: 700; margin-left: 3px;">(Sold Out)</em></span>
       </a>
-      <a href="#plans3d" class="loam-nav-link">3D & Plans</a>
     </nav>
 
     <!-- Center: Clean Asharq Al Awsat Group Logo (Without Immobilier) -->
@@ -104,9 +100,6 @@
             <span>Découvrir les Projets</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
           </a>
-          <a href="#plans3d" class="loam-btn-outline">
-            <span>Modèles 3D & Plans</span>
-          </a>
         </div>
       </div>
 
@@ -134,9 +127,9 @@
           <div class="card-field">
             <label for="hero-project">Projet de Prédilection</label>
             <select id="hero-project">
-              <option value="palmares">01. Résidence Palmares (Tanger Centre — dès 688k DH)</option>
-              <option value="assalam">02. Résidence Assalam (Vue Mer — dès 13 800 DH/m²)</option>
-              <option value="villas">03. Les Villas Assalam (Malabata — 2.5M DH)</option>
+              <option value="palmares">01. Résidence Palmares (Tanger Centre — dès 646k DH)</option>
+              <option value="assalam">02. Résidence Assalam (Vue Mer — Sold Out / 100% Vendu)</option>
+              <option value="villas">03. Les Villas Assalam (Malabata — Sold Out / 100% Vendu)</option>
             </select>
           </div>
 
@@ -159,7 +152,7 @@
 
       <div class="loam-chapter-copy">
         <div class="section-number">
-          01 <span class="section-tagline">Complexe Urbain Haut Standing</span>
+          01 <span class="section-tagline">Complexe Urbain Moyen Standing</span>
         </div>
         <div class="loam-project-brand-badge">
           <img src="assets/projects/logo_palmares.png" alt="Logo Officiel Résidence Palmares" class="loam-project-brand-logo">
@@ -169,14 +162,18 @@
           Résidence <em>Palmares</em>
         </h2>
         <p class="loam-chapter-lede">
-          <span class="desktop-only">Dans un environnement d’exception se dresse majestueusement Palmares. Un ensemble résidentiel clos et sécurisé 24h/24 alliant appartements spacieux, complexe scolaire complet, terrains omnisports et piscines privatives au cœur de la vitalité tangéroise.</span>
-          <span class="mobile-only">Ensemble résidentiel clos et sécurisé avec école, omnisports et piscines privatives.</span>
+          <span class="desktop-only">Dans un environnement d'exception se dresse majestueusement Palmares. Un ensemble résidentiel de moyen standing supérieur, clos et sécurisé 24h/24, doté de 4 piscines privatives, climatisation centralisée, complexe scolaire complet et terrains omnisports au cœur de la vitalité tangéroise.</span>
+          <span class="mobile-only">Ensemble résidentiel moyen standing clos et sécurisé avec 4 piscines, école et omnisports.</span>
         </p>
 
         <div class="loam-figs">
           <div class="loam-fig">
-            <strong>688 000 DH</strong>
+            <strong>646 000 DH</strong>
             <span>À Partir De</span>
+          </div>
+          <div class="loam-fig">
+            <strong>1–4 Ch.</strong>
+            <span>Studios, Apparts & Duplex</span>
           </div>
           <div class="loam-fig">
             <strong>40–155 m²</strong>
@@ -219,23 +216,24 @@
       <div class="loam-chapter-copy">
         <div class="section-number">
           02 <span class="section-tagline">Sanctuaire Côtier & Vue Mer</span>
+          <span class="badge-sold-out" style="margin-left: 14px; padding: 4px 12px; border-radius: 9999px; font-size: 0.72rem; vertical-align: middle;">SOLD OUT • 100% VENDU</span>
         </div>
         <div class="loam-project-brand-badge">
           <img src="assets/projects/logo_assalam.png" alt="Logo Officiel Résidence Assalam" class="loam-project-brand-logo">
         </div>
         <p class="loam-eyebrow desktop-only">Littoral Nord • Vue Panoramique Méditerranée</p>
         <h2 class="loam-chapter-title">
-          Résidence <em>Assalam</em>
+          Résidence <em>Assalam</em> <span class="badge-sold-out" style="font-size: 0.95rem; font-family: var(--font-sans); padding: 4px 14px; border-radius: 9999px; vertical-align: middle; font-style: normal; display: inline-block; margin-left: 10px;">SOLD OUT</span>
         </h2>
         <p class="loam-chapter-lede">
-          <span class="desktop-only">Face à la brise marine, la Résidence Assalam offre une perspective nouvelle sur l'art de vivre en famille. Des appartements baignés de lumière naturelle, dotés d'une climatisation centrale réversible, de piscines paysagères et d'une mosquée intégrée au domaine.</span>
-          <span class="mobile-only">Appartements d'exception face à la mer avec piscines paysagères et mosquée au domaine.</span>
+          <span class="desktop-only">Face à la brise marine, la Résidence Assalam offre une perspective nouvelle sur l'art de vivre en famille. Des appartements baignés de lumière naturelle, dotés d'une climatisation centrale réversible, de piscines paysagères et d'une mosquée intégrée au domaine. <strong>Ce programme est intégralement vendu (Sold Out).</strong></span>
+          <span class="mobile-only">Appartements d'exception face à la mer avec piscines paysagères • 100% Vendu (Sold Out).</span>
         </p>
 
         <div class="loam-figs">
-          <div class="loam-fig">
-            <strong>13 800 DH</strong>
-            <span>Le m² Habitable</span>
+          <div class="loam-fig" style="border-color: #DC2626;">
+            <strong style="color: #DC2626;">SOLD OUT</strong>
+            <span>100% Vendu</span>
           </div>
           <div class="loam-fig">
             <strong>94–115 m²</strong>
@@ -274,23 +272,24 @@
       <div class="loam-chapter-copy">
         <div class="section-number">
           03 <span class="section-tagline">Domaine Privé Confidentiel</span>
+          <span class="badge-sold-out" style="margin-left: 14px; padding: 4px 12px; border-radius: 9999px; font-size: 0.72rem; vertical-align: middle;">SOLD OUT • 100% VENDU</span>
         </div>
         <div class="loam-project-brand-badge">
           <img src="assets/projects/logo_villas.png" alt="Logo Officiel Les Villas Assalam" class="loam-project-brand-logo">
         </div>
         <p class="loam-eyebrow desktop-only">Colline de Malabata • Baie de Tanger</p>
         <h2 class="loam-chapter-title">
-          Les Villas <em>Assalam</em>
+          Les Villas <em>Assalam</em> <span class="badge-sold-out" style="font-size: 0.95rem; font-family: var(--font-sans); padding: 4px 14px; border-radius: 9999px; vertical-align: middle; font-style: normal; display: inline-block; margin-left: 10px;">SOLD OUT</span>
         </h2>
         <p class="loam-chapter-lede">
-          <span class="desktop-only">Une collection confidentielle de villas contemporaines jumelées surplombant la baie de Malabata. 300 m² de terrain et 360 m² de surface construite sur 4 niveaux avec solarium privatif, jardin paysager et piscine individuelle.</span>
-          <span class="mobile-only">Villas de prestige sur 4 niveaux avec solarium privatif, jardin et piscine à Malabata.</span>
+          <span class="desktop-only">Une collection confidentielle de villas contemporaines jumelées surplombant la baie de Malabata. 300 m² de terrain et 360 m² de surface construite sur 4 niveaux avec solarium privatif, jardin paysager et piscine individuelle. <strong>Ce domaine confidentiel est intégralement vendu (Sold Out).</strong></span>
+          <span class="mobile-only">Villas de prestige sur 4 niveaux à Malabata • 100% Vendu (Sold Out).</span>
         </p>
 
         <div class="loam-figs">
-          <div class="loam-fig">
-            <strong>2 500 000 DH</strong>
-            <span>Prix Propriété</span>
+          <div class="loam-fig" style="border-color: #DC2626;">
+            <strong style="color: #DC2626;">SOLD OUT</strong>
+            <span>100% Vendu</span>
           </div>
           <div class="loam-fig">
             <strong>360 m²</strong>
@@ -317,73 +316,10 @@
       </div>
     </section>
 
-    <!-- ==========================================================================
-         CHAPTER 04: Finitions & Architecture (Loam House Interactive Swatches)
-         ========================================================================== -->
-    <section id="finitions" class="loam-chapter">
-      <div class="loam-chapter-bg">
-        <img id="loam-finish-img" src="assets/loam/INT01_Penthouse-Living.jpg" alt="Finitions Intérieures et Volumes">
-      </div>
-      <div class="loam-chapter-shade"></div>
 
-      <div class="loam-chapter-copy">
-        <div class="section-number">
-          04 <span class="section-tagline">Exigence des Matériaux & Design</span>
-        </div>
-        <p class="loam-eyebrow">L'Harmonie dans Chaque Détail</p>
-        <h2 class="loam-chapter-title">
-          La Perfection dans <em>Chaque Ligne</em>
-        </h2>
-        <p class="loam-chapter-lede">
-          <span class="desktop-only">Nous marions le savoir-faire artisanal marocain aux standards architecturaux internationaux les plus stricts : marbres polis de premier choix, menuiseries nobles, vitrages isolants thermo-acoustiques et agencements baignés de clarté.</span>
-          <span class="mobile-only">Marbres polis de premier choix, menuiseries nobles et vitrages thermo-acoustiques.</span>
-        </p>
-
-        <div class="loam-tags">
-          <button type="button" class="loam-tag-btn active" data-img="assets/loam/INT01_Penthouse-Living.jpg">
-            Séjour & Réceptions
-          </button>
-          <button type="button" class="loam-tag-btn" data-img="assets/loam/INT03_Courtyard-Living-Dining.jpg">
-            Salons & Patios
-          </button>
-          <button type="button" class="loam-tag-btn" data-img="assets/loam/INT04_Kitchen-Light.jpg">
-            Cuisines Équipées
-          </button>
-          <button type="button" class="loam-tag-btn" data-img="assets/loam/INT05_Bathroom-Light.jpg">
-            Bains & Marbre
-          </button>
-          <button type="button" class="loam-tag-btn" data-img="assets/loam/EXT_Terrace.jpg">
-            Terrasses Extérieures
-          </button>
-        </div>
-      </div>
-    </section>
 
     <!-- ==========================================================================
-         CHAPTER 05: 3D Plans & Typologies Explorer (Interactive Master Model)
-         ========================================================================== -->
-    <section id="plans3d" class="loam-plans-section">
-      <div class="loam-plans-header desktop-only">
-        <div class="section-number">
-          05 <span class="section-tagline">Architecture & Typologies 3D</span>
-        </div>
-        <h2 class="loam-chapter-title" style="margin-top: 10px;">
-          Maquette 3D Interactive & <em>Dollhouse Palmares</em>
-        </h2>
-        <p style="color: #4B5563; font-size: 1.05rem; margin-top: 12px; line-height: 1.6;">
-          Naviguez en 3D temps réel au cœur de la <strong>Tranche 8 (Étage Courant)</strong> de la Résidence Palmares conçue par MB Interior Architects. Basculez entre la maquette 3D dollhouse de l'appartement et la vue du plateau des 17 lots, simulez l'ensoleillement de Tanger heure par heure, et personnalisez les finitions intérieures.
-        </p>
-      </div>
-
-      <div class="mobile-only section-number" style="margin-bottom: 8px;">
-        05 <span class="section-tagline">Architecture & Typologies 3D</span>
-      </div>
-
-      <div id="palmares-3d-explorer"></div>
-    </section>
-
-    <!-- ==========================================================================
-         CHAPTER 06: Private Consultation & Contact
+         CHAPTER 04: Private Consultation & Contact
          ========================================================================== -->
     <section id="contact" class="loam-contact-section">
       <div class="loam-contact-bg">
@@ -392,7 +328,7 @@
 
       <div class="loam-contact-container">
         <div class="section-number">
-          06 <span class="section-tagline">Rendez-Vous & Conseil Privé</span>
+          04 <span class="section-tagline">Rendez-Vous & Conseil Privé</span>
         </div>
         <h2 class="loam-chapter-title">
           Votre Nouvelle Demeure <em>Vous Attend</em>
@@ -417,9 +353,9 @@
           <div class="card-field">
             <label for="c-project">Projet Sélectionné</label>
             <select id="c-project">
-              <option value="palmares">Résidence Palmares (Tanger Centre — dès 688k DH)</option>
-              <option value="assalam">Résidence Assalam (Vue Mer — dès 13 800 DH/m²)</option>
-              <option value="villas">Les Villas Assalam (Malabata — 2.5M DH)</option>
+              <option value="palmares">Résidence Palmares (Tanger Centre — dès 646k DH)</option>
+              <option value="assalam">Résidence Assalam (Vue Mer — Sold Out / 100% Vendu)</option>
+              <option value="villas">Les Villas Assalam (Malabata — Sold Out / 100% Vendu)</option>
             </select>
           </div>
 
@@ -506,7 +442,6 @@
           <li><a href="palmares.html">01. Résidence Palmares</a></li>
           <li><a href="residence-assalam.html">02. Résidence Assalam</a></li>
           <li><a href="villas-assalam.html">03. Les Villas Assalam</a></li>
-          <li><a href="#plans3d">Plans 3D & Typologies</a></li>
         </ul>
       </div>
 
@@ -541,9 +476,5 @@
 
   <!-- Controller Script -->
   <script src="js/loam-scroll.js?v=pagescroll_2"></script>
-  <!-- Three.js WebGL 3D Engine -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <!-- Palmares 3D Architectural Master Explorer Script -->
-  <script src="js/palmares-3d-explorer.js?v=pagescroll_2"></script>
 </body>
 </html>

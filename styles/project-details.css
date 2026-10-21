@@ -172,6 +172,14 @@ body.theme-villas .loam-btn-primary:hover {
   color: var(--loam-gold, #9E1B32);
 }
 
+.proj-badge.sold-out {
+  background: #DC2626 !important;
+  color: #FFFFFF !important;
+  border: 1px solid #B91C1C !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35) !important;
+}
+
 .proj-official-logo-wrap {
   display: inline-flex;
   align-items: center;

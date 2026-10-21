@@ -43,8 +43,6 @@
       '#palmares',
       '#assalam',
       '#villas',
-      '#finitions',
-      '#plans3d',
       '#contact'
     ];
 
@@ -402,39 +400,7 @@
         }
       });
 
-      // C. 3D Plans Explorer Differential Parallax (Desktop only)
-      const specCard = document.querySelector('.loam-spec-card');
-      const planViewer = document.querySelector('.loam-plan-viewer');
 
-      if (specCard && planViewer && !isMobile) {
-        gsap.fromTo(specCard,
-          { y: 50 },
-          {
-            y: -50,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: '#plans3d',
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: 1.2
-            }
-          }
-        );
-
-        gsap.fromTo(planViewer,
-          { y: 90 },
-          {
-            y: -90,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: '#plans3d',
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: 1.2
-            }
-          }
-        );
-      }
     }
 
     // 3. Smooth Anchor Links via Lenis
@@ -459,8 +425,7 @@
     const projectSections = [
       { id: 'palmares', link: document.querySelector('.loam-nav-projects a[href="#palmares"]') },
       { id: 'assalam', link: document.querySelector('.loam-nav-projects a[href="#assalam"]') },
-      { id: 'villas', link: document.querySelector('.loam-nav-projects a[href="#villas"]') },
-      { id: 'plans3d', link: document.querySelector('.loam-nav-projects a[href="#plans3d"]') }
+      { id: 'villas', link: document.querySelector('.loam-nav-projects a[href="#villas"]') }
     ];
 
     window.addEventListener('scroll', () => {
@@ -571,17 +536,19 @@
     // 7. Project Inspection Modal Drawer
     const projectDetails = {
       'palmares': {
-        location: 'Centre-Ville Tanger • Nouveau Stade',
-        title: 'Résidence Palmares',
+        location: 'Centre-Ville Tanger • Grand Stade',
+        title: 'Résidence Palmares (Moyen Standing)',
         logo: 'assets/projects/logo_palmares.png',
-        price: 'À partir de 688 000 DH',
+        price: 'À partir de 646 000 DH',
         img: 'assets/projects/palmares_hero.jpg',
-        desc: 'Un complexe résidentiel avant-gardiste sécurisé 24h/24. Idéalement situé face au grand stade de Tanger, il réunit des appartements hauts de gamme, des équipements scolaires complets, des terrains de sport et des piscines privées.',
+        desc: 'Un complexe résidentiel de moyen standing supérieur sécurisé 24h/24 avec 4 piscines privatives et climatisation centralisée. Idéalement situé face au grand stade de Tanger, il réunit des studios, des appartements familiaux de 1 à 4 chambres, des duplex d\'exception et des locaux commerciaux.',
         specs: [
-          ['Surfaces habitables', '40 à 155 m² (Studios, F3, F4)'],
-          ['Étage & Immeubles', 'R+7 avec ascenseurs silencieux'],
-          ['Stationnement', 'Sous-sol sécurisé avec places titrées'],
-          ['Équipements domaine', 'Complexe scolaire, piscines, omnisports'],
+          ['Finition', 'Moyen Standing'],
+          ['Sécurité', 'Surveillance 24/7 avec agents & contrôle d\'accès'],
+          ['Piscines', '4 piscines privatives au sein du domaine'],
+          ['Climatisation', 'Climatisation centralisée intégrée'],
+          ['Typologies', '1 à 4 Chambres • Studios, Appartements, Duplex & Locaux Commerciaux (40 à 155 m²)'],
+          ['Équipements', 'Groupe scolaire complet (maternelle à collège), terrains de sport'],
           ['Situation légale', '100% Déclaré • Titres fonciers disponibles']
         ],
         whatsapp: '212600907262',
@@ -589,12 +556,13 @@
       },
       'assalam': {
         location: 'Littoral Nord • Vue Mer Panoramique',
-        title: 'Résidence Assalam',
+        title: 'Résidence Assalam (SOLD OUT)',
         logo: 'assets/projects/logo_assalam.png',
-        price: 'Dès 13 800 DH / m²',
+        price: 'SOLD OUT (100% Vendu)',
         img: 'assets/projects/assalam_hero.jpg',
-        desc: 'Érigée face à la mer, la Résidence Assalam offre une expérience résidentielle sereine et prestigieuse. Appartements lumineux équipés de climatisation réversible, terrasses ouvertes sur la mer, piscines paysagées et mosquée intégrée.',
+        desc: 'Érigée face à la mer, la Résidence Assalam a offert une expérience résidentielle d\'exception à Tanger. Le projet est aujourd\'hui entièrement commercialisé et 100% vendu.',
         specs: [
+          ['Statut', 'SOLD OUT — 100% Vendu'],
           ['Surfaces habitables', '94 à 115 m² (F3 & F4 familiaux)'],
           ['Vue', 'Panoramique Mer & Cap Spartel'],
           ['Climatisation', 'Centrale réversible intégrée'],
@@ -606,12 +574,13 @@
       },
       'villas': {
         location: 'Colline de Malabata • Baie de Tanger',
-        title: 'Les Villas Assalam',
+        title: 'Les Villas Assalam (SOLD OUT)',
         logo: 'assets/projects/logo_villas.png',
-        price: '2 500 000 DH',
+        price: 'SOLD OUT (100% Vendu)',
         img: 'assets/projects/villas_hero.jpg',
-        desc: 'Une collection exclusive de villas modernes jumelées situées sur la colline très prisée de Malabata. Chaque villa bénéficie de 300 m² de terrain privatif et 360 m² construits sur 4 niveaux avec solarium privatif, jardin et piscine.',
+        desc: 'Une collection exclusive de villas modernes jumelées sur la colline de Malabata avec solarium privatif, jardin et piscine. Ce domaine prestigieux est aujourd\'hui entièrement commercialisé et 100% vendu.',
         specs: [
+          ['Statut', 'SOLD OUT — 100% Vendu'],
           ['Surface terrain', '300 m² de parcelle privative'],
           ['Surface construite', '360 m² habitables sur 4 niveaux'],
           ['Configuration', '4 suites parentales, triples salons, rooftop vue baie'],

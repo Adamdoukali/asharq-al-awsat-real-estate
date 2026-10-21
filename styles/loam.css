@@ -66,11 +66,26 @@ body {
 }
 
 /* Section Scroll Snap & Offset Grounding (Holding Style) */
-#hero, #palmares, #assalam, #villas, #finitions, #plans3d, #contact {
+#hero, #palmares, #assalam, #villas, #contact {
   scroll-margin-top: 70px !important;
 }
 
-/* Floating Luxury Page Indicators (7 Discrete Slides — Identical to Holding Group) */
+/* Sold Out Badges */
+.badge-sold-out {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #DC2626 !important;
+  color: #FFFFFF !important;
+  border: 1px solid #B91C1C !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35) !important;
+}
+
+/* Floating Luxury Page Indicators (5 Discrete Slides — Identical to Holding Group) */
 .page-scroll-dots {
   position: fixed;
   right: 28px;
@@ -239,20 +254,14 @@ body {
 }
 
 .loam-logo-lockup img {
-  height: 52px;
+  height: 72px;
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0 2px 8px rgba(158, 27, 50, 0.18));
 }
 
 .loam-logo-lockup span {
-  font-family: var(--font-serif);
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: #0E1015;
-  margin-top: 2px;
+  display: none;
 }
 
 /* Header CTAs */
@@ -1411,7 +1420,7 @@ body {
   }
 
   .loam-logo-lockup img {
-    height: 28px !important;
+    height: 44px !important;
     width: auto !important;
   }
 
