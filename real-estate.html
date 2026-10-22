@@ -22,13 +22,14 @@
 </head>
 <body>
 
-  <!-- Floating Luxury Page Indicator (5 Discrete Slides / Sections) -->
+  <!-- Floating Luxury Page Indicator (6 Discrete Slides / Sections) -->
   <nav class="page-scroll-dots" id="page-scroll-dots" aria-label="Pagination des résidences">
     <button class="scroll-dot active" data-page="0" data-label="01. Accueil" aria-label="Écran 1 : Accueil"></button>
     <button class="scroll-dot" data-page="1" data-label="02. Palmares" aria-label="Écran 2 : Résidence Palmares"></button>
     <button class="scroll-dot" data-page="2" data-label="03. Assalam" aria-label="Écran 3 : Résidence Assalam"></button>
     <button class="scroll-dot" data-page="3" data-label="04. Villas Malabata" aria-label="Écran 4 : Les Villas Assalam"></button>
-    <button class="scroll-dot" data-page="4" data-label="05. Contact & Visite" aria-label="Écran 5 : Contact & Visite"></button>
+    <button class="scroll-dot" data-page="4" data-label="05. Google Maps" aria-label="Écran 5 : Cartographie Google Maps"></button>
+    <button class="scroll-dot" data-page="5" data-label="06. Contact & Visite" aria-label="Écran 6 : Contact & Visite"></button>
   </nav>
 
   <!-- ==========================================================================
@@ -316,10 +317,85 @@
       </div>
     </section>
 
+    <!-- ==========================================================================
+         CHAPTER 04: Google Maps Interactive Showcase
+         ========================================================================== -->
+    <section id="maps" class="loam-maps-section">
+      <div class="loam-maps-container">
+        <div class="loam-maps-header-row">
+          <div>
+            <div style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--loam-gold); margin-bottom: 8px;">
+              <span>✦</span> Cartographie Google Maps Interactive
+            </div>
+            <h2 style="font-family: var(--font-serif); font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 300; line-height: 1.1; color: #0E1015;">
+              Nos Emplacements d'Exception <em>à Tanger</em>
+            </h2>
+          </div>
 
+          <div class="loam-maps-tabs" role="tablist">
+            <button type="button" class="loam-maps-tab active" onclick="switchMainMap('palmares')" id="tab-palmares">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="#EA4335"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              <span>01. Palmares</span>
+            </button>
+            <button type="button" class="loam-maps-tab" onclick="switchMainMap('assalam')" id="tab-assalam">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="#EA4335"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              <span>02. Assalam</span>
+            </button>
+            <button type="button" class="loam-maps-tab" onclick="switchMainMap('villas')" id="tab-villas">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="#EA4335"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              <span>03. Villas Malabata</span>
+            </button>
+            <button type="button" class="loam-maps-tab" onclick="switchMainMap('siege')" id="tab-siege">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="#EA4335"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              <span>Siège Social Mohamed V</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="loam-maps-box">
+          <div class="loam-maps-info-col">
+            <div>
+              <div id="map-loc-badge" style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 9999px; background: rgba(30, 81, 40, 0.1); color: #1E5128; font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px;">
+                ✦ Chapitre 01 • En Vente
+              </div>
+              <h3 id="map-loc-title" style="font-family: var(--font-serif); font-size: 1.85rem; color: #0E1015; font-weight: 400; line-height: 1.2; margin-bottom: 10px;">
+                Les Résidences Palmares
+              </h3>
+              <p id="map-loc-desc" style="color: #4B5563; font-size: 0.95rem; line-height: 1.6; margin: 0 0 16px;">
+                Complexe résidentiel de standing avec 4 piscines privatives, situé sur l'axe du Grand Stade Ibn Battouta à proximité immédiate de toutes les commodités urbaines.
+              </p>
+              <div id="map-loc-coords" style="font-size: 0.8rem; color: #64748B; padding: 8px 12px; background: #FFFFFF; border-radius: 8px; border: 1px solid rgba(14,16,21,0.08); font-family: monospace;">
+                GPS: 35.766556, -5.847969 • Bureau de Vente sur Place
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <a id="map-direct-link" href="https://share.google/8IbP5KHM5J5JCG4iH" target="_blank" rel="noopener" class="loam-btn-primary" style="justify-content: center; padding: 12px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                <span>Ouvrir dans Google Maps ↗</span>
+              </a>
+              <a id="map-details-link" href="palmares.html" class="loam-btn-outline" style="justify-content: center; padding: 10px; font-size: 0.8rem;">
+                <span>Consulter la Page du Projet →</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="loam-maps-frame-col">
+            <iframe 
+              id="main-map-iframe"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.813!2d-5.8505493!3d35.7665592!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0c7f2122b5c5e3%3A0xb324d27e8a9462b0!2sLes%20R%C3%A9sidences%20Palmares!5e0!3m2!1sfr!2sma!4v1711111111111!5m2!1sfr!2sma"
+              title="Carte Google Maps Asharq Al Awsat Group Tanger"
+              loading="lazy"
+              allowfullscreen=""
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- ==========================================================================
-         CHAPTER 04: Private Consultation & Contact
+         CHAPTER 05: Private Consultation & Contact
          ========================================================================== -->
     <section id="contact" class="loam-contact-section">
       <div class="loam-contact-bg">
@@ -328,7 +404,7 @@
 
       <div class="loam-contact-container">
         <div class="section-number">
-          04 <span class="section-tagline">Rendez-Vous & Conseil Privé</span>
+          05 <span class="section-tagline">Rendez-Vous & Conseil Privé</span>
         </div>
         <h2 class="loam-chapter-title">
           Votre Nouvelle Demeure <em>Vous Attend</em>
@@ -476,5 +552,76 @@
 
   <!-- Controller Script -->
   <script src="js/loam-scroll.js?v=pagescroll_2"></script>
+  <script>
+    const mainMapData = {
+      palmares: {
+        badge: '✦ Chapitre 01 • En Vente',
+        badgeBg: 'rgba(30, 81, 40, 0.1)',
+        badgeColor: '#1E5128',
+        title: 'Les Résidences Palmares',
+        desc: 'Complexe résidentiel de standing avec 4 piscines privatives, situé sur l\'axe du Grand Stade Ibn Battouta à proximité immédiate de toutes les commodités urbaines.',
+        coords: 'GPS: 35.766556, -5.847969 • Bureau de Vente sur Place',
+        link: 'https://share.google/8IbP5KHM5J5JCG4iH',
+        details: 'palmares.html',
+        embed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.813!2d-5.8505493!3d35.7665592!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0c7f2122b5c5e3%3A0xb324d27e8a9462b0!2sLes%20R%C3%A9sidences%20Palmares!5e0!3m2!1sfr!2sma!4v1711111111111!5m2!1sfr!2sma'
+      },
+      assalam: {
+        badge: '✦ Chapitre 02 • SOLD OUT (100% Vendu)',
+        badgeBg: 'rgba(220, 38, 38, 0.1)',
+        badgeColor: '#DC2626',
+        title: 'Residence Assalam - Asharq Group',
+        desc: 'Complexe résidentiel de luxe avec vue imprenable sur la baie de Tanger, piscine et équipements complets face à la Méditerranée.',
+        coords: 'GPS: 35.791155, -5.745576 • Tanger Nord',
+        link: 'https://share.google/KdUHd6vcCGUNeqv8e',
+        details: 'residence-assalam.html',
+        embed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3238.456!2d-5.7481561!3d35.7911592!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0b80f123456789%3A0x123456789abcdef!2sResidence%20Assalam!5e0!3m2!1sfr!2sma!4v1711111111111!5m2!1sfr!2sma'
+      },
+      villas: {
+        badge: '✦ Chapitre 03 • SOLD OUT (100% Vendu)',
+        badgeBg: 'rgba(220, 38, 38, 0.1)',
+        badgeColor: '#DC2626',
+        title: 'Les Villas Assalam Malabata',
+        desc: 'Villas contemporaines de grand standing de 360 m² habitables sur 4 niveaux avec rooftop panoramique plongeant sur le détroit de Gibraltar.',
+        coords: 'GPS: 35.780056, -5.764217 • Baie de Malabata Tanger',
+        link: 'https://www.google.com/maps/place/Malabata,+Tanger/@35.7800557,-5.7642172,15z',
+        details: 'villas-assalam.html',
+        embed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.5!2d-5.7642172!3d35.7800557!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0c7f86939ab769%3A0x24a87304372b8ceb!2sMalabata!5e0!3m2!1sfr!2sma!4v1711111111111!5m2!1sfr!2sma'
+      },
+      siege: {
+        badge: '✦ Siège Social • Asharq Al Awsat Group',
+        badgeBg: 'rgba(197, 160, 89, 0.15)',
+        badgeColor: '#9E1B32',
+        title: 'Siège Social Avenue Mohamed V',
+        desc: '6 Rue Ibn Katir, Avenue Mohamed V, 90000 Tanger. Accueil de nos clients et investisseurs pour les démarches administratives, signatures notariées et conseil patrimonial.',
+        coords: 'GPS: 35.776700, -5.803900 • Centre-Ville Tanger',
+        link: 'https://www.google.com/maps/search/Avenue+Mohamed+V+Tanger',
+        details: 'https://asharq-al-awsat-holding.vercel.app#contact',
+        embed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3238.8!2d-5.8039!3d35.7767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0b875500000000%3A0x0!2sAvenue%20Mohammed%20V%2C%20Tanger!5e0!3m2!1sfr!2sma!4v1711111111111!5m2!1sfr!2sma'
+      }
+    };
+
+    function switchMainMap(loc) {
+      document.querySelectorAll('.loam-maps-tab').forEach(t => t.classList.remove('active'));
+      const activeTab = document.getElementById('tab-' + loc);
+      if (activeTab) activeTab.classList.add('active');
+
+      const data = mainMapData[loc];
+      if (!data) return;
+
+      const badge = document.getElementById('map-loc-badge');
+      badge.innerText = data.badge;
+      badge.style.background = data.badgeBg;
+      badge.style.color = data.badgeColor;
+
+      document.getElementById('map-loc-title').innerText = data.title;
+      document.getElementById('map-loc-desc').innerText = data.desc;
+      document.getElementById('map-loc-coords').innerText = data.coords;
+      document.getElementById('map-direct-link').href = data.link;
+      document.getElementById('map-details-link').href = data.details;
+
+      const iframe = document.getElementById('main-map-iframe');
+      iframe.src = data.embed;
+    }
+  </script>
 </body>
 </html>

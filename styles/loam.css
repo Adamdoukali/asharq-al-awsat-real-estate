@@ -66,7 +66,7 @@ body {
 }
 
 /* Section Scroll Snap & Offset Grounding (Holding Style) */
-#hero, #palmares, #assalam, #villas, #contact {
+#hero, #palmares, #assalam, #villas, #maps, #contact {
   scroll-margin-top: 70px !important;
 }
 
@@ -1758,4 +1758,116 @@ body {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* ==========================================================================
+   Master Google Maps Showcase Section for Real Estate Portal
+   ========================================================================== */
+.loam-maps-section {
+  position: relative;
+  padding: 100px 6vw;
+  background-color: #FFFFFF;
+  color: #0E1015;
+}
+
+.loam-maps-container {
+  max-width: 1380px;
+  margin: 0 auto;
+}
+
+.loam-maps-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.loam-maps-tabs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.loam-maps-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 9999px;
+  background: #F1F3F7;
+  border: 1px solid rgba(14, 16, 21, 0.08);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #4B5563;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.loam-maps-tab:hover {
+  background: #E5E7EB;
+  color: #0E1015;
+}
+
+.loam-maps-tab.active {
+  background: #0E1015;
+  color: #FFFFFF;
+  border-color: #0E1015;
+  box-shadow: 0 4px 14px rgba(14, 16, 21, 0.2);
+}
+
+.loam-maps-box {
+  background: #FFFFFF;
+  border: 1px solid rgba(14, 16, 21, 0.1);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(14, 16, 21, 0.08);
+  display: grid;
+  grid-template-columns: 1fr 2.2fr;
+  min-height: 480px;
+}
+
+.loam-maps-info-col {
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  background: #FAFAFC;
+  border-right: 1px solid rgba(14, 16, 21, 0.08);
+}
+
+.loam-maps-frame-col {
+  position: relative;
+  background: #E5E7EB;
+  min-height: 440px;
+}
+
+.loam-maps-frame-col iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 440px;
+  border: 0;
+  display: block;
+}
+
+@media (max-width: 960px) {
+  .loam-maps-box {
+    grid-template-columns: 1fr !important;
+  }
+  .loam-maps-info-col {
+    border-right: 0 !important;
+    border-bottom: 1px solid rgba(14, 16, 21, 0.08) !important;
+    padding: 24px 20px !important;
+  }
+  .loam-maps-frame-col {
+    min-height: 340px !important;
+  }
+  .loam-maps-frame-col iframe {
+    min-height: 340px !important;
+  }
+}
+
 

@@ -679,6 +679,113 @@ body.theme-villas .loam-btn-primary:hover {
   text-transform: uppercase;
 }
 
+/* ==========================================================================
+   Luxury Google Maps Showcase Architecture
+   ========================================================================== */
+.proj-map-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #FFFFFF;
+  border: 1px solid rgba(14, 16, 21, 0.1);
+  box-shadow: 0 16px 45px rgba(14, 16, 21, 0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.proj-map-card:hover {
+  box-shadow: 0 22px 55px rgba(14, 16, 21, 0.12);
+  border-color: rgba(14, 16, 21, 0.18);
+}
+
+.proj-map-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: #FFFFFF;
+  border-bottom: 1px solid rgba(14, 16, 21, 0.08);
+  gap: 12px;
+}
+
+.proj-map-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #0E1015;
+  letter-spacing: 0.02em;
+}
+
+.proj-map-badge svg {
+  color: #EA4335;
+  flex-shrink: 0;
+}
+
+.proj-map-ext-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--loam-gold, #1E5128);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(30, 81, 40, 0.08);
+  border: 1px solid rgba(30, 81, 40, 0.15);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.proj-map-ext-link:hover {
+  background: var(--loam-gold, #1E5128);
+  color: #FFFFFF;
+}
+
+.proj-map-frame-wrap {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background: #F1F3F7;
+}
+
+.proj-map-frame-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.proj-map-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px 20px;
+  background: #F8FAFC;
+  border-top: 1px solid rgba(14, 16, 21, 0.06);
+  font-size: 0.78rem;
+  color: #64748B;
+}
+
+.proj-map-footer strong {
+  color: #0E1015;
+}
+
+@media (max-width: 900px) {
+  .proj-location-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+  .proj-map-frame-wrap {
+    height: 330px !important;
+  }
+}
+
 /* Cross-Navigation Cards */
 .proj-cross-section {
   padding: 90px 6vw 120px;
