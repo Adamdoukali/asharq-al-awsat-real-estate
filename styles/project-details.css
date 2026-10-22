@@ -14,6 +14,19 @@
 /* ==========================================================================
    Project Identity Theming (Palmares Green, Assalam Blue, Villas Turquoise/Teal)
    ========================================================================== */
+/* Ensure all project detail showcases feature a crisp, luminous white architectural canvas */
+body[data-project],
+body.theme-palmares,
+body.theme-assalam,
+body.theme-villas {
+  background-color: #FFFFFF !important;
+  color: #0E1015 !important;
+}
+
+body[data-project] main {
+  background-color: #FFFFFF !important;
+}
+
 body[data-project="palmares"],
 body.theme-palmares {
   --loam-gold: #1E5128;
@@ -285,6 +298,7 @@ body.theme-villas .loam-btn-primary:hover {
   padding: 100px 6vw;
   max-width: 1400px;
   margin: 0 auto;
+  background-color: #FFFFFF;
 }
 
 .proj-section-title-wrap {
@@ -315,7 +329,7 @@ body.theme-villas .loam-btn-primary:hover {
 
 .proj-section-title em {
   font-style: italic;
-  color: var(--loam-gold-light, #C42340);
+  color: var(--loam-gold, #1E5128);
 }
 
 /* Two-column Story Layout */
@@ -335,19 +349,27 @@ body.theme-villas .loam-btn-primary:hover {
 .proj-lead-p {
   font-size: 1.14rem;
   line-height: 1.7;
-  color: #333A48;
+  color: #1F2937;
+}
+
+.proj-lead-p strong {
+  color: #0E1015;
+  font-weight: 700;
 }
 
 .proj-quote-box {
-  background: #FFFFFF;
+  background: #F8FAFC;
   border-left: 4px solid var(--loam-gold, #9E1B32);
-  padding: 22px 26px;
+  border-top: 1px solid rgba(14, 16, 21, 0.06);
+  border-right: 1px solid rgba(14, 16, 21, 0.06);
+  border-bottom: 1px solid rgba(14, 16, 21, 0.06);
+  padding: 24px 28px;
   border-radius: 0 16px 16px 0;
   font-size: 1.05rem;
   font-style: italic;
   color: #0E1015;
   line-height: 1.6;
-  box-shadow: 0 8px 24px rgba(14, 16, 21, 0.04);
+  box-shadow: 0 8px 24px rgba(14, 16, 21, 0.03);
 }
 
 .proj-story-visual {
